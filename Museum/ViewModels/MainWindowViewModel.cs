@@ -20,8 +20,10 @@ public class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
+        // Au lancement de l'application, l'écran de sélection des langues est affiché par défaut
         currentView = new LangChoiceViewModel();
 
+        // Commande pour changer de vue
         GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel());
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel());
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel());
