@@ -4,5 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Museum.Views.LangChoiceView">
-    Welcome to LangControl!
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
+        <TextBlock HorizontalAlignment="Center">Choisissez votre langue</TextBlock>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50">
+            <StackPanel>
+                <Rectangle Fill="#FF00B3" Width="63" Height="41" Canvas.Left="40" Canvas.Top="31"></Rectangle>
+                <TextBlock Text="Langue 1"></TextBlock>
+            </StackPanel>
+            <StackPanel>
+                <Rectangle Fill="Blue" Width="63" Height="41" Canvas.Left="40" Canvas.Top="31"></Rectangle>
+                <TextBlock Text="Langue 2"></TextBlock>
+            </StackPanel>
+            <StackPanel>
+                <Rectangle Fill="#00FF4C" Width="63" Height="41" Canvas.Left="40" Canvas.Top="31"></Rectangle>
+                <TextBlock Text="Langue 3"></TextBlock>
+            </StackPanel>
+            <StackPanel>
+                <Rectangle Fill="#00EEFF" Width="63" Height="41" Canvas.Left="40" Canvas.Top="31"></Rectangle>
+                <TextBlock Text="Langue 4"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
 </UserControl>
