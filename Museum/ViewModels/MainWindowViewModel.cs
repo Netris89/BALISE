@@ -1,8 +1,29 @@
-﻿namespace Museum.ViewModels;
+﻿using System.Reactive;
+using ReactiveUI;
+
+namespace Museum.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-#pragma warning disable CA1822 // Mark members as static
-    public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+    private ViewModelBase currentView;
+
+    public ViewModelBase CurrentView
+    {
+        get => currentView;
+        set => this.RaiseAndSetIfChanged(ref currentView, value);
+    }
+
+    public ReactiveCommand<Unit, ViewModelBase> GoToMap { get; }
+    public ReactiveCommand<Unit, ViewModelBase> GoToAgenda { get; }
+    public ReactiveCommand<Unit, ViewModelBase> GoToConnection { get; }
+
+
+    public MainWindowViewModel()
+    {
+        currentView = new LangChoiceViewModel();
+
+        GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel());
+        GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel());
+        GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel());
+    }
 }
