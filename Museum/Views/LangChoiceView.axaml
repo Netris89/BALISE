@@ -8,20 +8,28 @@
         <TextBlock HorizontalAlignment="Center">Choisissez votre langue</TextBlock>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50">
             <StackPanel>
-                <Rectangle Fill="#FF00B3" Width="63" Height="41" Canvas.Left="40" Canvas.Top="31"></Rectangle>
-                <TextBlock Text="Langue 1"></TextBlock>
+                <Button Name="FrenchButton" CommandParameter="fr">
+                    <Image HorizontalAlignment="Center" Source="avares://Museum/Assets/Flag_of_France.png" Width="63" Height="41"/>
+                </Button>
+                <TextBlock HorizontalAlignment="Center" Text="Français"></TextBlock>
             </StackPanel>
             <StackPanel>
-                <Rectangle Fill="Blue" Width="63" Height="41" Canvas.Left="40" Canvas.Top="31"></Rectangle>
-                <TextBlock Text="Langue 2"></TextBlock>
+                <Button Name="DutchButton" CommandParameter="nl">
+                    <Image HorizontalAlignment="Center" Source="avares://Museum/Assets/Flag_of_the_Netherlands.png" Width="63" Height="41" />
+                </Button>
+                <TextBlock HorizontalAlignment="Center" Text="Nederlands"></TextBlock>
             </StackPanel>
             <StackPanel>
-                <Rectangle Fill="#00FF4C" Width="63" Height="41" Canvas.Left="40" Canvas.Top="31"></Rectangle>
-                <TextBlock Text="Langue 3"></TextBlock>
+                <Button Name="GermanButton" CommandParameter="de">
+                    <Image HorizontalAlignment="Center" Source="avares://Museum/Assets/Flag_of_Germany.png" Width="63" Height="41" />
+                </Button>
+                <TextBlock HorizontalAlignment="Center" Text="Deutsch"></TextBlock>
             </StackPanel>
             <StackPanel>
-                <Rectangle Fill="#00EEFF" Width="63" Height="41" Canvas.Left="40" Canvas.Top="31"></Rectangle>
-                <TextBlock Text="Langue 4"></TextBlock>
+                <Button Name="EnglishButton" CommandParameter="en">
+                    <Image HorizontalAlignment="Center" Source="avares://Museum/Assets/Flag_of_the_United_Kingdom.png" Width="63" Height="41" />
+                </Button>
+                <TextBlock HorizontalAlignment="Center" Text="English"></TextBlock>
             </StackPanel>
         </StackPanel>
     </StackPanel>
