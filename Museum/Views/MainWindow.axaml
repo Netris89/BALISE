@@ -7,7 +7,8 @@
         x:Class="Museum.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Museum">
+        Title="Museum"
+        WindowState="FullScreen">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -16,10 +17,10 @@
     </Design.DataContext>
 
     <DockPanel>
-        <Border
-        DockPanel.Dock="Top"
-        Height="40"
-        Background="#Ca005d">
+        <Border IsVisible="{Binding !IsLangChoiceActive}"
+                DockPanel.Dock="Top"
+                Height="40"
+                Background="#Ca005d">
 
             <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,*,Auto"
                   Margin="20,0">

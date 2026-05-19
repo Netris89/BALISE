@@ -10,7 +10,16 @@ public class MainWindowViewModel : ViewModelBase
     public ViewModelBase CurrentView
     {
         get => currentView;
-        set => this.RaiseAndSetIfChanged(ref currentView, value);
+        set
+        {
+            this.RaiseAndSetIfChanged(ref currentView, value);
+            this.RaisePropertyChanged(nameof(IsLangChoiceActive));
+        }
+    }
+
+    public bool IsLangChoiceActive
+    {
+        get => currentView is LangChoiceViewModel;
     }
 
     public ReactiveCommand<Unit, ViewModelBase> GoToMap { get; }
@@ -21,11 +30,16 @@ public class MainWindowViewModel : ViewModelBase
     public MainWindowViewModel()
     {
         // Au lancement de l'application, l'écran de sélection des langues est affiché par défaut
-        currentView = new LangChoiceViewModel();
+        currentView = new LangChoiceViewModel(SetCurrentView);
 
         // Commande pour changer de vue
         GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel());
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel());
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel());
+    }
+
+    public void SetCurrentView(ViewModelBase vm)
+    {
+        CurrentView = vm;
     }
 }
