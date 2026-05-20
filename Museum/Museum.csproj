@@ -1,54 +1,67 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <AvaloniaResource Include="Assets\**" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.3.3" />
-    <PackageReference Include="Avalonia" Version="12.0.3" />
-    <PackageReference Include="Avalonia.Desktop" Version="12.0.3" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.3" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.3" />
-    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.15" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="11.3.9" />
-    <PackageReference Include="Duende.IdentityModel.OidcClient" Version="7.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.8" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Models\" />
+        <AvaloniaResource Include="Assets\**" />
+    </ItemGroup>
 
 
-  <ItemGroup>
-    <Compile Update="Views\AdminView.axaml.cs">
-      <DependentUpon>AdminView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\AgendaView.axaml.cs">
-      <DependentUpon>AgendaView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\ConnectionView.axaml.cs">
-      <DependentUpon>ConnectionView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\ContentManagerView.axaml.cs">
-      <DependentUpon>ContentManagerView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\FormView.axaml.cs">
-      <DependentUpon>FormView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\LangChoiceView.axaml.cs">
-      <DependentUpon>LangChoiceView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\MapView.axaml.cs">
-      <DependentUpon>MapView.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.3.3" />
+        <PackageReference Include="Avalonia" Version="12.0.3" />
+        <PackageReference Include="Avalonia.Desktop" Version="12.0.3" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.3" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.3" />
+        <!--Condition
+        below is needed to remove Avalonia.Diagnostics package from build output in Release
+        configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.15" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.3.9" />
+        <PackageReference Include="Duende.IdentityModel.OidcClient" Version="7.1.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.8" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Localization\Resources.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Localization\Resources.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Views\AdminView.axaml.cs">
+            <DependentUpon>AdminView.axaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\AgendaView.axaml.cs">
+            <DependentUpon>AgendaView.axaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\ConnectionView.axaml.cs">
+            <DependentUpon>ConnectionView.axaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\ContentManagerView.axaml.cs">
+            <DependentUpon>ContentManagerView.axaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\FormView.axaml.cs">
+            <DependentUpon>FormView.axaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\LangChoiceView.axaml.cs">
+            <DependentUpon>LangChoiceView.axaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\MapView.axaml.cs">
+            <DependentUpon>MapView.axaml</DependentUpon>
+        </Compile>
+    </ItemGroup>
 </Project>

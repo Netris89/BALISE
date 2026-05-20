@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Reactive;
 using ReactiveUI;
 
@@ -6,7 +7,6 @@ namespace Museum.ViewModels;
 
 public class LangChoiceViewModel : ViewModelBase
 {
-    private string selectedLang = "";
     private readonly Action<ViewModelBase> navigate;
     
     public ReactiveCommand<string, Unit> SelectLang { get; }
@@ -20,7 +20,7 @@ public class LangChoiceViewModel : ViewModelBase
 
     public void SelectLanguage(string lang)
     {
-        selectedLang = lang;
+        Localization.Resources.Culture = new CultureInfo(lang);
 
         navigate(new MapViewModel());
     }
