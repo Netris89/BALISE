@@ -25,7 +25,7 @@ public class MainWindowViewModel : ViewModelBase
     public ReactiveCommand<Unit, ViewModelBase> GoToMap { get; }
     public ReactiveCommand<Unit, ViewModelBase> GoToAgenda { get; }
     public ReactiveCommand<Unit, ViewModelBase> GoToConnection { get; }
-
+    public ReactiveCommand<Unit, ViewModelBase> GoToForm { get; }
 
     public MainWindowViewModel()
     {
@@ -36,6 +36,7 @@ public class MainWindowViewModel : ViewModelBase
         GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel());
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel());
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel());
+        GoToForm = ReactiveCommand.Create(()=> CurrentView = new FormViewModel());
     }
 
     public void SetCurrentView(ViewModelBase vm)
