@@ -127,17 +127,12 @@
     <data name="CancelText" xml:space="preserve">
     <value>Annuler</value>
   </data>
-    <data name="Culture" xml:space="preserve">
-    <value>Culture</value>
-  </data>
     
-    <data name="ResourceManager" xml:space="preserve">
-    <value>Gestionnaire de ressource</value>
-  </data>
     <data name="Password" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
     <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+    <data name="Test" xml:space="preserve"><value>Test</value></data>
 </root>
