@@ -1,8 +1,27 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Museum.Views.FormView">
-    Welcome to Form!
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:localization="clr-namespace:Museum.Localization"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Museum.Views.FormView">
+    <Grid ShowGridLines="True" VerticalAlignment="Center" ColumnDefinitions="2*,*,*,*,*,2*" RowDefinitions="*,*,*,*,*" RowSpacing="20">
+        <TextBlock Grid.Row="0" Grid.Column="1" Text= "Nom"/>
+        <TextBox Grid.Row= "0" Grid.Column="2" PlaceholderText= "Placeholdernom"/>
+        <TextBlock Grid.Row="0" Grid.Column="3" Text= "Prénom"/>
+        <TextBox Grid.Row= "0" Grid.Column="4" PlaceholderText= "Placeholderprénom"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Adresse"/>
+        <TextBox Grid.Row= "1" Grid.Column="2" PlaceholderText= "Placeholderadresse"/>
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="{x:Static localization:Resources.Email}"/>
+        <TextBox PlaceholderText="Entrez votre adresse email" Grid.Row="2" Grid.Column="3" Name="EmailTextBox"/>
+
+        <CheckBox HorizontalAlignment="Right" Grid.Row="3" Grid.Column="1"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Text="S'inscrire à la newsletter ?"/>
+        <Button Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center">
+            <TextBlock Text="{x:Static localization:Resources.AcceptText}"/>
+        </Button>
+        <Button Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center">
+            <TextBlock Text="{x:Static localization:Resources.CancelText}" />
+        </Button>
+    </Grid>
 </UserControl>
