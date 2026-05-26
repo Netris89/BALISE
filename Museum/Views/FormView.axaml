@@ -3,24 +3,58 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:localization="clr-namespace:Museum.Localization"
+             xmlns:vm="clr-namespace:Museum.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Museum.Views.FormView">
-    <Grid ShowGridLines="True" VerticalAlignment="Center" ColumnDefinitions="2*,*,*,*,*,2*" RowDefinitions="*,*,*,*,*" RowSpacing="20">
-        <TextBlock Grid.Row="0" Grid.Column="1" Text= "Nom"/>
-        <TextBox Grid.Row= "0" Grid.Column="2" PlaceholderText= "Placeholdernom"/>
-        <TextBlock Grid.Row="0" Grid.Column="3" Text= "Prénom"/>
-        <TextBox Grid.Row= "0" Grid.Column="4" PlaceholderText= "Placeholderprénom"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Adresse"/>
-        <TextBox Grid.Row= "1" Grid.Column="2" PlaceholderText= "Placeholderadresse"/>
-        <TextBlock Grid.Row="2" Grid.Column="2" Text="{x:Static localization:Resources.Email}"/>
-        <TextBox PlaceholderText="Entrez votre adresse email" Grid.Row="2" Grid.Column="3" Name="EmailTextBox"/>
+             x:Class="Museum.Views.FormView"
+             x:DataType="vm:FormViewModel">
+    <Grid VerticalAlignment="Center" ColumnDefinitions="3*,*,2*,*,2*,3*" RowDefinitions="*,*,*,*,*,*,*" RowSpacing="20">
+        <!-- Nom -->
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="0" Grid.Column="1" Text= "Nom"/>
+        <TextBox Text="{Binding LastName}" Grid.Row= "0" Grid.Column="2" PlaceholderText= "Placeholdernom"/>
+        <!-- Prénom -->
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="0" Grid.Column="3" Text= "Prénom"/>
+        <TextBox Text="{Binding FirstName}" Grid.Row= "0" Grid.Column="4" PlaceholderText= "Placeholderprénom"/>
+        <!-- Adresse -->
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="1" Text="Adresse"/>
+        <TextBox Text="{Binding Address}" Grid.Row= "1" Grid.Column="2" PlaceholderText= "Placeholderadresse"/>
+        <!-- Numéro -->
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="3" Text="Numéro"/>
+        <TextBox Text="{Binding Number}" Grid.Row= "1" Grid.Column="4" PlaceholderText= "Placeholdnuméro"/>
+        <!-- Ville -->
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="1" Text="Ville"/>
+        <TextBox Text="{Binding City}" Grid.Row= "2" Grid.Column="2" PlaceholderText= "Placeholdville"/>
+        <!-- Pays -->
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="3" Text="Pays"/>
+        <ComboBox Grid.Row="2"
+                  Grid.Column="4"
+                  ItemsSource="{Binding Countries}"
+                  SelectedItem="{Binding SelectedCountry}"
+                  PlaceholderText="Placeholdpays"
+                  HorizontalAlignment="Stretch">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DisplayName}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <!-- Email -->
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="3" Grid.Column="1" Text="{x:Static localization:Resources.Email}"/>
+        <TextBox Text="{Binding Email}" PlaceholderText="Entrez votre adresse email" Grid.Row="3" Grid.Column="2" Name="EmailTextBox"/>
 
-        <CheckBox HorizontalAlignment="Right" Grid.Row="3" Grid.Column="1"/>
-        <TextBox Grid.Row="3" Grid.Column="2" Text="S'inscrire à la newsletter ?"/>
-        <Button Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center">
+        <!-- CheckBox Newletter -->
+        <CheckBox IsChecked="{Binding IsNewletterChecked}" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="1"/>
+        <TextBlock VerticalAlignment="Center" Margin="5" Grid.Row="4" Grid.Column="2" Text="S'inscrire à la newsletter ?"/>
+
+        <!-- CheckBox Enquête -->
+        <CheckBox IsChecked="{Binding IsSatisfactionChecked}" HorizontalAlignment="Right" Grid.Row="5" Grid.Column="1"/>
+        <TextBlock VerticalAlignment="Center" Margin="5" Grid.Row="5" Grid.Column="2" Text="Participer à l'enquête de satisfaction ?"/>
+
+        <!-- Bouton Accepter -->
+        <Button Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right">
             <TextBlock Text="{x:Static localization:Resources.AcceptText}"/>
         </Button>
-        <Button Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center">
+        <!-- Bouton Annuler -->
+        <Button Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" Command="{Binding CancelCommand}">
             <TextBlock Text="{x:Static localization:Resources.CancelText}" />
         </Button>
     </Grid>
