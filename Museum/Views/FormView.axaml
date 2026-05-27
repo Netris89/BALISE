@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Museum.Views.FormView"
              x:DataType="vm:FormViewModel">
-    <Grid VerticalAlignment="Center" ColumnDefinitions="3*,*,2*,*,2*,3*" RowDefinitions="*,*,*,*,*,*,*" RowSpacing="20">
+    <Grid VerticalAlignment="Center" ColumnDefinitions="4*,*,3*,*,3*,*,4*" RowDefinitions="*,*,*,*,*,*,*" RowSpacing="20">
         <!-- Nom -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="0" Grid.Column="1" Text= "{x:Static localization:Resources.Name}"/>
         <TextBox Text="{Binding LastName}" Grid.Row= "0" Grid.Column="2" PlaceholderText= "{x:Static localization:Resources.NamePlaceholder}"/>
