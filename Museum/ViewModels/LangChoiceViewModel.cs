@@ -50,6 +50,9 @@ public class LangChoiceViewModel : ViewModelBase
             "Choose your language"
         };
 
+        SelectionText = variants[index];
+        index++;
+        
         timer.Tick += (_, _) =>
         {
             SelectionText = variants[index];
