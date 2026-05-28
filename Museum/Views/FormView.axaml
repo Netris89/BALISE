@@ -9,20 +9,35 @@
              x:DataType="vm:FormViewModel">
     <Grid VerticalAlignment="Center" ColumnDefinitions="4*,*,3*,*,3*,*,4*" RowDefinitions="*,*,*,*,*,*,*" RowSpacing="20">
         <!-- Nom -->
-        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="0" Grid.Column="1" Text= "{x:Static localization:Resources.Name}"/>
-        <TextBox Text="{Binding LastName}" Grid.Row= "0" Grid.Column="2" PlaceholderText= "{x:Static localization:Resources.NamePlaceholder}"/>
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="0" Grid.Column="1" Text= "{x:Static localization:Resources.Name}"/>
+        <StackPanel Grid.Row= "0" Grid.Column="2" >
+            <TextBlock IsVisible="{Binding !LastNameError}" Text="{x:Static localization:Resources.LastNameError}"  Foreground="Red"/>
+            <TextBox Text="{Binding LastName}"  PlaceholderText= "{x:Static localization:Resources.NamePlaceholder}"/>
+        </StackPanel>
         <!-- Prénom -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="0" Grid.Column="3" Text= "{x:Static localization:Resources.FirstName}"/>
-        <TextBox Text="{Binding FirstName}" Grid.Row= "0" Grid.Column="4" PlaceholderText= "{x:Static localization:Resources.FirstNamePlaceholder}"/>
+        <StackPanel Grid.Row= "0" Grid.Column="4">
+            <TextBlock IsVisible="{Binding !FirstNameError}" Text="{x:Static localization:Resources.FirstNameError}"  Foreground="Red"/>
+            <TextBox Text="{Binding FirstName}"  PlaceholderText= "{x:Static localization:Resources.FirstNamePlaceholder}"/>
+        </StackPanel>
         <!-- Adresse -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="1" Text="{x:Static localization:Resources.Address}"/>
-        <TextBox Text="{Binding Address}" Grid.Row= "1" Grid.Column="2" PlaceholderText= "{x:Static localization:Resources.AddressPlaceholder}"/>
+        <StackPanel Grid.Row= "1" Grid.Column="2">
+            <TextBlock IsVisible="{Binding !AddressError}" Text="{x:Static localization:Resources.AddressError}"  Foreground="Red"/>
+            <TextBox Text="{Binding Address}"  PlaceholderText= "{x:Static localization:Resources.AddressPlaceholder}"/>
+        </StackPanel>
         <!-- Numéro -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="3" Text="{x:Static localization:Resources.Number}"/>
-        <TextBox Text="{Binding Number}" Grid.Row= "1" Grid.Column="4" PlaceholderText= "{x:Static localization:Resources.NumberPlaceholder}"/>
+        <StackPanel Grid.Row= "1" Grid.Column="4">
+            <TextBlock IsVisible="{Binding !NumberError}" Text="{x:Static localization:Resources.NumberError}"  Foreground="Red"/>
+            <TextBox Text="{Binding Number}"  PlaceholderText= "{x:Static localization:Resources.NumberPlaceholder}"/>
+        </StackPanel >
         <!-- Ville -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="1" Text="{x:Static localization:Resources.City}"/>
-        <TextBox Text="{Binding City}" Grid.Row= "2" Grid.Column="2" PlaceholderText= "{x:Static localization:Resources.CityPlaceholder}"/>
+        <StackPanel Grid.Row= "2" Grid.Column="2">
+            <TextBlock IsVisible="{Binding !CityError}" Text="{x:Static localization:Resources.CityError}"  Foreground="Red"/>
+            <TextBox Text="{Binding City}"  PlaceholderText= "{x:Static localization:Resources.CityPlaceholder}"/>
+        </StackPanel>
         <!-- Pays -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="3" Text="{x:Static localization:Resources.Country}"/>
         <ComboBox Grid.Row="2"
@@ -39,7 +54,10 @@
         </ComboBox>
         <!-- Email -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="3" Grid.Column="1" Text="{x:Static localization:Resources.Email}"/>
-        <TextBox Text="{Binding Email}" PlaceholderText="{x:Static localization:Resources.EmailPlaceholder}" Grid.Row="3" Grid.Column="2" Name="EmailTextBox"/>
+        <StackPanel Grid.Row="3" Grid.Column="2">
+            <TextBlock IsVisible="{Binding !EmailError}" Text="{x:Static localization:Resources.EmailError}"  Foreground="Red"/>
+            <TextBox Text="{Binding Email}" PlaceholderText="{x:Static localization:Resources.EmailPlaceholder}"  Name="EmailTextBox"/>
+        </StackPanel>
 
         <!-- CheckBox Newletter -->
         <CheckBox IsChecked="{Binding IsNewletterChecked}" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="1"/>

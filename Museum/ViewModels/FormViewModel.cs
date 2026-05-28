@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
@@ -17,6 +18,12 @@ public class FormViewModel : ViewModelBase
     private string number = string.Empty;
     private string city = string.Empty;
     private string email = string.Empty;
+    private bool lastNameError = true;
+    private bool firstNameError = true;
+    private bool addressError = true;
+    private bool numberError = true;
+    private bool cityError = true;
+    private bool emailError = true;
     private bool isNewletterChecked;
     private bool isSatisfactionChecked;
     private RegionInfo? selectedCountry;
@@ -79,6 +86,60 @@ public class FormViewModel : ViewModelBase
         {
             this.RaiseAndSetIfChanged(ref email, value);
             this.RaisePropertyChanged(nameof(IsFormCompleted));
+        }
+    }
+
+    public bool LastNameError
+    {
+        get => lastNameError;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref lastNameError, value);
+        }
+    }
+
+    public bool FirstNameError
+    {
+        get => firstNameError;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref firstNameError, value);
+        }
+    }
+
+    public bool AddressError
+    {
+        get => addressError;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref addressError, value);
+        }
+    }
+
+    public bool NumberError
+    {
+        get => numberError;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref numberError, value);
+        }
+    }
+
+    public bool CityError
+    {
+        get => cityError;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref cityError, value);
+        }
+    }
+
+    public bool EmailError
+    {
+        get => emailError;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref emailError, value);
         }
     }
 
@@ -155,6 +216,13 @@ public class FormViewModel : ViewModelBase
     {
         FormDto dto = new FormDto(FirstName, LastName, Address, Number, City, Email, SelectedCountry!);
 
-        service.ValidateUser(dto);
+        FormValidationResult results = service.ValidateUser(dto);
+
+        LastNameError = results.IsValidLastName;
+        FirstNameError = results.IsValidFirstName;
+        AddressError = results.IsValidAddress;
+        NumberError = results.IsValidNumber;
+        CityError = results.IsValidCity;
+        EmailError = results.IsValidMail;
     }
 }

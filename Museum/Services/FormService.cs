@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using Museum.DTO;
 using Museum.Repositories;
 using Museum.Validation;
@@ -14,7 +15,7 @@ public class FormService
         repository = userRepository;
     }
 
-    public void ValidateUser(FormDto dto)
+    public FormValidationResult ValidateUser(FormDto dto)
     {
         var results = FormValidator.ValidateForm(dto);
 
@@ -22,5 +23,7 @@ public class FormService
         {
             repository.AddUser(dto);
         }
+
+        return results;
     }
 }
