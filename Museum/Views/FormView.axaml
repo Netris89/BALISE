@@ -50,7 +50,7 @@
         <TextBlock VerticalAlignment="Center" Margin="5" Grid.Row="5" Grid.Column="2" Text="{x:Static localization:Resources.SatisfactionPlaceholder}"/>
 
         <!-- Bouton Accepter -->
-        <Button Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right">
+        <Button Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" Command="{Binding AcceptCommand}" IsEnabled="{Binding IsFormCompleted}">
             <TextBlock Text="{x:Static localization:Resources.AcceptText}"/>
         </Button>
         <!-- Bouton Annuler -->
