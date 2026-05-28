@@ -22,7 +22,8 @@
         <!--Condition
         below is needed to remove Avalonia.Diagnostics package from build output in Release
         configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.15" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"
+            Version="11.3.15" />
         <PackageReference Include="Avalonia.ReactiveUI" Version="11.3.9" />
         <PackageReference Include="Duende.IdentityModel.OidcClient" Version="7.1.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.8" />
@@ -39,6 +40,15 @@
             <PublicClass>true</PublicClass>
         </EmbeddedResource>
     </ItemGroup>
+
+    <!-- Désactive l'avertissement CS2002 car Resources.Designer.cs est inclus deux fois :
+    une première fois par le générateur MSBuild lié au .resx, et une seconde fois
+    par l'inclusion automatique des fichiers .cs du SDK.
+    Cette duplication est volontaire afin de conserver la compatibilité avec VSCode
+    et l'outillage XAML (Avalonia), tout en évitant les avertissements de compilation. -->
+    <PropertyGroup>
+        <NoWarn>$(NoWarn);CS2002</NoWarn>
+    </PropertyGroup>
 
     <ItemGroup>
         <Compile Update="Views\AdminView.axaml.cs">
