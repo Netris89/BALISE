@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
 using Museum.DTO;
+using Museum.Services;
 using Museum.Validation;
 using ReactiveUI;
 
@@ -19,6 +20,7 @@ public class FormViewModel : ViewModelBase
     private bool isNewletterChecked;
     private bool isSatisfactionChecked;
     private RegionInfo? selectedCountry;
+    private FormService service;
 
     public string FirstName
     {
@@ -123,7 +125,7 @@ public class FormViewModel : ViewModelBase
     public ICommand CancelCommand { get; }
     public ICommand AcceptCommand { get; }
 
-    public FormViewModel()
+    public FormViewModel(FormService formService)
     {
         Countries = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
                                .Select(culture => new RegionInfo(culture.Name))
@@ -133,6 +135,7 @@ public class FormViewModel : ViewModelBase
 
         CancelCommand = ReactiveCommand.Create(ClearForm);
         AcceptCommand = ReactiveCommand.Create(ValidateForm);
+        service = formService;
     }
 
     public void ClearForm()
@@ -150,7 +153,8 @@ public class FormViewModel : ViewModelBase
 
     public void ValidateForm()
     {
-        FormDto dto = new FormDto(FirstName,LastName,Address,Number,City,Email,SelectedCountry!);
-        FormValidator.ValidateForm(dto);
+        FormDto dto = new FormDto(FirstName, LastName, Address, Number, City, Email, SelectedCountry!);
+
+        service.ValidateUser(dto);
     }
 }
