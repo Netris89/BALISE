@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
-using Museum.Services;
+using Museum.DTO;
+using Museum.Validation;
 using ReactiveUI;
 
 namespace Museum.ViewModels;
 
 public class FormViewModel : ViewModelBase
 {
-    private string? firstName;
-    private string? lastName;
-    private string? address;
-    private string? number;
-    private string? city;
-    private string? email;
-    private FormService service;
+    private string firstName = string.Empty;
+    private string lastName = string.Empty;
+    private string address = string.Empty;
+    private string number = string.Empty;
+    private string city = string.Empty;
+    private string email = string.Empty;
     private bool isNewletterChecked;
     private bool isSatisfactionChecked;
     private RegionInfo? selectedCountry;
 
-    public string? FirstName
+    public string FirstName
     {
         get => firstName;
         set
@@ -31,7 +31,7 @@ public class FormViewModel : ViewModelBase
         }
     }
 
-    public string? LastName
+    public string LastName
     {
         get => lastName;
         set
@@ -41,7 +41,7 @@ public class FormViewModel : ViewModelBase
         }
     }
 
-    public string? Address
+    public string Address
     {
         get => address;
         set
@@ -51,7 +51,7 @@ public class FormViewModel : ViewModelBase
         }
     }
 
-    public string? Number
+    public string Number
     {
         get => number;
         set
@@ -61,7 +61,7 @@ public class FormViewModel : ViewModelBase
         }
     }
 
-    public string? City
+    public string City
     {
         get => city;
         set
@@ -71,7 +71,7 @@ public class FormViewModel : ViewModelBase
         }
     }
 
-    public string? Email
+    public string Email
     {
         get => email;
         set
@@ -134,7 +134,6 @@ public class FormViewModel : ViewModelBase
 
         CancelCommand = ReactiveCommand.Create(ClearForm);
         AcceptCommand = ReactiveCommand.Create(ValidateForm);
-        service = new FormService();
     }
 
     public void ClearForm()
@@ -152,6 +151,7 @@ public class FormViewModel : ViewModelBase
 
     public void ValidateForm()
     {
-        Console.WriteLine("Accept");
+        FormDto dto = new FormDto(FirstName,LastName,Address,Number,City,Email,SelectedCountry!);
+        FormValidator.ValidateForm(dto);
     }
 }
