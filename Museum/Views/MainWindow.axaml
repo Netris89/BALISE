@@ -26,17 +26,17 @@
             <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,*,Auto"
                   Margin="20,0">
 
-                <Button Name="GoToMapButton" Grid.Column="0" Content="{x:Static localization:Resources.Map}" Foreground="White" Background= "#Ca005d">
+                <Button Name="GoToMapButton" Command="{Binding GoToMap}" Grid.Column="0" Content="{x:Static localization:Resources.Map}" Foreground="White" Background= "#Ca005d">
                     
                 </Button>
-                <Button Name="GoToAgendaButton" Grid.Column="1" Content="Événements" Foreground="White" Background= "#Ca005d"/>
-                <Button Name="GoToFormButton" Grid.Column="2" Content="Newsletter" Foreground="White" Background= "#Ca005d"/>
+                <Button Name="GoToAgendaButton" Command="{Binding GoToAgenda}" Grid.Column="1" Content="Événements" Foreground="White" Background= "#Ca005d"/>
+                <Button Name="GoToFormButton" Command="{Binding GoToForm}" Grid.Column="2" Content="Newsletter" Foreground="White" Background= "#Ca005d"/>
                 <!-- Pas de colonne 4 pour espacer -->
                 <Button Name="GoToConnectionButton" Grid.Column="5" Content="Se connecter" Foreground="White" Background= "#Ca005d"/>
             </Grid>
         </Border>
 
-        <ContentControl Name="ContentControl"/>
+        <ContentControl Name="ContentControl" Content="{Binding CurrentView}"/>
     </DockPanel>
 
 </Window>
