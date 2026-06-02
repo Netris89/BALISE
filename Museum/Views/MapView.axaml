@@ -8,15 +8,15 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.MapView">
     <Grid>
-        <!-- Carte -->
+        <!-- Map -->
         <!-- TODO: Remettre image binding -->
         <!-- <Image Source="{Binding Image}"/> -->
         <Image Source="avares://Balise/Assets/REZ_GC.png"/>
-        <!-- Zone cliquable -->
+        <!-- Clickable zone -->
         <Canvas>
             <Polygon Points="0,0 100,0 100,100 0,100 0,0" Fill="Transparent" Stroke="Red" StrokeThickness="2" PointerPressed="PolygonPressed"/>
         </Canvas>
-        <!-- Panneau flottant -->
+        <!-- Floating panel -->
         <Border HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 IsVisible="{Binding IsSpaceDetailsVisible}">

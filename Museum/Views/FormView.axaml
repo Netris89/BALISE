@@ -8,37 +8,37 @@
              x:Class="Balise.Views.FormView"
              x:DataType="vm:FormViewModel">
     <Grid VerticalAlignment="Center" ColumnDefinitions="4*,*,3*,*,3*,*,4*" RowDefinitions="*,*,*,*,*,*,*" RowSpacing="20">
-        <!-- Nom -->
+        <!-- Name -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="0" Grid.Column="1" Text= "{x:Static localization:Resources.Name}"/>
         <StackPanel Grid.Row= "0" Grid.Column="2" >
             <TextBlock Opacity="{Binding !LastNameError}" Text="{x:Static localization:Resources.LastNameError}"  Foreground="Red"/>
             <TextBox Text="{Binding LastName}" PlaceholderText= "{x:Static localization:Resources.NamePlaceholder}"/>
         </StackPanel>
-        <!-- Prénom -->
+        <!-- First name -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="0" Grid.Column="3" Text= "{x:Static localization:Resources.FirstName}"/>
         <StackPanel Grid.Row= "0" Grid.Column="4">
             <TextBlock Opacity="{Binding !FirstNameError}" Text="{x:Static localization:Resources.FirstNameError}"  Foreground="Red"/>
             <TextBox Text="{Binding FirstName}" PlaceholderText= "{x:Static localization:Resources.FirstNamePlaceholder}"/>
         </StackPanel>
-        <!-- Adresse -->
+        <!-- Address -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.Column="1" Text="{x:Static localization:Resources.Address}"/>
         <StackPanel Grid.Row= "1" Grid.Column="2">
             <TextBlock Opacity="{Binding !AddressError}" Text="{x:Static localization:Resources.AddressError}"  Foreground="Red"/>
             <TextBox Text="{Binding Address}" PlaceholderText= "{x:Static localization:Resources.AddressPlaceholder}"/>
         </StackPanel>
-        <!-- Numéro -->
+        <!-- Number -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.Column="3" Text="{x:Static localization:Resources.Number}"/>
         <StackPanel Grid.Row= "1" Grid.Column="4">
             <TextBlock Opacity="{Binding !NumberError}" Text="{x:Static localization:Resources.NumberError}"  Foreground="Red"/>
             <TextBox Text="{Binding Number}"  PlaceholderText= "{x:Static localization:Resources.NumberPlaceholder}"/>
         </StackPanel >
-        <!-- Ville -->
+        <!-- City -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="2" Grid.Column="1" Text="{x:Static localization:Resources.City}"/>
         <StackPanel Grid.Row= "2" Grid.Column="2">
             <TextBlock Opacity="{Binding !CityError}" Text="{x:Static localization:Resources.CityError}"  Foreground="Red"/>
             <TextBox Text="{Binding City}" PlaceholderText= "{x:Static localization:Resources.CityPlaceholder}"/>
         </StackPanel>
-        <!-- Pays -->
+        <!-- Country -->
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" Grid.Row="2" Grid.Column="3" Text="{x:Static localization:Resources.Country}"/>
         <ComboBox Grid.Row="2"
                   Grid.Column="4"
@@ -63,15 +63,15 @@
         <CheckBox IsChecked="{Binding IsNewletterChecked}" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="1"/>
         <TextBlock VerticalAlignment="Center" Margin="5" Grid.Row="4" Grid.Column="2" Text="{x:Static localization:Resources.NewsletterPlaceholder}"/>
 
-        <!-- CheckBox Enquête -->
+        <!-- CheckBox Survey -->
         <CheckBox IsChecked="{Binding IsSatisfactionChecked}" HorizontalAlignment="Right" Grid.Row="5" Grid.Column="1"/>
         <TextBlock VerticalAlignment="Center" Margin="5" Grid.Row="5" Grid.Column="2" Text="{x:Static localization:Resources.SatisfactionPlaceholder}"/>
 
-        <!-- Bouton Accepter -->
+        <!-- Bouton Accept -->
         <Button Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" Command="{Binding AcceptCommand}" IsEnabled="{Binding IsFormCompleted}">
             <TextBlock Text="{x:Static localization:Resources.AcceptText}"/>
         </Button>
-        <!-- Bouton Annuler -->
+        <!-- Bouton Cancel -->
         <Button Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" Command="{Binding CancelCommand}">
             <TextBlock Text="{x:Static localization:Resources.CancelText}" />
         </Button>
