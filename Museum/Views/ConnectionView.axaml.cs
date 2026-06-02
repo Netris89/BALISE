@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace Museum.Views;
+namespace Balise.Views;
 
 public partial class ConnectionView : UserControl
 {

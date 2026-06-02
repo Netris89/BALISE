@@ -1,9 +1,9 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using Museum.ViewModels;
+using Balise.ViewModels;
 
-namespace Museum;
+namespace Balise;
 
 public class ViewLocator : IDataTemplate
 {

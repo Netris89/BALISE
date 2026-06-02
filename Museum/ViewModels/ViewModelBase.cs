@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace Museum.ViewModels;
+namespace Balise.ViewModels;
 
 public class ViewModelBase : ReactiveObject
 {

@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
-using Museum.DTO;
-using Museum.Services;
-using Museum.Validation;
+using Balise.DTO;
+using Balise.Services;
+using Balise.Validation;
 using ReactiveUI;
 
-namespace Museum.ViewModels;
+namespace Balise.ViewModels;
 
 public class FormViewModel : ViewModelBase
 {

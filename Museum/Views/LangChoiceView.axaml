@@ -1,35 +1,35 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="clr-namespace:Museum.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Balise.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Museum.Views.LangChoiceView"
+             x:Class="Balise.Views.LangChoiceView"
              x:DataType="vm:LangChoiceViewModel">
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
         <TextBlock HorizontalAlignment="Center" Text="{Binding SelectionText}" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50">
             <StackPanel>
                 <Button Name="FrenchButton" CommandParameter="fr">
-                    <Image HorizontalAlignment="Center" Source="avares://Museum/Assets/Flag_of_France.png" Width="63" Height="41"/>
+                    <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_France.png" Width="63" Height="41"/>
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="Français"></TextBlock>
             </StackPanel>
             <StackPanel>
                 <Button Name="DutchButton" CommandParameter="nl">
-                    <Image HorizontalAlignment="Center" Source="avares://Museum/Assets/Flag_of_the_Netherlands.png" Width="63" Height="41" />
+                    <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_the_Netherlands.png" Width="63" Height="41" />
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="Nederlands"></TextBlock>
             </StackPanel>
             <StackPanel>
                 <Button Name="GermanButton" CommandParameter="de">
-                    <Image HorizontalAlignment="Center" Source="avares://Museum/Assets/Flag_of_Germany.png" Width="63" Height="41" />
+                    <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_Germany.png" Width="63" Height="41" />
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="Deutsch"></TextBlock>
             </StackPanel>
             <StackPanel>
                 <Button Name="EnglishButton" CommandParameter="en">
-                    <Image HorizontalAlignment="Center" Source="avares://Museum/Assets/Flag_of_the_United_Kingdom.png" Width="63" Height="41" />
+                    <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_the_United_Kingdom.png" Width="63" Height="41" />
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="English"></TextBlock>
             </StackPanel>

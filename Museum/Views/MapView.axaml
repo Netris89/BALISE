@@ -2,17 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewmodels="using:Museum.ViewModels"
-             xmlns:localization="clr-namespace:Museum.Localization"
-             xmlns:vm="clr-namespace:Museum.ViewModels"
+             xmlns:localization="clr-namespace:Balise.Localization"
+             xmlns:vm="clr-namespace:Balise.ViewModels"
              x:DataType="vm:MapViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Museum.Views.MapView">
+             x:Class="Balise.Views.MapView">
     <Grid>
         <!-- Carte -->
         <!-- TODO: Remettre image binding -->
         <!-- <Image Source="{Binding Image}"/> -->
-        <Image Source="avares://Museum/Assets/REZ_GC.png"/>
+        <Image Source="avares://Balise/Assets/REZ_GC.png"/>
         <!-- Zone cliquable -->
         <Canvas>
             <Polygon Points="0,0 100,0 100,100 0,100 0,0" Fill="Transparent" Stroke="Red" StrokeThickness="2" PointerPressed="PolygonPressed"/>

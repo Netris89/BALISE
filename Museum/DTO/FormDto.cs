@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Museum.DTO;
+namespace Balise.DTO;
 
 public class FormDto
 {

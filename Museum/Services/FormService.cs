@@ -1,8 +1,8 @@
-using Museum.DTO;
-using Museum.Repositories;
-using Museum.Validation;
+using Balise.DTO;
+using Balise.Repositories;
+using Balise.Validation;
 
-namespace Museum.Services;
+namespace Balise.Services;
 
 public class FormService
 {

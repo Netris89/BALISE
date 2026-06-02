@@ -5,7 +5,7 @@ using System.Reactive;
 using Avalonia.Threading;
 using ReactiveUI;
 
-namespace Museum.ViewModels;
+namespace Balise.ViewModels;
 
 public class LangChoiceViewModel : ViewModelBase
 {

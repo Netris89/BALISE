@@ -1,8 +1,8 @@
 ﻿using System.Reactive;
-using Museum.Services;
+using Balise.Services;
 using ReactiveUI;
 
-namespace Museum.ViewModels;
+namespace Balise.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {

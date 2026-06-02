@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Museum.Models;
+namespace Balise.Models;
 
 public class Floor
 {

@@ -1,8 +1,8 @@
-using Museum.Data;
-using Museum.DTO;
-using Museum.Models;
+using Balise.Data;
+using Balise.DTO;
+using Balise.Models;
 
-namespace Museum.Repositories;
+namespace Balise.Repositories;
 
 public class UserRepository
 {

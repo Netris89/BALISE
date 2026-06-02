@@ -1,6 +1,6 @@
 using NetTopologySuite.Geometries;
 
-namespace Museum.Models;
+namespace Balise.Models;
 
 public class PointOfInterest
 {

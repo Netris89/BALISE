@@ -2,13 +2,13 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Microsoft.EntityFrameworkCore;
-using Museum.Data;
-using Museum.Repositories;
-using Museum.Services;
-using Museum.ViewModels;
-using Museum.Views;
+using Balise.Data;
+using Balise.Repositories;
+using Balise.Services;
+using Balise.ViewModels;
+using Balise.Views;
 
-namespace Museum;
+namespace Balise;
 
 public partial class App : Application
 {
@@ -20,7 +20,7 @@ public partial class App : Application
     public override void OnFrameworkInitializationCompleted()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseInMemoryDatabase("MuseumDb")
+            .UseInMemoryDatabase("BaliseDb")
             .Options;
 
         var dbContext = new AppDbContext(options);

@@ -1,9 +1,9 @@
 using System.Reactive.Disposables;
 using Avalonia.ReactiveUI;
-using Museum.ViewModels;
+using Balise.ViewModels;
 using ReactiveUI;
 
-namespace Museum.Views;
+namespace Balise.Views;
 
 public partial class LangChoiceView : ReactiveUserControl<LangChoiceViewModel>
 {

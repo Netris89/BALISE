@@ -1,4 +1,4 @@
-namespace Museum.Models;
+namespace Balise.Models;
 
 public class Event
 {

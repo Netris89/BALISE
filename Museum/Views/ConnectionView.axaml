@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Museum.Views.ConnectionView">
+             x:Class="Balise.Views.ConnectionView">
     <Grid VerticalAlignment="Center" ColumnDefinitions="2*,*, *, 2*" RowDefinitions="*,*,*" RowSpacing="20">
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Email :"></TextBlock>
         <TextBox PlaceholderText="Entrez votre adresse email" Grid.Row="0" Grid.Column="2" Name="EmailTextBox"></TextBox>

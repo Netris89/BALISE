@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Net.Mail;
-using Museum.DTO;
+using Balise.DTO;
 
-namespace Museum.Validation;
+namespace Balise.Validation;
 
 public class FormValidator
 {

@@ -1,4 +1,4 @@
-namespace Museum.Validation;
+namespace Balise.Validation;
 
 public class FormValidationResult
 {

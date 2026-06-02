@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Museum.Models;
+using Balise.Models;
 
-namespace Museum.Data
+namespace Balise.Data
 {
     public class AppDbContext : DbContext
     {

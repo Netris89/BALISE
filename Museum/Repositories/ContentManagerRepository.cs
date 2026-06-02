@@ -1,4 +1,4 @@
-namespace Museum.Repositories;
+namespace Balise.Repositories;
 
 public class ContentManagerRepository
 {

@@ -2,11 +2,11 @@ using System;
 using System.Windows.Input;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using Museum.Models;
+using Balise.Models;
 using NetTopologySuite.Geometries;
 using ReactiveUI;
 
-namespace Museum.ViewModels;
+namespace Balise.ViewModels;
 
 public class MapViewModel : ViewModelBase
 {
@@ -35,7 +35,7 @@ public class MapViewModel : ViewModelBase
 
     public MapViewModel()
     {
-        var uri = new Uri("avares://Museum/Assets/REZ_GC.png");
+        var uri = new Uri("avares://Balise/Assets/REZ_GC.png");
 
         var polygon = new Polygon(
             new LinearRing(

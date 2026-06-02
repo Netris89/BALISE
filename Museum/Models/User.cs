@@ -1,6 +1,6 @@
-using Museum.DTO;
+using Balise.DTO;
 
-namespace Museum.Models;
+namespace Balise.Models;
 
 public class User
 {

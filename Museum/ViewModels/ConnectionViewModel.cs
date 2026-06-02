@@ -1,4 +1,4 @@
-namespace Museum.ViewModels;
+namespace Balise.ViewModels;
 
 public class ConnectionViewModel : ViewModelBase
 {

@@ -2,7 +2,7 @@
 using Avalonia.ReactiveUI;
 using System;
 
-namespace Museum;
+namespace Balise;
 
 sealed class Program
 {

@@ -1,7 +1,7 @@
 using Avalonia.ReactiveUI;
-using Museum.ViewModels;
+using Balise.ViewModels;
 
-namespace Museum.Views;
+namespace Balise.Views;
 
 public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
