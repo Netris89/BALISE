@@ -3,17 +3,44 @@ using NetTopologySuite.Geometries;
 
 namespace Balise.Models;
 
+/// <summary>
+/// Represents a physical space defined by a boundary and containing points of interest.
+/// </summary>
 public class Space
 {
+    /// <summary>
+    /// Unique identifier of the space.
+    /// </summary>
     public int Id { get; set; }
+
+    /// <summary>
+    /// Name of the space.
+    /// </summary>
     public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Collection of points of interest contained within the space.
+    /// </summary>
     public List<PointOfInterest> PointOfInterests { get; set; } = [];
+
+    /// <summary>
+    /// Geographical boundary defining the limits of the space.
+    /// </summary>
     public Polygon Boundary { get; set; } = null!;
 
+    /// <summary>
+    /// Initializes a new empty instance of <see cref="Space"/>.
+    /// </summary>
     public Space()
     {
     }
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="Space"/> with specified values.
+    /// </summary>
+    /// <param name="name">Name of the space.</param>
+    /// <param name="poi">List of points of interest contained in the space.</param>
+    /// <param name="boundary">Geographical boundary of the space.</param>
     public Space(string name, List<PointOfInterest> poi, Polygon boundary)
     {
         Name = name;
