@@ -8,7 +8,23 @@
              x:DataType="vm:MapViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Museum.Views.MapView">
-    <Panel>
-        <Image Source="{Binding Image}"/>
-    </Panel>
+    <Grid>
+        <!-- Carte -->
+        <!-- TODO: Remettre image binding -->
+        <!-- <Image Source="{Binding Image}"/> -->
+        <Image Source="avares://Museum/Assets/REZ_GC.png"/>
+        <!-- Zone cliquable -->
+        <Canvas>
+            <Polygon Points="0,0 100,0 100,100 0,100 0,0" Fill="Transparent" Stroke="Red" StrokeThickness="2" PointerPressed="PolygonPressed"/>
+        </Canvas>
+        <!-- Panneau flottant -->
+        <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsVisible="{Binding IsSpaceDetailsVisible}">
+
+            <StackPanel>
+                <TextBlock Text="{Binding SelectedSpace.Name}" />
+            </StackPanel>
+        </Border>
+    </Grid>
 </UserControl>
