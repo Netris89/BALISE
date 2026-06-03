@@ -25,20 +25,24 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-
+        
         <!-- Map -->
         <Grid Grid.Row="1">
             <Image Source="{Binding Image}" Stretch="Uniform"/>
 
-            <Canvas HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch">
-                <!-- TODO: ItemsControl to have the polygons draw automatically -->
-                <Polygon Points="0,0 100,0 100,100 0,100"
-                         Fill="Transparent"
-                         Stroke="Red"
-                         StrokeThickness="2"
-                         PointerPressed="PolygonPressed"/>
-            </Canvas>
+            <ItemsControl ItemsSource="{Binding Spaces}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Polygon Points="{Binding AvaloniaPoints}" Fill="Red"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
 
         <!-- Floating panel -->

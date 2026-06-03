@@ -15,6 +15,7 @@ public class MapViewModel : ViewModelBase
 {
     private Bitmap image;
     private Museum museum;
+    private List<Space> spaces;
     private static readonly GeometryFactory Factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
 
     public Space? SelectedSpace
@@ -36,11 +37,13 @@ public class MapViewModel : ViewModelBase
     }
 
     public List<Floor> Floors { get; set; }
-
     public Floor CurrentFloor { get; private set; }
-
+    public List<Space> Spaces
+    {
+        get => spaces; 
+        set => this.RaiseAndSetIfChanged(ref spaces, value);
+    }
     public ReactiveCommand<Floor, Unit> ChangeFloorCommand { get; }
-
     public ViewModelActivator Activator => new ViewModelActivator();
 
     public MapViewModel()
@@ -119,6 +122,7 @@ public class MapViewModel : ViewModelBase
 
         Floors = museum.Floors;
         CurrentFloor = museum.Floors.ElementAt(0);
+        spaces = CurrentFloor.Spaces;
         image = CurrentFloor.MapImage;
 
         ChangeFloorCommand = ReactiveCommand.Create<Floor>(ChangeFloor);
@@ -128,5 +132,6 @@ public class MapViewModel : ViewModelBase
     {
         CurrentFloor = floor;
         Image = floor.MapImage;
+        Spaces = floor.Spaces;
     }
 }

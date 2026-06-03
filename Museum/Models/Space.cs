@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using NetTopologySuite.Geometries;
 
 namespace Balise.Models;
@@ -27,6 +28,11 @@ public class Space
     /// Geographical boundary defining the limits of the space.
     /// </summary>
     public Polygon Boundary { get; set; } = null!;
+
+    public List<Avalonia.Point> AvaloniaPoints
+    {
+        get => Boundary.ExteriorRing.Coordinates.Select(c => new Avalonia.Point(c.X, c.Y)).ToList();
+    }
 
     /// <summary>
     /// Initializes a new empty instance of <see cref="Space"/>.
