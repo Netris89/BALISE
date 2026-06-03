@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Avalonia.Media.Imaging;
 
 namespace Balise.Models;
 
@@ -20,7 +22,7 @@ public class Floor
     /// <summary>
     /// URI of the map image representing the floor layout.
     /// </summary>
-    public string MapImageUri { get; set; } = string.Empty;
+    public Bitmap MapImage { get; set; } = null!;
 
     /// <summary>
     /// Collection of spaces located on the floor.
@@ -40,10 +42,10 @@ public class Floor
     /// <param name="number">Floor number within the building.</param>
     /// <param name="mapImage">URI of the map image representing the floor layout.</param>
     /// <param name="spaces">List of spaces located on the floor.</param>
-    public Floor(int number, string mapImage, List<Space> spaces)
+    public Floor(int number, Bitmap mapImage, List<Space> spaces)
     {
         Number = number;
-        MapImageUri = mapImage;
+        MapImage = mapImage;
         Spaces = spaces;
     }
 }
