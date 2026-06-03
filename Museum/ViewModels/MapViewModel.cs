@@ -37,7 +37,11 @@ public class MapViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref image, value);
     }
 
-    public ReactiveCommand<int, Unit> ChangeFloorCommand { get; }
+    public List<Floor> Floors { get; set; }
+
+    public Floor CurrentFloor { get; private set; }
+
+    public ReactiveCommand<Floor, Unit> ChangeFloorCommand { get; }
 
     public ViewModelActivator Activator => new ViewModelActivator();
 
@@ -93,19 +97,19 @@ public class MapViewModel : ViewModelBase
         //Floors
         var floor0 = new Floor(
             0,
-            "avares://Balise/Assets/REZ_GC.png",
+            new Bitmap(AssetLoader.Open(new Uri("avares://Balise/Assets/REZ_GC.png"))),
             new List<Space> { space1 }
         );
 
         var floor1 = new Floor(
             1,
-            "avares://Balise/Assets/GC_1.png",
+            new Bitmap(AssetLoader.Open(new Uri("avares://Balise/Assets/GC_1.png"))),
             new List<Space> { space2 }
         );
 
         var floor2 = new Floor(
             2,
-            "avares://Balise/Assets/GC_2.png",
+            new Bitmap(AssetLoader.Open(new Uri("avares://Balise/Assets/GC_2.png"))),
             new List<Space>()
         );
 
@@ -115,15 +119,16 @@ public class MapViewModel : ViewModelBase
             new List<Floor> { floor0, floor1, floor2 }
         );
 
-        var uri = new Uri(museum.Floors.ElementAt(0).MapImageUri);
-        image = new Bitmap(AssetLoader.Open(uri));
+        Floors = museum.Floors;
+        CurrentFloor = museum.Floors.ElementAt(0);
+        image = CurrentFloor.MapImage;
 
-        ChangeFloorCommand = ReactiveCommand.Create<int>(ChangeFloor);
+        ChangeFloorCommand = ReactiveCommand.Create<Floor>(ChangeFloor);
     }
 
-    public void ChangeFloor(int floorNumber)
+    public void ChangeFloor(Floor floor)
     {
-        var uri = new Uri(museum.Floors.ElementAt(floorNumber).MapImageUri);
-        Image = new Bitmap(AssetLoader.Open(uri));
+        CurrentFloor = floor;
+        Image = floor.MapImage;
     }
 }
