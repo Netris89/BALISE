@@ -10,13 +10,20 @@
     <Grid RowDefinitions="auto, *">
 
         <!-- Floor buttons -->
-        <!-- TODO: ItemsControl to have the buttons draw automatically -->
-        <StackPanel Grid.Row="0"
-                    HorizontalAlignment="Center"
-                    Orientation="Horizontal">
-            <Button Content="Rez de chaussée" CommandParameter="0" Command="{Binding ChangeFloor}"/>
-            <Button Content="1er étage" CommandParameter="1" Command="{Binding ChangeFloor}"/>
-            <Button Content="2ème étage" CommandParameter="2" Command="{Binding ChangeFloor}"/>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+            <ItemsControl ItemsSource="{Binding Floors}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Number}" Command="{Binding $parent[ItemsControl].DataContext.ChangeFloorCommand}" CommandParameter="{Binding}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
 
         <!-- Map -->
