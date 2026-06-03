@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
-using System.Windows.Input;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Balise.Models;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
-using NetTopologySuite.Operation.Buffer;
 using ReactiveUI;
 
 namespace Balise.ViewModels;
