@@ -7,27 +7,39 @@
              x:DataType="vm:MapViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.MapView">
-    <Grid RowDefinitions="auto, auto">
+    <Grid RowDefinitions="auto, *">
+
         <!-- Floor buttons -->
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
             <Button Content="Rez de chaussée" CommandParameter="0" Command="{Binding ChangeFloor}"/>
             <Button Content="1er étage" CommandParameter="1" Command="{Binding ChangeFloor}"/>
             <Button Content="2ème étage" CommandParameter="2" Command="{Binding ChangeFloor}"/>
         </StackPanel>
+
         <!-- Map -->
-        <Image Grid.Row="1" Source="{Binding Image}"/>
-        <!-- Clickable zone -->
-        <Canvas>
-            <Polygon Points="0,0 100,0 100,100 0,100 0,0" Fill="Transparent" Stroke="Red" StrokeThickness="2" PointerPressed="PolygonPressed"/>
-        </Canvas>
+        <Grid Grid.Row="1">
+            <Image Source="{Binding Image}" Stretch="Uniform"/>
+
+            <Canvas HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                <Polygon Points="0,0 100,0 100,100 0,100"
+                         Fill="Transparent"
+                         Stroke="Red"
+                         StrokeThickness="2"
+                         PointerPressed="PolygonPressed"/>
+            </Canvas>
+        </Grid>
+
         <!-- Floating panel -->
         <Border HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 IsVisible="{Binding IsSpaceDetailsVisible}">
-
             <StackPanel>
                 <TextBlock Text="{Binding SelectedSpace.Name}" />
             </StackPanel>
         </Border>
+
     </Grid>
 </UserControl>
