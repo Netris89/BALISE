@@ -10,6 +10,7 @@
     <Grid RowDefinitions="auto, *">
 
         <!-- Floor buttons -->
+        <!-- TODO: ItemsControl to have the buttons draw automatically -->
         <StackPanel Grid.Row="0"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
@@ -24,6 +25,7 @@
 
             <Canvas HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
+                <!-- TODO: ItemsControl to have the polygons draw automatically -->
                 <Polygon Points="0,0 100,0 100,100 0,100"
                          Fill="Transparent"
                          Stroke="Red"
