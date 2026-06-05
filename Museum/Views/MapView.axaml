@@ -53,14 +53,16 @@
                     BoxShadow="1 1 10 0 Black"
                     CornerRadius="0 10 10 0">
                 <StackPanel DataContext="{Binding SelectedSpace}">
+                    <TextBlock Text="{x:Static localization:Resources.Name}"/>
                     <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{x:Static localization:Resources.DescriptionText}"/>
                     <TextBlock Text="{Binding Description}" />
+                    <TextBlock Text="{x:Static localization:Resources.PointOfInterests}"/>
                     <ItemsControl ItemsSource="{Binding PointOfInterests}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
                                     <TextBlock Text="{Binding Name}" />
-                                    <TextBlock Text="{Binding Description}" />
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
