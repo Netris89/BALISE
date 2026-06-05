@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
+using Avalonia.Interactivity;
 using Balise.Models;
 using Balise.ViewModels;
 
@@ -19,4 +20,9 @@ public partial class MapView : UserControl
             vm.SelectedSpace = polygon.DataContext as Space;
         }
     }
+    
+    /* private void OnTogglePopup(object sender, RoutedEventArgs e)
+    {
+        MyPopup.IsOpen = !MyPopup.IsOpen;
+    } */
 }
