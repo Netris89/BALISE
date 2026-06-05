@@ -14,23 +14,21 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.3.3" />
-        <PackageReference Include="Avalonia" Version="12.0.3" />
-        <PackageReference Include="Avalonia.Desktop" Version="12.0.3" />
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.3" />
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.3" />
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.4.2" />
+        <PackageReference Include="Avalonia" Version="12.0.4" />
+        <PackageReference Include="Avalonia.Desktop" Version="12.0.4" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.4" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.4" />
         <!--Condition
         below is needed to remove Avalonia.Diagnostics package from build output in Release
         configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"
-            Version="11.3.15" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.17" />
         <PackageReference Include="Avalonia.ReactiveUI" Version="11.3.9" />
         <PackageReference Include="Duende.IdentityModel.OidcClient" Version="7.1.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.8" />
         <PackageReference Include="NetTopologySuite" Version="2.6.0" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite"
-            Version="10.0.2" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" Version="10.0.2" />
         <PackageReference Include="Npgsql.NetTopologySuite" Version="10.0.3" />
     </ItemGroup>
     <PropertyGroup>
