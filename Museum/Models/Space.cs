@@ -20,6 +20,11 @@ public class Space
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
+    /// Description of a space
+    /// </summary>
+    public string Description { get; set; } = string.Empty;
+
+    /// <summary>
     /// Collection of points of interest contained within the space.
     /// </summary>
     public List<PointOfInterest> PointOfInterests { get; set; } = [];
@@ -47,9 +52,10 @@ public class Space
     /// <param name="name">Name of the space.</param>
     /// <param name="poi">List of points of interest contained in the space.</param>
     /// <param name="boundary">Geographical boundary of the space.</param>
-    public Space(string name, List<PointOfInterest> poi, Polygon boundary)
+    public Space(string name, string description, List<PointOfInterest> poi, Polygon boundary)
     {
         Name = name;
+        Description = description;
         PointOfInterests = poi;
         Boundary = boundary;
     }
