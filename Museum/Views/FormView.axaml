@@ -9,33 +9,33 @@
              x:DataType="vm:FormViewModel">
     <Grid VerticalAlignment="Center" ColumnDefinitions="4*,*,3*,*,3*,*,4*" RowDefinitions="*,*,*,*,*,*,*" RowSpacing="20">
         <!-- Name -->
-        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="0" Grid.Column="1" Text= "{x:Static localization:Resources.Name}"/>
+        <TextBlock Classes="formLabel" Grid.Row="0" Grid.Column="1" Text= "{x:Static localization:Resources.Name}"/>
         <StackPanel Grid.Row= "0" Grid.Column="2" >
-            <TextBlock Opacity="{Binding !LastNameError}" Text="{x:Static localization:Resources.LastNameError}"  Foreground="Red"/>
+            <TextBlock Classes="formError" Opacity="{Binding !LastNameError}" Text="{x:Static localization:Resources.LastNameError}" />
             <TextBox Text="{Binding LastName}" PlaceholderText= "{x:Static localization:Resources.NamePlaceholder}"/>
         </StackPanel>
         <!-- First name -->
-        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="0" Grid.Column="3" Text= "{x:Static localization:Resources.FirstName}"/>
+        <TextBlock Classes="formLabel" Grid.Row="0" Grid.Column="3" Text= "{x:Static localization:Resources.FirstName}"/>
         <StackPanel Grid.Row= "0" Grid.Column="4">
-            <TextBlock Opacity="{Binding !FirstNameError}" Text="{x:Static localization:Resources.FirstNameError}"  Foreground="Red"/>
+            <TextBlock Classes="formError" Opacity="{Binding !FirstNameError}" Text="{x:Static localization:Resources.FirstNameError}" />
             <TextBox Text="{Binding FirstName}" PlaceholderText= "{x:Static localization:Resources.FirstNamePlaceholder}"/>
         </StackPanel>
         <!-- Address -->
-        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.Column="1" Text="{x:Static localization:Resources.Address}"/>
+        <TextBlock Classes="formLabel" Grid.Row="1" Grid.Column="1" Text="{x:Static localization:Resources.Address}"/>
         <StackPanel Grid.Row= "1" Grid.Column="2">
-            <TextBlock Opacity="{Binding !AddressError}" Text="{x:Static localization:Resources.AddressError}"  Foreground="Red"/>
+            <TextBlock Classes="formError" Opacity="{Binding !AddressError}" Text="{x:Static localization:Resources.AddressError}" />
             <TextBox Text="{Binding Address}" PlaceholderText= "{x:Static localization:Resources.AddressPlaceholder}"/>
         </StackPanel>
         <!-- Number -->
-        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.Column="3" Text="{x:Static localization:Resources.Number}"/>
+        <TextBlock Classes="formLabel" Grid.Row="1" Grid.Column="3" Text="{x:Static localization:Resources.Number}"/>
         <StackPanel Grid.Row= "1" Grid.Column="4">
-            <TextBlock Opacity="{Binding !NumberError}" Text="{x:Static localization:Resources.NumberError}"  Foreground="Red"/>
+            <TextBlock Classes="formError" Opacity="{Binding !NumberError}" Text="{x:Static localization:Resources.NumberError}" />
             <TextBox Text="{Binding Number}"  PlaceholderText= "{x:Static localization:Resources.NumberPlaceholder}"/>
         </StackPanel >
         <!-- City -->
-        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="2" Grid.Column="1" Text="{x:Static localization:Resources.City}"/>
+        <TextBlock Classes="formLabel" Grid.Row="2" Grid.Column="1" Text="{x:Static localization:Resources.City}"/>
         <StackPanel Grid.Row= "2" Grid.Column="2">
-            <TextBlock Opacity="{Binding !CityError}" Text="{x:Static localization:Resources.CityError}"  Foreground="Red"/>
+            <TextBlock Classes="formError" Opacity="{Binding !CityError}" Text="{x:Static localization:Resources.CityError}" />
             <TextBox Text="{Binding City}" PlaceholderText= "{x:Static localization:Resources.CityPlaceholder}"/>
         </StackPanel>
         <!-- Country -->
@@ -53,9 +53,9 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <!-- Email -->
-        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Grid.Row="3" Grid.Column="1" Text="{x:Static localization:Resources.Email}"/>
+        <TextBlock Classes="formLabel" Grid.Row="3" Grid.Column="1" Text="{x:Static localization:Resources.Email}"/>
         <StackPanel Grid.Row="3" Grid.Column="2">
-            <TextBlock Opacity="{Binding !EmailError}" Text="{x:Static localization:Resources.EmailError}"  Foreground="Red"/>
+            <TextBlock Classes="formError" Opacity="{Binding !EmailError}" Text="{x:Static localization:Resources.EmailError}" />
             <TextBox Text="{Binding Email}" PlaceholderText="{x:Static localization:Resources.EmailPlaceholder}"  Name="EmailTextBox"/>
         </StackPanel>
 

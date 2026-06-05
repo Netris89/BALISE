@@ -3,13 +3,41 @@
              xmlns:local="using:Balise"
              x:Class="Balise.App"
              RequestedThemeVariant="Light">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
-  
+
     <Application.Styles>
         <FluentTheme />
+
+        <!-- Reusable card style for information sections -->
+        <Style Selector="Border.infoSection">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#6E808080" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Margin" Value="10 5 10 5" />
+            <Setter Property="CornerRadius" Value="5" />
+        </Style>
+
+        <!-- Reusable label style for section headers -->
+        <Style Selector="TextBlock.sectionLabel">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="Gray" />
+        </Style>
+
+        <!-- Standard style for form field labels (aligned right, bottom spacing) -->
+        <Style Selector="TextBlock.formLabel">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
+        <!-- Standard style for validation error messages -->
+        <Style Selector="TextBlock.formError">
+            <Setter Property="Foreground" Value="Red" />
+        </Style>
+
     </Application.Styles>
 </Application>
