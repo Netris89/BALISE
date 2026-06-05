@@ -1,5 +1,7 @@
-using System;
 using Avalonia.Controls;
+using Avalonia.Controls.Shapes;
+using Balise.Models;
+using Balise.ViewModels;
 
 namespace Balise.Views;
 
@@ -12,7 +14,9 @@ public partial class MapView : UserControl
 
     private void PolygonPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
     {
-        // TODO: create method to open a side view for the clicked space
-        Console.WriteLine("clic");
+        if (sender is Polygon polygon && DataContext is MapViewModel vm)
+        {
+            vm.SelectedSpace = polygon.DataContext as Space;
+        }
     }
 }

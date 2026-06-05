@@ -16,12 +16,17 @@ public class MapViewModel : ViewModelBase
     private Bitmap image;
     private Museum museum;
     private List<Space> spaces;
+    private Space? selectedSpace;
     private static readonly GeometryFactory Factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
 
     public Space? SelectedSpace
     {
-        get;
-        set;
+        get => selectedSpace;
+        set
+        {
+            selectedSpace = value;
+            this.RaisePropertyChanged(nameof(SelectedSpace));
+        }
     }
 
     public bool IsSpaceDetailsVisible
@@ -40,7 +45,7 @@ public class MapViewModel : ViewModelBase
     public Floor CurrentFloor { get; private set; }
     public List<Space> Spaces
     {
-        get => spaces; 
+        get => spaces;
         set => this.RaiseAndSetIfChanged(ref spaces, value);
     }
     public ReactiveCommand<Floor, Unit> ChangeFloorCommand { get; }
@@ -71,19 +76,21 @@ public class MapViewModel : ViewModelBase
         // Spaces
         var space1 = new Space(
             "Salle Romaine",
+            "Une salle contenant des artéfacts romains",
             new List<PointOfInterest> { poi1, poi2 },
             Factory.CreatePolygon(new[]
             {
-                new Coordinate(0, 0),
-                new Coordinate(0, 100),
-                new Coordinate(100, 100),
-                new Coordinate(100, 0),
-                new Coordinate(0,0)
+                new Coordinate(400, 300),
+                new Coordinate(550, 300),
+                new Coordinate(550, 500),
+                new Coordinate(400, 500),
+                new Coordinate(400, 300)
             })
         );
 
         var space2 = new Space(
             "Salle Médiévale",
+            "Une salle contenant des artéfacts médiévaux",
             new List<PointOfInterest> { poi3 },
             Factory.CreatePolygon(new[]
             {
@@ -133,5 +140,6 @@ public class MapViewModel : ViewModelBase
         CurrentFloor = floor;
         Image = floor.MapImage;
         Spaces = floor.Spaces;
+        SelectedSpace = null;
     }
 }

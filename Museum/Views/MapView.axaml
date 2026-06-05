@@ -25,7 +25,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-        
+
         <!-- Map -->
         <Grid Grid.Row="1">
             <Image Source="{Binding Image}" Stretch="Uniform"/>
@@ -39,20 +39,35 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Polygon Points="{Binding AvaloniaPoints}" Fill="Red"/>
+                        <Polygon Points="{Binding AvaloniaPoints}" Fill="Red" PointerPressed="PolygonPressed"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </Grid>
 
-        <!-- Floating panel -->
-        <Border HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                IsVisible="{Binding IsSpaceDetailsVisible}">
-            <StackPanel>
-                <TextBlock Text="{Binding SelectedSpace.Name}" />
-            </StackPanel>
-        </Border>
+            <!-- Floating panel -->
+            <Border HorizontalAlignment="Left"
+                    VerticalAlignment="Stretch"
+                    IsVisible="{Binding SelectedSpace, Converter={x:Static ObjectConverters.IsNotNull}}"
+                    BorderThickness="2"
+                    BorderBrush="Black"
+                    BoxShadow="1 1 10 0 Black"
+                    CornerRadius="0 10 10 0">
+                <StackPanel DataContext="{Binding SelectedSpace}">
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Description}" />
+                    <ItemsControl ItemsSource="{Binding PointOfInterests}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text="{Binding Description}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </Grid>
 
     </Grid>
 </UserControl>
