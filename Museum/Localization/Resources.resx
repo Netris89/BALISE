@@ -159,7 +159,6 @@
     <data name="NumberError" xml:space="preserve"><value>Numéro invalide</value></data>
     <data name="CityError" xml:space="preserve"><value>Ville invalide</value></data>
     <data name="EmailError" xml:space="preserve"><value>Email invalide</value></data>
-    <data name="Culture" xml:space="preserve"><value></value></data>
-    <data name="ResourceManager" xml:space="preserve"><value></value></data>
+    
     
 <data name="DescriptionText" xml:space="preserve"><value>Desfription</value></data><data name="PointOfInterests" xml:space="preserve"><value>Points d'intérêt</value></data></root>

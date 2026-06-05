@@ -61,7 +61,8 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
         <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
         <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
@@ -86,10 +87,13 @@
                     <xsd:element name="data">
                         <xsd:complexType>
                             <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"
+                                    msdata:Ordinal="1" />
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0"
+                                    msdata:Ordinal="2" />
                             </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+                            <xsd:attribute name="name" type="xsd:string" use="required"
+                                msdata:Ordinal="1" />
                             <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
                             <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
                             <xsd:attribute ref="xml:space" />
@@ -98,7 +102,8 @@
                     <xsd:element name="resheader">
                         <xsd:complexType>
                             <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"
+                                    msdata:Ordinal="1" />
                             </xsd:sequence>
                             <xsd:attribute name="name" type="xsd:string" use="required" />
                         </xsd:complexType>
@@ -138,7 +143,25 @@
     <data name="FirstName" xml:space="preserve"><value>Vorname</value></data>
     <data name="Address" xml:space="preserve"><value>Adresse</value></data>
     <data name="Number" xml:space="preserve"><value>Nr.</value></data>
-    
+
     <data name="City" xml:space="preserve"><value>Stadt</value></data>
     <data name="Country" xml:space="preserve"><value>Auszahlungen</value></data>
-<data name="EmailPlaceholder" xml:space="preserve"><value>Geben Sie Ihre E-Mail-Adresse ein.</value></data><data name="NewsletterPlaceholder" xml:space="preserve"><value>Newsletter abonnieren</value></data><data name="SatisfactionPlaceholder" xml:space="preserve"><value>Möchten Sie an der Zufriedenheitsumfrage teilnehmen?</value></data><data name="NamePlaceholder" xml:space="preserve"><value>Geben Sie Ihren Namen ein</value></data><data name="FirstNamePlaceholder" xml:space="preserve"><value>Geben Sie Ihren Vornamen ein</value></data><data name="AddressPlaceholder" xml:space="preserve"><value>Geben Sie Ihre Adresse ein</value></data><data name="CountryPlaceholder" xml:space="preserve"><value>Wählen Sie Ihr Land aus</value></data><data name="CityPlaceholder" xml:space="preserve"><value>Gib deine Stadt ein</value></data><data name="NumberPlaceholder" xml:space="preserve"><value>Geben Sie die Nummer ein</value></data><data name="Map" xml:space="preserve"><value>Karte</value></data><data name="LastNameError" xml:space="preserve"><value>Ungültiger Name</value></data><data name="FirstNameError" xml:space="preserve"><value>Ungültiger Vorname</value></data><data name="AddressError" xml:space="preserve"><value>Ungültige Adresse</value></data><data name="NumberError" xml:space="preserve"><value>Ungültige Nummer</value></data><data name="CityError" xml:space="preserve"><value>Ungültige Stadt</value></data><data name="EmailError" xml:space="preserve"><value>Ungültige E-Mail-Adresse</value></data><data name="Culture" xml:space="preserve"><value>Kultur</value></data><data name="ResourceManager" xml:space="preserve"><value>Ressourcen</value></data><data name="DescriptionText" xml:space="preserve"><value>Beschreibung</value></data><data name="PointOfInterests" xml:space="preserve"><value>Sehenswürdigkeiten</value></data></root>
+    <data name="EmailPlaceholder" xml:space="preserve"><value>Geben Sie Ihre E-Mail-Adresse ein.</value></data>
+    <data name="NewsletterPlaceholder" xml:space="preserve"><value>Newsletter abonnieren</value></data>
+    <data name="SatisfactionPlaceholder" xml:space="preserve"><value>Möchten Sie an der Zufriedenheitsumfrage teilnehmen?</value></data>
+    <data name="NamePlaceholder" xml:space="preserve"><value>Geben Sie Ihren Namen ein</value></data>
+    <data name="FirstNamePlaceholder" xml:space="preserve"><value>Geben Sie Ihren Vornamen ein</value></data>
+    <data name="AddressPlaceholder" xml:space="preserve"><value>Geben Sie Ihre Adresse ein</value></data>
+    <data name="CountryPlaceholder" xml:space="preserve"><value>Wählen Sie Ihr Land aus</value></data>
+    <data name="CityPlaceholder" xml:space="preserve"><value>Gib deine Stadt ein</value></data>
+    <data name="NumberPlaceholder" xml:space="preserve"><value>Geben Sie die Nummer ein</value></data>
+    <data name="Map" xml:space="preserve"><value>Karte</value></data>
+    <data name="LastNameError" xml:space="preserve"><value>Ungültiger Name</value></data>
+    <data name="FirstNameError" xml:space="preserve"><value>Ungültiger Vorname</value></data>
+    <data name="AddressError" xml:space="preserve"><value>Ungültige Adresse</value></data>
+    <data name="NumberError" xml:space="preserve"><value>Ungültige Nummer</value></data>
+    <data name="CityError" xml:space="preserve"><value>Ungültige Stadt</value></data>
+    <data name="EmailError" xml:space="preserve"><value>Ungültige E-Mail-Adresse</value></data>
+    <data name="DescriptionText" xml:space="preserve"><value>Beschreibung</value></data>
+    <data name="PointOfInterests" xml:space="preserve"><value>Sehenswürdigkeiten</value></data>
+</root>
