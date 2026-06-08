@@ -17,6 +17,7 @@ public class MapViewModel : ViewModelBase
     private Museum museum;
     private List<Space> spaces;
     private Space? selectedSpace;
+    private PointOfInterest? selectedPointOfInterest;
     private static readonly GeometryFactory Factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
 
     public Space? SelectedSpace
@@ -29,10 +30,14 @@ public class MapViewModel : ViewModelBase
         }
     }
 
-    public bool IsSpaceDetailsVisible
+    public PointOfInterest? SelectedPointOfInterest
     {
-        get;
-        set;
+        get => selectedPointOfInterest;
+        set
+        {
+            selectedPointOfInterest = value;
+            this.RaisePropertyChanged(nameof(SelectedPointOfInterest));
+        }
     }
 
     public Bitmap Image
@@ -49,6 +54,7 @@ public class MapViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref spaces, value);
     }
     public ReactiveCommand<Floor, Unit> ChangeFloorCommand { get; }
+    public ReactiveCommand<PointOfInterest, Unit> SelectingPoiCommand { get; }
     public ViewModelActivator Activator => new ViewModelActivator();
 
     public MapViewModel()
@@ -133,6 +139,7 @@ public class MapViewModel : ViewModelBase
         image = CurrentFloor.MapImage;
 
         ChangeFloorCommand = ReactiveCommand.Create<Floor>(ChangeFloor);
+        SelectingPoiCommand = ReactiveCommand.Create<PointOfInterest>(SelectPointOfInterest);
     }
 
     public void ChangeFloor(Floor floor)
@@ -141,5 +148,11 @@ public class MapViewModel : ViewModelBase
         Image = floor.MapImage;
         Spaces = floor.Spaces;
         SelectedSpace = null;
+        SelectedPointOfInterest = null;
+    }
+
+    public void SelectPointOfInterest(PointOfInterest pointOfInterest)
+    {
+        SelectedPointOfInterest = pointOfInterest;
     }
 }

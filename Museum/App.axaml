@@ -39,5 +39,11 @@
             <Setter Property="Foreground" Value="Red" />
         </Style>
 
+        <Style Selector="Button.plainButton">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
     </Application.Styles>
 </Application>
