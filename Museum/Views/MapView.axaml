@@ -11,6 +11,7 @@
 
         <!-- Floor buttons -->
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+            <!-- Floor navigation bound to ChangeFloorCommand -->    
             <ItemsControl ItemsSource="{Binding Floors}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -39,12 +40,16 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
+                        <!-- Interactive map zones; selection handled in code-behind -->
                         <Polygon Points="{Binding AvaloniaPoints}" Fill="Red" PointerPressed="PolygonPressed"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
             <!-- Floating panel -->
+            <!-- Two independent selections:
+                - SelectedSpace: main context displayed in side panel
+                - SelectedPointOfInterest: secondary overlay popup -->
             <Border HorizontalAlignment="Left"
                     VerticalAlignment="Stretch"
                     IsVisible="{Binding SelectedSpace, Converter={x:Static ObjectConverters.IsNotNull}}"
@@ -55,6 +60,7 @@
                     Margin="20 0 50 25"
                     Background="White"
                     Name="infoPanel">
+                <!-- Side panel bound to currently selected space -->
                 <StackPanel DataContext="{Binding SelectedSpace}" Width="350">
                     <!-- Title -->
                     <Border Padding="5" Margin="5">
@@ -85,10 +91,13 @@
                                     <DataTemplate>
                                         <StackPanel>
                                             <Panel>
-                                                <Button Content="{Binding Name}" Classes="plainButton" x:Name="ToggleButton" Command="{Binding $parent[UserControl].DataContext.SelectingPoiCommand}" CommandParameter="{Binding}"/>
+                                                <!-- Access parent ViewModel because DataTemplate DataContext is a PointOfInterest -->
+                                                <Button Content="{Binding Name}" Classes="plainButton" Command="{Binding $parent[UserControl].DataContext.SelectingPoiCommand}" CommandParameter="{Binding}"/>
 
+                                                <!-- Popup bound to global SelectedPointOfInterest and anchored to info panel -->
                                                 <Popup PlacementTarget="infoPanel" Placement="RightEdgeAlignedTop" IsOpen="{Binding $parent[UserControl].DataContext.SelectedPointOfInterest, Converter={x:Static ObjectConverters.IsNotNull}}" IsLightDismissEnabled="True">
                                                     <Border Classes="infoSection" Background="White">
+                                                        <!-- Override DataContext to display details of the globally selected POI -->
                                                         <StackPanel DataContext="{Binding $parent[UserControl].DataContext.SelectedPointOfInterest}">
                                                             <Border Classes="infoSection">
                                                                 <StackPanel>
