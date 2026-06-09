@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:localization="clr-namespace:Balise.Localization"
              xmlns:vm="clr-namespace:Balise.ViewModels"
              x:DataType="vm:MapViewModel"
@@ -65,22 +66,32 @@
                     <!-- Title -->
                     <Border Padding="5" Margin="5">
                         <Grid ColumnDefinitions="*, auto">
-                            <TextBlock Grid.Column="0" FontSize="20" FontWeight="Bold" Foreground="Black" Text="Informations" />
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <materialIcons:MaterialIcon Grid.Column="0" Kind="InformationOutline" Foreground="#Ca005d" FontSize="30" Padding="10"/>
+                                <TextBlock VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="Black" Text="Informations" />
+                            </StackPanel>
+                            <Button Classes="plainButton" Grid.Column="1" FontSize="30" Content="{materialIcons:MaterialIconExt Kind=Close}" Foreground="#Ca005d"/>
                         </Grid>
                     </Border>
                     <!-- Name -->
                     <Border Classes="infoSection">
-                        <StackPanel>
-                            <TextBlock Classes="sectionLabel" Text="{x:Static localization:Resources.Name}" />
-                            <TextBlock FontSize="14" Text="{Binding Name}" />
-                        </StackPanel>
+                        <Grid ColumnDefinitions="auto, *">
+                            <materialIcons:MaterialIcon Grid.Column="0" Kind="Warehouse" Foreground="#Ca005d" FontSize="30" Padding="10"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Classes="sectionLabel" Text="{x:Static localization:Resources.Name}" />
+                                <TextBlock FontSize="14" Text="{Binding Name}" />
+                            </StackPanel>
+                        </Grid>
                     </Border>
                     <!-- Description -->
                     <Border Classes="infoSection">
-                        <StackPanel>
-                            <TextBlock Classes="sectionLabel" Text="{x:Static localization:Resources.DescriptionText}" />
-                            <TextBlock FontSize="14" Text="{Binding Description}" TextWrapping="Wrap" />
-                        </StackPanel>
+                        <Grid ColumnDefinitions="auto, *">
+                            <materialIcons:MaterialIcon Grid.Column="0" Kind="NoteTextOutline" Foreground="#Ca005d" FontSize="30" Padding="10"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Classes="sectionLabel" Text="{x:Static localization:Resources.DescriptionText}" />
+                                <TextBlock FontSize="14" Text="{Binding Description}" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
                     </Border>
                     <!-- List of points of interest -->
                     <Border Classes="infoSection">
@@ -89,8 +100,9 @@
                             <ItemsControl ItemsSource="{Binding PointOfInterests}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel>
-                                            <Panel>
+                                        <Grid ColumnDefinitions="auto, *">
+                                            <materialIcons:MaterialIcon Grid.Column="0" Kind="MapMarkerOutline" Foreground="#Ca005d" FontSize="30" Padding="10"/>
+                                            <Panel Grid.Column="1">
                                                 <!-- Access parent ViewModel because DataTemplate DataContext is a PointOfInterest -->
                                                 <Button Content="{Binding Name}" Classes="plainButton" Command="{Binding $parent[UserControl].DataContext.SelectingPoiCommand}" CommandParameter="{Binding}"/>
 
@@ -115,7 +127,7 @@
                                                     </Border>
                                                 </Popup>
                                             </Panel>
-                                        </StackPanel>
+                                        </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
