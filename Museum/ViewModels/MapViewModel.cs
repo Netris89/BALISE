@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
+using System.Windows.Input;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Balise.Models;
@@ -88,6 +89,11 @@ public class MapViewModel : ViewModelBase
     /// Command used to select a point of interest.
     /// </summary>
     public ReactiveCommand<PointOfInterest, Unit> SelectingPoiCommand { get; }
+
+    /// <summary>
+    /// Command used to close de side panel.
+    /// </summary>
+    public ICommand ClosePanelCommand { get; }
 
     /// <summary>
     /// Activator for ReactiveUI lifecycle management.
@@ -182,6 +188,7 @@ public class MapViewModel : ViewModelBase
         // Commands
         ChangeFloorCommand = ReactiveCommand.Create<Floor>(ChangeFloor);
         SelectingPoiCommand = ReactiveCommand.Create<PointOfInterest>(SelectPointOfInterest);
+        ClosePanelCommand = ReactiveCommand.Create(ClosePanel);
     }
 
     /// <summary>
@@ -205,5 +212,13 @@ public class MapViewModel : ViewModelBase
     public void SelectPointOfInterest(PointOfInterest pointOfInterest)
     {
         SelectedPointOfInterest = pointOfInterest;
+    }
+
+    /// <summary>
+    /// Closes the information panel by clearing the currently selected space.
+    /// </summary>
+    public void ClosePanel()
+    {
+        SelectedSpace = null;
     }
 }

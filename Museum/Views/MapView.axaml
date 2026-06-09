@@ -70,7 +70,7 @@
                                 <materialIcons:MaterialIcon Grid.Column="0" Kind="InformationOutline" Foreground="#Ca005d" FontSize="30" Padding="10"/>
                                 <TextBlock VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="Black" Text="Informations" />
                             </StackPanel>
-                            <Button Classes="plainButton" Grid.Column="1" FontSize="30" Content="{materialIcons:MaterialIconExt Kind=Close}" Foreground="#Ca005d"/>
+                            <Button Classes="plainButton" Grid.Column="1" FontSize="30" Content="{materialIcons:MaterialIconExt Kind=Close}" Foreground="#Ca005d" Command="{Binding $parent[UserControl].DataContext.ClosePanelCommand}"/>
                         </Grid>
                     </Border>
                     <!-- Name -->
