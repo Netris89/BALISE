@@ -23,6 +23,11 @@ public class Museum
     public List<Floor> Floors { get; set; } = [];
 
     /// <summary>
+    /// Collection of events associated with the museum.
+    /// </summary>
+    public List<Event>? Events { get; set; }
+
+    /// <summary>
     /// Initializes a new empty instance of <see cref="Museum"/>.
     /// </summary>
     public Museum()
