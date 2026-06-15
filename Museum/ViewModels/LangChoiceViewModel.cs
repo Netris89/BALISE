@@ -10,6 +10,7 @@ namespace Balise.ViewModels;
 public class LangChoiceViewModel : ViewModelBase
 {
     private string selectionText = "";
+    private DispatcherTimer? timer;
     private int index = 0;
     private readonly Action<ViewModelBase> navigate;
 
@@ -33,11 +34,12 @@ public class LangChoiceViewModel : ViewModelBase
         Localization.Resources.Culture = new CultureInfo(lang);
 
         navigate(new MapViewModel());
+        StopTimer();
     }
 
     public void ChangeMessage()
     {
-        DispatcherTimer timer = new DispatcherTimer
+        timer = new DispatcherTimer
         {
             Interval = TimeSpan.FromSeconds(3),
         };
@@ -65,5 +67,11 @@ public class LangChoiceViewModel : ViewModelBase
         };
 
         timer.Start();
+    }
+
+    public void StopTimer()
+    {
+        timer?.Stop();
+        timer = null;
     }
 }
