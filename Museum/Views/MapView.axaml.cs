@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
-using Avalonia.Interactivity;
 using Balise.Models;
 using Balise.ViewModels;
 
