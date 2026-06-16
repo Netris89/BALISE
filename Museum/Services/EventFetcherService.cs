@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -47,10 +48,20 @@ public class EventFetcherService
             var imgNode = node.SelectSingleNode(".//div[contains(@class,'field--name-field-image')]//img");
             var descNode = node.SelectSingleNode(".//div[contains(@class,'field--name-body')]");
 
+            var dateString = dateNode?.GetAttributeValue("datetime", "");
+            DateOnly date = default;
+            
+            // Convert the ISO date string to a DateOnly value.
+            // The source contains a full timestamp, but only the calendar date is relevant.
+            if (DateTime.TryParse(dateString, out var parsedDate))
+            {
+                date = DateOnly.FromDateTime(parsedDate);
+            }
+
             var ev = new Event
             {
                 Title = WebUtility.HtmlDecode(titleNode?.InnerText)?.Trim(),
-                Date = dateNode?.GetAttributeValue("datetime", ""),
+                Date = date,
 
                 Link = linkNode != null ? baseUrl + linkNode.GetAttributeValue("href", "") : null,
                 ImageUrl = imgNode != null ? baseUrl + imgNode.GetAttributeValue("src", "") : null,
