@@ -211,4 +211,13 @@
   <data name="EventDiscoverText" xml:space="preserve">
     <value>Entdecken Sie die kommenden Veranstaltungen des Museums.</value>
   </data>
+  <data name="NewsletterSignup" xml:space="preserve">
+    <value>Newsletter-Anmeldung</value>
+  </data>
+  <data name="NewsletterSignupDesc" xml:space="preserve">
+    <value>Erhalten Sie Updates, Veranstaltungshinweise und Neuigkeiten aus dem Museum.</value>
+  </data>
+  <data name="Preferences" xml:space="preserve">
+    <value>Präferenzen</value>
+  </data>
 </root>
