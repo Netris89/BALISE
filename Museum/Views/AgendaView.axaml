@@ -11,7 +11,10 @@
     <Grid ColumnDefinitions="*,2*,*" RowDefinitions="auto,*">
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="10">
             <materialIcons:MaterialIcon Grid.Row="0" Kind="CalendarMultiselect" Foreground="#Ca005d" FontSize="50" />
-            <TextBlock Text="{x:Static localization:Resources.EventText}" FontWeight="Bold" FontSize="40" Padding="10"/>
+            <StackPanel Margin="10">
+                <TextBlock Text="{x:Static localization:Resources.EventText}" FontWeight="Bold" FontSize="40"/>
+                <TextBlock Text="{x:Static localization:Resources.EventDiscoverText}" Foreground="#6E808080"/>
+            </StackPanel>
         </StackPanel>
         <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <ItemsControl ItemsSource="{Binding Events}" >
