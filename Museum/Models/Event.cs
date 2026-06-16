@@ -14,9 +14,5 @@ public class Event
 
     public Event()
     {
-        if (ImageUrl != null)
-        {
-            Image = new Bitmap(ImageUrl);
-        }
     }
 }

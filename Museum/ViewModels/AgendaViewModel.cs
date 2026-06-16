@@ -26,7 +26,7 @@ public class AgendaViewModel : ViewModelBase
 
         Events.Clear();
 
-        foreach (var ev in events)
+        foreach (var ev in await events)
         {
             Events.Add(ev);
         }
