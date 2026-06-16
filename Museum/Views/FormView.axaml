@@ -4,76 +4,108 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Balise.ViewModels"
              xmlns:localization="clr-namespace:Balise.Localization"
+             xmlns:materialIcons="using:Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.FormView"
              x:DataType="vm:FormViewModel">
-    <Grid VerticalAlignment="Center" ColumnDefinitions="4*,*,3*,*,3*,*,4*" RowDefinitions="*,*,*,*,*,*,*" RowSpacing="20">
-        <!-- Name -->
-        <TextBlock Classes="formLabel" Grid.Row="0" Grid.Column="1" Text= "{x:Static localization:Resources.Name}"/>
-        <StackPanel Grid.Row= "0" Grid.Column="2" >
-            <TextBlock Classes="formError" Opacity="{Binding !LastNameError}" Text="{x:Static localization:Resources.LastNameError}" />
-            <TextBox Text="{Binding LastName}" PlaceholderText= "{x:Static localization:Resources.NamePlaceholder}"/>
+    <Grid VerticalAlignment="Stretch" ColumnDefinitions="*,2*,*" RowDefinitions="auto,*,auto,*">
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="20">
+            <materialIcons:MaterialIcon Kind="EmailOutline" Foreground="#Ca005d" FontSize="50" />
+            <StackPanel Margin="10">
+                <TextBlock Text="{x:Static localization:Resources.NewsletterSignup}" FontWeight="Bold" FontSize="40"/>
+                <TextBlock Text="{x:Static localization:Resources.NewsletterSignupDesc}" Foreground="#6E808080"/>
+            </StackPanel>
         </StackPanel>
-        <!-- First name -->
-        <TextBlock Classes="formLabel" Grid.Row="0" Grid.Column="3" Text= "{x:Static localization:Resources.FirstName}"/>
-        <StackPanel Grid.Row= "0" Grid.Column="4">
-            <TextBlock Classes="formError" Opacity="{Binding !FirstNameError}" Text="{x:Static localization:Resources.FirstNameError}" />
-            <TextBox Text="{Binding FirstName}" PlaceholderText= "{x:Static localization:Resources.FirstNamePlaceholder}"/>
-        </StackPanel>
-        <!-- Address -->
-        <TextBlock Classes="formLabel" Grid.Row="1" Grid.Column="1" Text="{x:Static localization:Resources.Address}"/>
-        <StackPanel Grid.Row= "1" Grid.Column="2">
-            <TextBlock Classes="formError" Opacity="{Binding !AddressError}" Text="{x:Static localization:Resources.AddressError}" />
-            <TextBox Text="{Binding Address}" PlaceholderText= "{x:Static localization:Resources.AddressPlaceholder}"/>
-        </StackPanel>
-        <!-- Number -->
-        <TextBlock Classes="formLabel" Grid.Row="1" Grid.Column="3" Text="{x:Static localization:Resources.Number}"/>
-        <StackPanel Grid.Row= "1" Grid.Column="4">
-            <TextBlock Classes="formError" Opacity="{Binding !NumberError}" Text="{x:Static localization:Resources.NumberError}" />
-            <TextBox Text="{Binding Number}"  PlaceholderText= "{x:Static localization:Resources.NumberPlaceholder}"/>
-        </StackPanel >
-        <!-- City -->
-        <TextBlock Classes="formLabel" Grid.Row="2" Grid.Column="1" Text="{x:Static localization:Resources.City}"/>
-        <StackPanel Grid.Row= "2" Grid.Column="2">
-            <TextBlock Classes="formError" Opacity="{Binding !CityError}" Text="{x:Static localization:Resources.CityError}" />
-            <TextBox Text="{Binding City}" PlaceholderText= "{x:Static localization:Resources.CityPlaceholder}"/>
-        </StackPanel>
-        <!-- Country -->
-        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" Grid.Row="2" Grid.Column="3" Text="{x:Static localization:Resources.Country}"/>
-        <ComboBox Grid.Row="2"
-                  Grid.Column="4"
-                  ItemsSource="{Binding Countries}"
-                  SelectedItem="{Binding SelectedCountry}"
-                  PlaceholderText="{x:Static localization:Resources.CountryPlaceholder}"
-                  HorizontalAlignment="Stretch">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding DisplayName}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <!-- Email -->
-        <TextBlock Classes="formLabel" Grid.Row="3" Grid.Column="1" Text="{x:Static localization:Resources.Email}"/>
-        <StackPanel Grid.Row="3" Grid.Column="2">
-            <TextBlock Classes="formError" Opacity="{Binding !EmailError}" Text="{x:Static localization:Resources.EmailError}" />
-            <TextBox Text="{Binding Email}" PlaceholderText="{x:Static localization:Resources.EmailPlaceholder}"  Name="EmailTextBox"/>
-        </StackPanel>
+        <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*" Grid.Row="1" Grid.Column="1" Margin="20">
+            <!-- Name -->
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="10">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <TextBlock Classes="formLabel" Text= "{x:Static localization:Resources.Name}"/>
+                    <TextBlock Classes="formError" Opacity="{Binding !LastNameError}" Text="{x:Static localization:Resources.LastNameError}" />
+                </StackPanel>
+                <TextBox Text="{Binding LastName}" PlaceholderText= "{x:Static localization:Resources.NamePlaceholder}"/>
+            </StackPanel>
+            <!-- First name -->
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="10">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <TextBlock Classes="formLabel" Text= "{x:Static localization:Resources.FirstName}"/>
+                    <TextBlock Classes="formError" Opacity="{Binding !FirstNameError}" Text="{x:Static localization:Resources.FirstNameError}" />
+                </StackPanel>
+                <TextBox Text="{Binding FirstName}" PlaceholderText= "{x:Static localization:Resources.FirstNamePlaceholder}"/>
+            </StackPanel>
+            <!-- Address -->
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <TextBlock Classes="formLabel"  Text="{x:Static localization:Resources.Address}"/>
+                    <TextBlock Classes="formError" Opacity="{Binding !AddressError}" Text="{x:Static localization:Resources.AddressError}" />
+                </StackPanel>
+                <TextBox Text="{Binding Address}" PlaceholderText= "{x:Static localization:Resources.AddressPlaceholder}"/>
+            </StackPanel>
+            <!-- Number -->
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <TextBlock Classes="formLabel"  Text="{x:Static localization:Resources.Number}"/>
+                    <TextBlock Classes="formError" Opacity="{Binding !NumberError}" Text="{x:Static localization:Resources.NumberError}" />
+                </StackPanel >
+                <TextBox Text="{Binding Number}"  PlaceholderText= "{x:Static localization:Resources.NumberPlaceholder}"/>
+            </StackPanel>
+            <!-- City -->
+            <StackPanel Grid.Row="2" Grid.Column="0" Margin="10">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <TextBlock Classes="formLabel"  Text="{x:Static localization:Resources.City}"/>
+                    <TextBlock Classes="formError" Opacity="{Binding !CityError}" Text="{x:Static localization:Resources.CityError}" />
+                </StackPanel>
+                <TextBox Text="{Binding City}" PlaceholderText= "{x:Static localization:Resources.CityPlaceholder}"/>
+            </StackPanel>
+            <!-- Country -->
+            <StackPanel Grid.Row="2" Grid.Column="1" Margin="10">
+                <TextBlock Classes="formLabel"  Text="{x:Static localization:Resources.Country}"/>
+                <ComboBox ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}"
+                          PlaceholderText="{x:Static localization:Resources.CountryPlaceholder}"
+                          HorizontalAlignment="Stretch">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DisplayName}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <!-- Email -->
+            <StackPanel Grid.Row="3" Grid.Column="0" Margin="10" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <TextBlock Classes="formLabel" Text="{x:Static localization:Resources.Email}"/>
+                    <TextBlock Classes="formError" Opacity="{Binding !EmailError}" Text="{x:Static localization:Resources.EmailError}" />
+                </StackPanel>
+                <TextBox Text="{Binding Email}" PlaceholderText="{x:Static localization:Resources.EmailPlaceholder}"  Name="EmailTextBox"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" Margin="20" ColumnDefinitions="auto,*">
+            <materialIcons:MaterialIcon Kind="BellOutline" Foreground="#Ca005d" FontSize="20" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="{x:Static localization:Resources.Preferences}" Grid.Column="1" FontWeight="Bold" FontSize="20"/>
+                <!-- CheckBox Newletter -->
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding IsNewletterChecked}" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="1"/>
+                    <TextBlock VerticalAlignment="Center" Margin="10" Grid.Row="4" Grid.Column="2" Text="{x:Static localization:Resources.NewsletterPlaceholder}"/>
+                </StackPanel>
 
-        <!-- CheckBox Newletter -->
-        <CheckBox IsChecked="{Binding IsNewletterChecked}" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="1"/>
-        <TextBlock VerticalAlignment="Center" Margin="5" Grid.Row="4" Grid.Column="2" Text="{x:Static localization:Resources.NewsletterPlaceholder}"/>
+                <!-- CheckBox Survey -->
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding IsSatisfactionChecked}" HorizontalAlignment="Right" Grid.Row="5" Grid.Column="1"/>
+                    <TextBlock VerticalAlignment="Center" Margin="10" Grid.Row="5" Grid.Column="2" Text="{x:Static localization:Resources.SatisfactionPlaceholder}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
 
-        <!-- CheckBox Survey -->
-        <CheckBox IsChecked="{Binding IsSatisfactionChecked}" HorizontalAlignment="Right" Grid.Row="5" Grid.Column="1"/>
-        <TextBlock VerticalAlignment="Center" Margin="5" Grid.Row="5" Grid.Column="2" Text="{x:Static localization:Resources.SatisfactionPlaceholder}"/>
-
-        <!-- Bouton Accept -->
-        <Button Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" Command="{Binding AcceptCommand}" IsEnabled="{Binding IsFormCompleted}">
-            <TextBlock Text="{x:Static localization:Resources.AcceptText}"/>
-        </Button>
-        <!-- Bouton Cancel -->
-        <Button Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" Command="{Binding CancelCommand}">
-            <TextBlock Text="{x:Static localization:Resources.CancelText}" />
-        </Button>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top" Spacing="20" Margin="10">
+            <!-- Bouton Cancel -->
+            <Button Background="White" BorderThickness="1" BorderBrush="Black" Padding="30 10 30 10" HorizontalAlignment="Left" Command="{Binding CancelCommand}">
+                <TextBlock Text="{x:Static localization:Resources.CancelText}" />
+            </Button>
+            <!-- Bouton Accept -->
+            <Button Background="#Ca005d" Command="{Binding AcceptCommand}" Padding="30 10 30 10" IsEnabled="{Binding IsFormCompleted}" HorizontalAlignment="Right">
+                <TextBlock Foreground="White" Text="{x:Static localization:Resources.AcceptText}"/>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

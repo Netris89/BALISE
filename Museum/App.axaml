@@ -31,14 +31,13 @@
 
         <!-- Standard style for form field labels (aligned right, bottom spacing) -->
         <Style Selector="TextBlock.formLabel">
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="VerticalAlignment" Value="Bottom" />
-            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
 
         <!-- Standard style for validation error messages -->
         <Style Selector="TextBlock.formError">
             <Setter Property="Foreground" Value="Red" />
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
 
         <Style Selector="Button.plainButton">
