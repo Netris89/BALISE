@@ -1,23 +1,40 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:localization="using:Balise.Localization"
+             xmlns:materialIcons="using:Material.Icons.Avalonia"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Balise.ViewModels"
              x:DataType="vm:AgendaViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.AgendaView">
-    <Grid ColumnDefinitions="*,2*,*">
-        <ItemsControl ItemsSource="{Binding Events}" Grid.Column="1">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Spacing="5">
-                        <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding Date}"/>
-                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
-                        <Image Source="{Binding Image}" Height="150"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+    <Grid ColumnDefinitions="*,2*,*" RowDefinitions="auto,*">
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <materialIcons:MaterialIcon Grid.Row="0" Kind="CalendarMultiselect" Foreground="#Ca005d" FontSize="50" />
+            <TextBlock Text="{x:Static localization:Resources.EventText}" FontWeight="Bold" FontSize="40" Padding="10"/>
+        </StackPanel>
+        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+            <ItemsControl ItemsSource="{Binding Events}" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Classes="infoSection" CornerRadius="10" BorderThickness="1" BorderBrush="#6E808080" BoxShadow="0 0 5 0 #6E808080">
+                            <Grid ColumnDefinitions="*,2*,*" >
+                                <Border CornerRadius="20" ClipToBounds="True">
+                                    <Image Grid.Column="0" Source="{Binding Image}" Height="150"/>
+                                </Border>
+                                <Grid Grid.Column="1" RowDefinitions="*,*" Margin="10">
+                                    <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="20" TextWrapping="Wrap" FontWeight="Bold"/>
+                                    <TextBlock Grid.Row="1" Text="{Binding Description}" TextWrapping="Wrap"/>
+                                </Grid>
+                                <Grid Grid.Column="2" RowDefinitions="*,*" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <materialIcons:MaterialIcon Grid.Row="0" Kind="CalendarMultiselect" Foreground="#Ca005d" FontSize="30" Padding="10"/>
+                                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="{Binding Date}" FontWeight="Bold"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>
