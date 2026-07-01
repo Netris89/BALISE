@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reactive;
 using Avalonia.Threading;
+using Balise.Repositories;
 using ReactiveUI;
 
 namespace Balise.ViewModels;
@@ -13,6 +14,7 @@ public class LangChoiceViewModel : ViewModelBase
     private DispatcherTimer? timer;
     private int index = 0;
     private readonly Action<ViewModelBase> navigate;
+    private MuseumRepository repository;
 
     public ReactiveCommand<string, Unit> SelectLang { get; }
     public ViewModelActivator Activator { get; } = new ViewModelActivator();
@@ -22,18 +24,19 @@ public class LangChoiceViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref selectionText, value);
     }
 
-    public LangChoiceViewModel(Action<ViewModelBase> navigate)
+    public LangChoiceViewModel(Action<ViewModelBase> navigate, MuseumRepository museumRepository)
     {
         this.navigate = navigate;
         SelectLang = ReactiveCommand.Create<string>(SelectLanguage);
         ChangeMessage();
+        repository = museumRepository;
     }
 
     public void SelectLanguage(string lang)
     {
         Localization.Resources.Culture = new CultureInfo(lang);
 
-        navigate(new MapViewModel());
+        navigate(new MapViewModel(repository));
         StopTimer();
     }
 

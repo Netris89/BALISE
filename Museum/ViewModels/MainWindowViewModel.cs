@@ -1,4 +1,5 @@
 ﻿using System.Reactive;
+using Balise.Repositories;
 using Balise.Services;
 using ReactiveUI;
 
@@ -28,15 +29,15 @@ public class MainWindowViewModel : ViewModelBase
     public ReactiveCommand<Unit, ViewModelBase> GoToConnection { get; }
     public ReactiveCommand<Unit, ViewModelBase> GoToForm { get; }
 
-    public MainWindowViewModel(FormService formService)
+    public MainWindowViewModel(FormService formService, MuseumRepository museumRepository)
     {
         this.formService = formService;
 
         // Au lancement de l'application, l'écran de sélection des langues est affiché par défaut
-        currentView = new LangChoiceViewModel(SetCurrentView);
+        currentView = new LangChoiceViewModel(SetCurrentView, museumRepository);
 
         // Commande pour changer de vue
-        GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel());
+        GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(museumRepository));
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel());
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel());
         GoToForm = ReactiveCommand.Create(()=> CurrentView = new FormViewModel(formService));
