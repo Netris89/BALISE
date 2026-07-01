@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Balise.Models;
+using Balise.Repositories;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using ReactiveUI;
@@ -23,8 +24,7 @@ public class MapViewModel : ViewModelBase
     private List<Space> spaces;
     private Space? selectedSpace;
     private PointOfInterest? selectedPointOfInterest;
-
-    private static readonly GeometryFactory Factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
+    private MuseumRepository repository;
 
     /// <summary>
     /// Currently selected space displayed in the side information panel.
@@ -104,86 +104,17 @@ public class MapViewModel : ViewModelBase
     /// Initializes the ViewModel with a sample museum structure.
     /// (Currently hardcoded for testing purposes.)
     /// </summary>
-    public MapViewModel()
+    public MapViewModel(MuseumRepository museumRepository)
     {
-        // Points of interest (test data)
-        var poi1 = new PointOfInterest(
-            "Statue A",
-            "Statue en marbre",
-            Factory.CreatePoint(new Coordinate(120, 120))
-        );
-
-        var poi2 = new PointOfInterest(
-            "Statue B",
-            "Statue en bronze",
-            Factory.CreatePoint(new Coordinate(180, 160))
-        );
-
-        var poi3 = new PointOfInterest(
-            "Vitrine C",
-            "Objets anciens",
-            Factory.CreatePoint(new Coordinate(350, 300))
-        );
-
-        // Spaces (rooms containing POIs and defined by polygons)
-        var space1 = new Space(
-            "Salle Romaine",
-            "Une salle contenant des artéfacts romains",
-            new List<PointOfInterest> { poi1, poi2 },
-            Factory.CreatePolygon(new[]
-            {
-                new Coordinate(400, 300),
-                new Coordinate(550, 300),
-                new Coordinate(550, 500),
-                new Coordinate(400, 500),
-                new Coordinate(400, 300)
-            })
-        );
-
-        var space2 = new Space(
-            "Salle Médiévale",
-            "Une salle contenant des artéfacts médiévaux",
-            new List<PointOfInterest> { poi3 },
-            Factory.CreatePolygon(new[]
-            {
-                new Coordinate(300, 200),
-                new Coordinate(450, 200),
-                new Coordinate(450, 400),
-                new Coordinate(300, 400),
-                new Coordinate(300, 200)
-            })
-        );
-
-        // Floors (each floor has its own map and spaces)
-        var floor0 = new Floor(
-            0,
-            new Bitmap(AssetLoader.Open(new Uri("avares://Balise/Assets/REZ_GC.png"))),
-            new List<Space> { space1 }
-        );
-
-        var floor1 = new Floor(
-            1,
-            new Bitmap(AssetLoader.Open(new Uri("avares://Balise/Assets/GC_1.png"))),
-            new List<Space> { space2 }
-        );
-
-        var floor2 = new Floor(
-            2,
-            new Bitmap(AssetLoader.Open(new Uri("avares://Balise/Assets/GC_2.png"))),
-            new List<Space>()
-        );
-
-        // Museum root structure
-        museum = new Museum(
-            "Musée Test",
-            new List<Floor> { floor0, floor1, floor2 }
-        );
-
+        repository = museumRepository;
+        museum = repository.Get();
         Floors = museum.Floors;
         CurrentFloor = museum.Floors.ElementAt(0);
 
         spaces = CurrentFloor.Spaces;
-        image = CurrentFloor.MapImage;
+        var uri = new Uri(CurrentFloor.MapImageUrl);
+        using var stream = AssetLoader.Open(uri);
+        image = new Bitmap(stream);
 
         // Commands
         ChangeFloorCommand = ReactiveCommand.Create<Floor>(ChangeFloor);
@@ -198,7 +129,9 @@ public class MapViewModel : ViewModelBase
     public void ChangeFloor(Floor floor)
     {
         CurrentFloor = floor;
-        Image = floor.MapImage;
+        var uri = new Uri(CurrentFloor.MapImageUrl);
+        using var stream = AssetLoader.Open(uri);
+        Image = new Bitmap(stream);
         Spaces = floor.Spaces;
 
         SelectedSpace = null;
