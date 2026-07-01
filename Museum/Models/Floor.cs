@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Avalonia.Media.Imaging;
 
 namespace Balise.Models;
 

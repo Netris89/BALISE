@@ -7,8 +7,6 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Balise.Models;
 using Balise.Repositories;
-using NetTopologySuite;
-using NetTopologySuite.Geometries;
 using ReactiveUI;
 
 namespace Balise.ViewModels;

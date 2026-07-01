@@ -11,9 +11,6 @@ using NetTopologySuite.Geometries;
 using NetTopologySuite;
 using Balise.Models;
 using System.Collections.Generic;
-using Avalonia.Platform;
-using Avalonia.Media.Imaging;
-using System;
 
 namespace Balise;
 
