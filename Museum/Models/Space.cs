@@ -39,6 +39,8 @@ public class Space
         get => Boundary.ExteriorRing.Coordinates.Select(c => new Avalonia.Point(c.X, c.Y)).ToList();
     }
 
+    public Floor Floor { get; set; }
+
     /// <summary>
     /// Initializes a new empty instance of <see cref="Space"/>.
     /// </summary>
