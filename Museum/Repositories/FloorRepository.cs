@@ -24,22 +24,22 @@ public class FloorRepository
 
     public async Task UpdateAsync(Floor floor)
     {
-        var existingPoi = await context.Floors.FindAsync(floor.Id);
+        var existingFloor = await context.Floors.FindAsync(floor.Id);
 
-        if (existingPoi != null)
+        if (existingFloor != null)
         {
-            context.Entry(existingPoi).CurrentValues.SetValues(floor);
+            context.Entry(existingFloor).CurrentValues.SetValues(floor);
             await context.SaveChangesAsync();
         }
     }
 
     public async Task DeleteAsync(int id)
     {
-        var poi = await context.Floors.FindAsync(id);
+        var floor = await context.Floors.FindAsync(id);
 
-        if (poi != null)
+        if (floor != null)
         {
-            context.Floors.Remove(poi);
+            context.Floors.Remove(floor);
             await context.SaveChangesAsync();
         }
     }

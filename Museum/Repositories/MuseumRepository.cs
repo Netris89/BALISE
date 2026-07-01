@@ -25,22 +25,22 @@ public class MuseumRepository
 
     public async Task UpdateAsync(Museum museum)
     {
-        var existingPoi = await context.Museums.FindAsync(museum.Id);
+        var existingMuseum = await context.Museums.FindAsync(museum.Id);
 
-        if (existingPoi != null)
+        if (existingMuseum != null)
         {
-            context.Entry(existingPoi).CurrentValues.SetValues(museum);
+            context.Entry(existingMuseum).CurrentValues.SetValues(museum);
             await context.SaveChangesAsync();
         }
     }
 
     public async Task DeleteAsync(int id)
     {
-        var poi = await context.Museums.FindAsync(id);
+        var museum = await context.Museums.FindAsync(id);
 
-        if (poi != null)
+        if (museum != null)
         {
-            context.Museums.Remove(poi);
+            context.Museums.Remove(museum);
             await context.SaveChangesAsync();
         }
     }

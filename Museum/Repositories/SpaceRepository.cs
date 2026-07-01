@@ -23,22 +23,22 @@ public class SpaceRepository
 
     public async Task UpdateAsync(Space space)
     {
-        var existingPoi = await context.Spaces.FindAsync(space.Id);
+        var existingSpace = await context.Spaces.FindAsync(space.Id);
 
-        if (existingPoi != null)
+        if (existingSpace != null)
         {
-            context.Entry(existingPoi).CurrentValues.SetValues(space);
+            context.Entry(existingSpace).CurrentValues.SetValues(space);
             await context.SaveChangesAsync();
         }
     }
 
     public async Task DeleteAsync(int id)
     {
-        var poi = await context.Spaces.FindAsync(id);
+        var space = await context.Spaces.FindAsync(id);
 
-        if (poi != null)
+        if (space != null)
         {
-            context.Spaces.Remove(poi);
+            context.Spaces.Remove(space);
             await context.SaveChangesAsync();
         }
     }
