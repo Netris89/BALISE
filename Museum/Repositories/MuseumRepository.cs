@@ -16,10 +16,10 @@ public class MuseumRepository
         this.context = context;
     }
 
-    public void AddAsync(Museum museum)
+    public async Task AddAsync(Museum museum)
     {
-        context.Museums.AddAsync(museum);
-        context.SaveChanges();
+        await context.Museums.AddAsync(museum);
+        await context.SaveChangesAsync();
     }
 
     public Museum Get()
