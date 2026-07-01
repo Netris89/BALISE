@@ -111,7 +111,7 @@ public partial class App : Application
             new List<Floor> { floor0, floor1, floor2 }
         );
 
-        museumRepository.AddAsync(museum);
+        _ = museumRepository.AddAsync(museum);
 
         base.OnFrameworkInitializationCompleted();
     }
