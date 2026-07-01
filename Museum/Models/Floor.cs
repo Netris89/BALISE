@@ -21,8 +21,10 @@ public class Floor
     /// <summary>
     /// URI of the map image representing the floor layout.
     /// </summary>
-    public Bitmap MapImage { get; set; } = null!;
+    public string MapImageUrl { get; set; } = string.Empty;
 
+    public Museum Museum { get; set; }
+    
     /// <summary>
     /// Collection of spaces located on the floor.
     /// </summary>
@@ -39,12 +41,12 @@ public class Floor
     /// Initializes a new instance of <see cref="Floor"/> with specified values.
     /// </summary>
     /// <param name="number">Floor number within the building.</param>
-    /// <param name="mapImage">URI of the map image representing the floor layout.</param>
+    /// <param name="mapImageUrl">URI of the map image representing the floor layout.</param>
     /// <param name="spaces">List of spaces located on the floor.</param>
-    public Floor(int number, Bitmap mapImage, List<Space> spaces)
+    public Floor(int number, string mapImageUrl, List<Space> spaces)
     {
         Number = number;
-        MapImage = mapImage;
+        MapImageUrl = mapImageUrl;
         Spaces = spaces;
     }
 }
