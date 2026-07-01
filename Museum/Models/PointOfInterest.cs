@@ -1,3 +1,4 @@
+using Balise.Models;
 using NetTopologySuite.Geometries;
 
 /// <summary>
@@ -24,6 +25,7 @@ public class PointOfInterest
     /// Geographical position of the point of interest.
     /// </summary>
     public Point Position { get; set; } = null!;
+    public Space Space { get; set; }
 
     /// <summary>
     /// Initializes a new empty instance of <see cref="PointOfInterest"/>.
