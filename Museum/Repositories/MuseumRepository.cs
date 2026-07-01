@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Balise.Data;
 using Balise.Models;
 using DynamicData.Kernel;
+using Microsoft.EntityFrameworkCore;
 
 namespace Balise.Repositories;
 
@@ -21,11 +23,43 @@ public class MuseumRepository
         await context.SaveChangesAsync();
     }
 
+    public async Task UpdateAsync(Museum museum)
+    {
+        var existingPoi = await context.Museums.FindAsync(museum.Id);
+
+        if (existingPoi != null)
+        {
+            context.Entry(existingPoi).CurrentValues.SetValues(museum);
+            await context.SaveChangesAsync();
+        }
+    }
+
+    public async Task DeleteAsync(int id)
+    {
+        var poi = await context.Museums.FindAsync(id);
+
+        if (poi != null)
+        {
+            context.Museums.Remove(poi);
+            await context.SaveChangesAsync();
+        }
+    }
+
+    public async Task<Museum?> GetAsync(int id)
+    {
+        return await context.Museums.FindAsync(id);
+    }
+
+    public async Task<List<Museum>> GetAllAsync()
+    {
+        return await context.Museums.ToListAsync();
+    }
+
+    // TODO : Delete when done correctly
     public Museum Get()
     {
         var museums = context.Museums.AsList();
 
-        // TODO : make it so it returns all museums
         return museums.ElementAt(0);
     }
 }
