@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Balise.Models;
 
@@ -22,7 +23,7 @@ public class Floor
     /// </summary>
     public string MapImageUrl { get; set; } = string.Empty;
 
-    public Museum Museum { get; set; }
+    public required Museum Museum { get; set; }
     
     /// <summary>
     /// Collection of spaces located on the floor.
@@ -42,10 +43,12 @@ public class Floor
     /// <param name="number">Floor number within the building.</param>
     /// <param name="mapImageUrl">URI of the map image representing the floor layout.</param>
     /// <param name="spaces">List of spaces located on the floor.</param>
-    public Floor(int number, string mapImageUrl, List<Space> spaces)
+    [SetsRequiredMembers]
+    public Floor(int number, string mapImageUrl, List<Space> spaces, Museum museum)
     {
         Number = number;
         MapImageUrl = mapImageUrl;
         Spaces = spaces;
+        Museum = museum;
     }
 }

@@ -41,24 +41,37 @@ public partial class App : Application
             };
         }
 
+        // Museum root structure
+        var museum = new Museum(
+            "Musée Test",
+            new List<Floor>()
+        );
+
         // Floors (each floor has its own map and spaces)
         var floor0 = new Floor(
             0,
             "avares://Balise/Assets/REZ_GC.png",
-            new List<Space>()
+            new List<Space>(),
+            museum
         );
 
         var floor1 = new Floor(
             1,
             "avares://Balise/Assets/GC_1.png",
-            new List<Space>()
+            new List<Space>(),
+            museum
         );
 
         var floor2 = new Floor(
             2,
             "avares://Balise/Assets/GC_2.png",
-            new List<Space>()
+            new List<Space>(),
+            museum
         );
+
+        museum.Floors.Add(floor0);
+        museum.Floors.Add(floor1);
+        museum.Floors.Add(floor2);
 
         // Spaces (rooms containing POIs and defined by polygons)
         var space1 = new Space(
@@ -119,12 +132,6 @@ public partial class App : Application
         space1.PointOfInterests.Add(poi1);
         space2.PointOfInterests.Add(poi2);
         space2.PointOfInterests.Add(poi3);
-
-        // Museum root structure
-        var museum = new Museum(
-            "Musée Test",
-            new List<Floor> { floor0, floor1, floor2 }
-        );
 
         _ = museumRepository.AddAsync(museum);
 
