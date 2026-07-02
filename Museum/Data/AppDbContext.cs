@@ -10,6 +10,7 @@ namespace Balise.Data
         public DbSet<Floor> Floors { get; set; }
         public DbSet<Space> Spaces { get; set; }
         public DbSet<PointOfInterest> PointOfInterests { get; set; }
+        public DbSet<Event> Events { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -20,6 +21,12 @@ namespace Balise.Data
             modelBuilder.Entity<Museum>()
                         .HasMany(m => m.Floors)
                         .WithOne(f => f.Museum)
+                        .HasForeignKey("MuseumId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Museum>()                        
+                        .HasMany(m => m.Events)
+                        .WithOne(e => e.Museum)
                         .HasForeignKey("MuseumId")
                         .OnDelete(DeleteBehavior.Cascade);
 
