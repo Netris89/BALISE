@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using NetTopologySuite.Geometries;
 
@@ -39,7 +40,7 @@ public class Space
         get => Boundary.ExteriorRing.Coordinates.Select(c => new Avalonia.Point(c.X, c.Y)).ToList();
     }
 
-    public Floor Floor { get; set; }
+    public required Floor Floor { get; set; }
 
     /// <summary>
     /// Initializes a new empty instance of <see cref="Space"/>.
@@ -54,11 +55,13 @@ public class Space
     /// <param name="name">Name of the space.</param>
     /// <param name="poi">List of points of interest contained in the space.</param>
     /// <param name="boundary">Geographical boundary of the space.</param>
-    public Space(string name, string description, List<PointOfInterest> poi, Polygon boundary)
+    [SetsRequiredMembers]
+    public Space(string name, string description, List<PointOfInterest> poi, Polygon boundary, Floor floor)
     {
         Name = name;
         Description = description;
         PointOfInterests = poi;
         Boundary = boundary;
+        Floor = floor;
     }
 }

@@ -41,6 +41,24 @@ public partial class App : Application
             };
         }
 
+        // Floors (each floor has its own map and spaces)
+        var floor0 = new Floor(
+            0,
+            "avares://Balise/Assets/REZ_GC.png",
+            new List<Space>()
+        );
+
+        var floor1 = new Floor(
+            1,
+            "avares://Balise/Assets/GC_1.png",
+            new List<Space>()
+        );
+
+        var floor2 = new Floor(
+            2,
+            "avares://Balise/Assets/GC_2.png",
+            new List<Space>()
+        );
 
         // Spaces (rooms containing POIs and defined by polygons)
         var space1 = new Space(
@@ -54,7 +72,8 @@ public partial class App : Application
                 new Coordinate(550, 500),
                 new Coordinate(400, 500),
                 new Coordinate(400, 300)
-            })
+            }),
+            floor0
         );
 
         var space2 = new Space(
@@ -68,8 +87,12 @@ public partial class App : Application
                 new Coordinate(450, 400),
                 new Coordinate(300, 400),
                 new Coordinate(300, 200)
-            })
+            }),
+            floor1
         );
+
+        floor0.Spaces.Add(space1);
+        floor1.Spaces.Add(space2);
 
         // Points of interest (test data)
         var poi1 = new PointOfInterest(
@@ -96,26 +119,6 @@ public partial class App : Application
         space1.PointOfInterests.Add(poi1);
         space2.PointOfInterests.Add(poi2);
         space2.PointOfInterests.Add(poi3);
-
-
-        // Floors (each floor has its own map and spaces)
-        var floor0 = new Floor(
-            0,
-            "avares://Balise/Assets/REZ_GC.png",
-            new List<Space> { space1 }
-        );
-
-        var floor1 = new Floor(
-            1,
-            "avares://Balise/Assets/GC_1.png",
-            new List<Space> { space2 }
-        );
-
-        var floor2 = new Floor(
-            2,
-            "avares://Balise/Assets/GC_2.png",
-            new List<Space>()
-        );
 
         // Museum root structure
         var museum = new Museum(
