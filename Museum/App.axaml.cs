@@ -23,7 +23,7 @@ public partial class App : Application
     private static UserRepository userRepository = new UserRepository(context);
     private static AgendaRepository agendaRepository = new AgendaRepository(context);
     private MuseumRepository museumRepository = new MuseumRepository(context);
-    private FormService formService = new FormService(userRepository); 
+    private FormService formService = new FormService(userRepository);
     private static readonly GeometryFactory Factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
 
     public override void Initialize()
@@ -41,30 +41,12 @@ public partial class App : Application
             };
         }
 
-        // Points of interest (test data)
-        var poi1 = new PointOfInterest(
-            "Statue A",
-            "Statue en marbre",
-            Factory.CreatePoint(new Coordinate(120, 120))
-        );
-
-        var poi2 = new PointOfInterest(
-            "Statue B",
-            "Statue en bronze",
-            Factory.CreatePoint(new Coordinate(180, 160))
-        );
-
-        var poi3 = new PointOfInterest(
-            "Vitrine C",
-            "Objets anciens",
-            Factory.CreatePoint(new Coordinate(350, 300))
-        );
 
         // Spaces (rooms containing POIs and defined by polygons)
         var space1 = new Space(
             "Salle Romaine",
             "Une salle contenant des artéfacts romains",
-            new List<PointOfInterest> { poi1, poi2 },
+            new List<PointOfInterest>(),
             Factory.CreatePolygon(new[]
             {
                 new Coordinate(400, 300),
@@ -78,7 +60,7 @@ public partial class App : Application
         var space2 = new Space(
             "Salle Médiévale",
             "Une salle contenant des artéfacts médiévaux",
-            new List<PointOfInterest> { poi3 },
+            new List<PointOfInterest>(),
             Factory.CreatePolygon(new[]
             {
                 new Coordinate(300, 200),
@@ -88,6 +70,33 @@ public partial class App : Application
                 new Coordinate(300, 200)
             })
         );
+
+        // Points of interest (test data)
+        var poi1 = new PointOfInterest(
+            "Statue A",
+            "Statue en marbre",
+            Factory.CreatePoint(new Coordinate(120, 120)),
+            space1
+        );
+
+        var poi2 = new PointOfInterest(
+            "Statue B",
+            "Statue en bronze",
+            Factory.CreatePoint(new Coordinate(180, 160)),
+            space1
+        );
+
+        var poi3 = new PointOfInterest(
+            "Vitrine C",
+            "Objets anciens",
+            Factory.CreatePoint(new Coordinate(350, 300)),
+            space2
+        );
+
+        space1.PointOfInterests.Add(poi1);
+        space2.PointOfInterests.Add(poi2);
+        space2.PointOfInterests.Add(poi3);
+
 
         // Floors (each floor has its own map and spaces)
         var floor0 = new Floor(

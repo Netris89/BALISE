@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Balise.Models;
 using NetTopologySuite.Geometries;
 
@@ -25,7 +26,7 @@ public class PointOfInterest
     /// Geographical position of the point of interest.
     /// </summary>
     public Point Position { get; set; } = null!;
-    public Space Space { get; set; }
+    public required Space Space { get; set; }
 
     /// <summary>
     /// Initializes a new empty instance of <see cref="PointOfInterest"/>.
@@ -40,10 +41,12 @@ public class PointOfInterest
     /// <param name="name">Name of the point of interest.</param>
     /// <param name="description">Description of the point of interest.</param>
     /// <param name="position">Geographical position of the point of interest.</param>
-    public PointOfInterest(string name, string description, Point position)
+    [SetsRequiredMembers]
+    public PointOfInterest(string name, string description, Point position, Space space)
     {
         Name = name;
         Description = description;
         Position = position;
+        Space = space;
     }
 }
