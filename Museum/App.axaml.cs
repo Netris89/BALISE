@@ -11,6 +11,8 @@ using NetTopologySuite.Geometries;
 using NetTopologySuite;
 using Balise.Models;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Balise;
 
@@ -19,6 +21,7 @@ public partial class App : Application
     private static DbContextOptions<AppDbContext> options = new DbContextOptionsBuilder<AppDbContext>().UseInMemoryDatabase("BaliseDb").Options;
     private static AppDbContext context = new AppDbContext(options);
     private static UserRepository userRepository = new UserRepository(context);
+    private static AgendaRepository agendaRepository = new AgendaRepository(context);
     private MuseumRepository museumRepository = new MuseumRepository(context);
     private FormService formService = new FormService(userRepository); 
     private static readonly GeometryFactory Factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
@@ -28,13 +31,13 @@ public partial class App : Application
         AvaloniaXamlLoader.Load(this);
     }
 
-    public override void OnFrameworkInitializationCompleted()
+    public override async void OnFrameworkInitializationCompleted()
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(formService, museumRepository)
+                DataContext = new MainWindowViewModel(formService, museumRepository, agendaRepository)
             };
         }
 
@@ -112,6 +115,17 @@ public partial class App : Application
         );
 
         _ = museumRepository.AddAsync(museum);
+
+        HttpClient client = new HttpClient();
+        EventFetcherService service = new EventFetcherService(client);
+
+        string html = await service.GetAgendaHtmlAsync();
+        var events = service.ParseEvents(html);
+
+        foreach (var ev in await events)
+        {
+            await agendaRepository.AddAsync(ev);
+        }
 
         base.OnFrameworkInitializationCompleted();
     }

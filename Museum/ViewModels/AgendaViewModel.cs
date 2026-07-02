@@ -1,33 +1,32 @@
 using System.Collections.ObjectModel;
 using System.Net.Http;
+using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using Balise.Models;
+using Balise.Repositories;
 using Balise.Services;
 
 namespace Balise.ViewModels;
 
 public class AgendaViewModel : ViewModelBase
 {
-    public ObservableCollection<Event> Events { get; } = new();
+    private AgendaRepository repository;
+    public ObservableCollection<Event> Events { get; set; } = new();
 
-    public AgendaViewModel()
+    public AgendaViewModel(AgendaRepository agendaRepository)
     {
-        _ = TestAsync();
+        repository = agendaRepository;
+
+        _ = InitializeAsync();
     }
 
-    public async Task TestAsync()
+    private async Task InitializeAsync()
     {
-        HttpClient client = new HttpClient();
-        EventFetcherService service = new EventFetcherService(client);
+        var scrapedList = await repository.GetAllAsync();
 
-        string html = await service.GetAgendaHtmlAsync();
-        var events = service.ParseEvents(html);
-
-        Events.Clear();
-
-        foreach (var ev in await events)
+        foreach (var evt in scrapedList)
         {
-            Events.Add(ev);
+            Events.Add(evt);
         }
     }
 }

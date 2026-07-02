@@ -29,7 +29,7 @@ public class MainWindowViewModel : ViewModelBase
     public ReactiveCommand<Unit, ViewModelBase> GoToConnection { get; }
     public ReactiveCommand<Unit, ViewModelBase> GoToForm { get; }
 
-    public MainWindowViewModel(FormService formService, MuseumRepository museumRepository)
+    public MainWindowViewModel(FormService formService, MuseumRepository museumRepository, AgendaRepository agendaRepository)
     {
         this.formService = formService;
 
@@ -38,7 +38,7 @@ public class MainWindowViewModel : ViewModelBase
 
         // Commande pour changer de vue
         GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(museumRepository));
-        GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel());
+        GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel(agendaRepository));
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel());
         GoToForm = ReactiveCommand.Create(()=> CurrentView = new FormViewModel(formService));
     }
