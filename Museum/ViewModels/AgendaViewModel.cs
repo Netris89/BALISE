@@ -1,10 +1,7 @@
 using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using Balise.Models;
 using Balise.Repositories;
-using Balise.Services;
 
 namespace Balise.ViewModels;
 
