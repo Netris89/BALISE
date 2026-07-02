@@ -14,7 +14,7 @@ public class Event
     public string? Link { get; set; }
     [NotMapped]
     public Bitmap? Image { get; set; }
-    public /* required */ Museum Museum { get; set; }
+    public required Museum Museum { get; set; }
 
     public Event()
     {

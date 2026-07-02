@@ -16,14 +16,18 @@ namespace Balise.Services;
 public class EventFetcherService
 {
     private readonly HttpClient httpClient;
+    
+    // Temporary, probably will need a method to determine the museum to which an even belongs
+    private Museum museum;
 
     /// <summary>
     /// Initializes a new instance of <see cref="EventFetcherService"/>.
     /// </summary>
     /// <param name="client">HTTP client used to retrieve remote content.</param>
-    public EventFetcherService(HttpClient client)
+    public EventFetcherService(HttpClient client, Museum museum)
     {
         httpClient = client;
+        this.museum = museum;
     }
 
     /// <summary>
@@ -111,7 +115,9 @@ public class EventFetcherService
                     ImageUrl = imageUrl,
 
                     // Decode HTML entities and remove leading/trailing whitespace.
-                    Description = WebUtility.HtmlDecode(descNode?.InnerText)?.Trim()
+                    Description = WebUtility.HtmlDecode(descNode?.InnerText)?.Trim(),
+
+                    Museum = museum
                 };
             }
             else
@@ -129,7 +135,9 @@ public class EventFetcherService
                     ImageUrl = imageUrl,
 
                     // Decode HTML entities and remove leading/trailing whitespace.
-                    Description = WebUtility.HtmlDecode(descNode?.InnerText)?.Trim()
+                    Description = WebUtility.HtmlDecode(descNode?.InnerText)?.Trim(),
+
+                    Museum = museum
                 };
             }
 

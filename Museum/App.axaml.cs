@@ -117,7 +117,7 @@ public partial class App : Application
         _ = museumRepository.AddAsync(museum);
 
         HttpClient client = new HttpClient();
-        EventFetcherService service = new EventFetcherService(client);
+        EventFetcherService service = new EventFetcherService(client, museum);
 
         string html = await service.GetAgendaHtmlAsync();
         var events = service.ParseEvents(html);
