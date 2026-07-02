@@ -54,12 +54,4 @@ public class MuseumRepository
     {
         return await context.Museums.ToListAsync();
     }
-
-    // TODO : Delete when done correctly
-    public Museum Get()
-    {
-        var museums = context.Museums.AsList();
-
-        return museums.ElementAt(0);
-    }
 }

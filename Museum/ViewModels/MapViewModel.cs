@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -18,7 +19,7 @@ namespace Balise.ViewModels;
 public class MapViewModel : ViewModelBase
 {
     private Bitmap image;
-    private Museum museum;
+    private Museum? museum;
     private List<Space> spaces;
     private Space? selectedSpace;
     private PointOfInterest? selectedPointOfInterest;
@@ -105,19 +106,34 @@ public class MapViewModel : ViewModelBase
     public MapViewModel(MuseumRepository museumRepository)
     {
         repository = museumRepository;
-        museum = repository.Get();
-        Floors = museum.Floors;
-        CurrentFloor = museum.Floors.ElementAt(0);
 
-        spaces = CurrentFloor.Spaces;
-        var uri = new Uri(CurrentFloor.MapImageUrl);
-        using var stream = AssetLoader.Open(uri);
-        image = new Bitmap(stream);
+        // Temporarily load empty values until the museum is fetched asynchronously
+        Floors = new List<Floor>();
+        spaces = new List<Space>();
+        CurrentFloor = new Floor(0, "", spaces, new Museum());
+        image = new Bitmap(AssetLoader.Open(new Uri("avares://Balise/Assets/1_RDC 2.png"))); // TODO: placeholder
+
+        _ = InitializeAsync();
 
         // Commands
         ChangeFloorCommand = ReactiveCommand.Create<Floor>(ChangeFloor);
         SelectingPoiCommand = ReactiveCommand.Create<PointOfInterest>(SelectPointOfInterest);
         ClosePanelCommand = ReactiveCommand.Create(ClosePanel);
+    }
+
+    public async Task InitializeAsync()
+    {
+        museum = await repository.GetAsync(1);
+
+        if (museum != null)
+        {
+            Floors = museum.Floors;
+            CurrentFloor = museum.Floors.ElementAt(0);
+            spaces = CurrentFloor.Spaces;
+            var uri = new Uri(CurrentFloor.MapImageUrl);
+            using var stream = AssetLoader.Open(uri);
+            image = new Bitmap(stream);
+        }
     }
 
     /// <summary>
