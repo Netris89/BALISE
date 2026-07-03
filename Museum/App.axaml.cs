@@ -12,6 +12,8 @@ using NetTopologySuite;
 using Balise.Models;
 using System.Collections.Generic;
 using System.Net.Http;
+using Auth0.OidcClient;
+using Microsoft.Extensions.Configuration;
 
 namespace Balise;
 
@@ -39,6 +41,8 @@ public partial class App : Application
                 DataContext = new MainWindowViewModel(formService, museumRepository, agendaRepository)
             };
         }
+
+        var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
         // Museum root structure
         var museum = new Museum(
@@ -144,6 +148,12 @@ public partial class App : Application
         {
             await agendaRepository.AddAsync(ev);
         }
+
+        var Auth0Client = new Auth0Client(new Auth0ClientOptions
+        {
+            Domain = config["Auth0:Domain"],
+            ClientId = config["Auth0:ClientId"]
+        });
 
         base.OnFrameworkInitializationCompleted();
     }

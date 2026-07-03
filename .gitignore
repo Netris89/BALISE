@@ -429,3 +429,5 @@ FodyWeavers.xsd
 *.msp
 
 Resources.Designer.cs
+
+appsettings.json
