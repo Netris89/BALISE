@@ -34,15 +34,22 @@ public partial class App : Application
 
     public override async void OnFrameworkInitializationCompleted()
     {
+        var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+
+        var auth0Client = new Auth0Client(new Auth0ClientOptions
+        {
+            Domain = config["Auth0:Domain"],
+            ClientId = config["Auth0:ClientId"]
+        });
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(formService, museumRepository, agendaRepository)
+                DataContext = new MainWindowViewModel(formService, museumRepository, agendaRepository, auth0Client)
             };
         }
 
-        var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
         // Museum root structure
         var museum = new Museum(
@@ -148,12 +155,6 @@ public partial class App : Application
         {
             await agendaRepository.AddAsync(ev);
         }
-
-        var Auth0Client = new Auth0Client(new Auth0ClientOptions
-        {
-            Domain = config["Auth0:Domain"],
-            ClientId = config["Auth0:ClientId"]
-        });
 
         base.OnFrameworkInitializationCompleted();
     }
