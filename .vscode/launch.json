@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Avalonia: Balise",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/Museum/Museum.csproj"
+        }
+    ]
+}
