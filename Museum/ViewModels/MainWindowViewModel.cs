@@ -1,7 +1,7 @@
 ﻿using System.Reactive;
-using Auth0.OidcClient;
 using Balise.Repositories;
 using Balise.Services;
+using Duende.IdentityModel.OidcClient;
 using ReactiveUI;
 
 namespace Balise.ViewModels;
@@ -10,7 +10,7 @@ public class MainWindowViewModel : ViewModelBase
 {
     private ViewModelBase currentView;
     private FormService formServ;
-    private Auth0Client auth0Client;
+    private OidcClient auth0Client;
     public ViewModelBase CurrentView
     {
         get => currentView;
@@ -31,15 +31,15 @@ public class MainWindowViewModel : ViewModelBase
     public ReactiveCommand<Unit, ViewModelBase> GoToConnection { get; }
     public ReactiveCommand<Unit, ViewModelBase> GoToForm { get; }
 
-    public MainWindowViewModel(FormService formService, MuseumRepository museumRepository, AgendaRepository agendaRepository, Auth0Client auth)
+    public MainWindowViewModel(FormService formService, MuseumRepository museumRepository, AgendaRepository agendaRepository, OidcClient auth)
     {
         formServ = formService;
         auth0Client = auth;
 
-        // Au lancement de l'application, l'écran de sélection des langues est affiché par défaut
+        // At application startup, the language selection screen is displayed by default
         currentView = new LangChoiceViewModel(SetCurrentView, museumRepository);
 
-        // Commande pour changer de vue
+        // Command to change the current view
         GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(museumRepository));
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel(agendaRepository));
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(auth0Client));

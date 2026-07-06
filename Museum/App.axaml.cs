@@ -12,8 +12,8 @@ using NetTopologySuite;
 using Balise.Models;
 using System.Collections.Generic;
 using System.Net.Http;
-using Auth0.OidcClient;
 using Microsoft.Extensions.Configuration;
+using Duende.IdentityModel.OidcClient;
 
 namespace Balise;
 
@@ -36,10 +36,13 @@ public partial class App : Application
     {
         var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
-        var auth0Client = new Auth0Client(new Auth0ClientOptions
+        var auth0Client = new OidcClient(new OidcClientOptions
         {
-            Domain = config["Auth0:Domain"],
-            ClientId = config["Auth0:ClientId"]
+            Authority = config["Auth0:Domain"],
+            ClientId = config["Auth0:ClientId"],
+            Browser = new Browser(),
+            RedirectUri = "balise://callback",
+            Scope = "openid profile email",
         });
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
