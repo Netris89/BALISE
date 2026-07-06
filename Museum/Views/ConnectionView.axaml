@@ -2,14 +2,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Balise.ViewModels"
+             xmlns:localization="clr-namespace:Balise.Localization"
+             xmlns:materialIcons="using:Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Balise.Views.ConnectionView">
+             x:Class="Balise.Views.ConnectionView"
+             x:DataType="vm:ConnectionViewModel">
     <Grid VerticalAlignment="Center" ColumnDefinitions="2*,*, *, 2*" RowDefinitions="*,*,*" RowSpacing="20">
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Email :"></TextBlock>
         <TextBox PlaceholderText="Entrez votre adresse email" Grid.Row="0" Grid.Column="2" Name="EmailTextBox"></TextBox>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Mot de passe :"></TextBlock>
         <TextBox PlaceholderText="Entrez votre mot de passe" PasswordChar="*" Grid.Row="1" Grid.Column="2" Name="PasswordTextBox"></TextBox>
-        <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
+        <Button Command="{Binding LoginAsync}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
             <TextBlock>Connexion</TextBlock>
         </Button>
         <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center">
