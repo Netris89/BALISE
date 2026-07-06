@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Balise.Data;
 using Balise.Models;
-using DynamicData.Kernel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Balise.Repositories;
