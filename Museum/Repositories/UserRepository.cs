@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using Balise.Data;
 using Balise.DTO;
 using Balise.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Balise.Repositories;
 
@@ -19,5 +21,23 @@ public class UserRepository
 
         context.Users.Add(user);
         context.SaveChanges();
+    }
+
+    public void AddUser(User user)
+    {
+        context.Users.Add(user);
+        context.SaveChanges();
+    }
+
+    public async Task<User>? GetByAuth0IdAsync(string email)
+    {
+        var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+        if (user != null)
+        {
+            return user;
+        }
+
+        return null!;
     }
 }

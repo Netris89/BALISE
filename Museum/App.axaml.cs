@@ -25,6 +25,7 @@ public partial class App : Application
     private static AgendaRepository agendaRepository = new AgendaRepository(context);
     private MuseumRepository museumRepository = new MuseumRepository(context);
     private FormService formService = new FormService(userRepository);
+    private AuthenticationService authService;
     private static readonly GeometryFactory Factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
 
     public override void Initialize()
@@ -41,18 +42,19 @@ public partial class App : Application
             Authority = config["Auth0:Domain"],
             ClientId = config["Auth0:ClientId"],
             Browser = new Browser(),
-            RedirectUri = "balise://callback",
+            RedirectUri = "http://127.0.0.1:7890/callback",
             Scope = "openid profile email",
         });
+
+        authService = new AuthenticationService(auth0Client, userRepository);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(formService, museumRepository, agendaRepository, auth0Client)
+                DataContext = new MainWindowViewModel(formService, museumRepository, agendaRepository, authService, userRepository)
             };
         }
-
 
         // Museum root structure
         var museum = new Museum(
@@ -158,6 +160,14 @@ public partial class App : Application
         {
             await agendaRepository.AddAsync(ev);
         }
+
+        var user = new User
+        {
+            Email = "ludovic.hansen@hotmail.be",
+            Password = "test"
+        };
+
+        userRepository.AddUser(user);
 
         base.OnFrameworkInitializationCompleted();
     }
