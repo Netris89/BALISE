@@ -6,7 +6,6 @@ namespace Balise.Models;
 public class User
 {
     public int Id { get; set; }
-    public string Auth0Id { get; set; } = string.Empty;
     public string Address { get; set; } = string.Empty;
     public string City { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
@@ -14,7 +13,7 @@ public class User
     public string LastName { get; set; } = string.Empty;
     public string Number { get; set; } = string.Empty;
     public string Country { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty; // Todo: make a hash
     public UserRole Role { get; set; }
 
     public User()

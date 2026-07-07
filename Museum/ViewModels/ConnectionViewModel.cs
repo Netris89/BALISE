@@ -10,17 +10,12 @@ namespace Balise.ViewModels;
 public class ConnectionViewModel : ViewModelBase
 {
     private readonly AuthenticationService authenticationService;
-    // private readonly UserRepository repository;
-    /* private bool isError;
-    private ClaimsPrincipal? user;
-    private string? token; */
 
     public ICommand LoginCommand { get; }
 
-    public ConnectionViewModel(AuthenticationService auth/* , UserRepository userRepository */)
+    public ConnectionViewModel(AuthenticationService auth)
     {
         authenticationService = auth;
-        // repository = userRepository;
         LoginCommand = ReactiveCommand.CreateFromTask(LoginAsync);
     }
 

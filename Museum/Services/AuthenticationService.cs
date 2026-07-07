@@ -27,12 +27,11 @@ public class AuthenticationService
             return;
         }
 
-        string? id = result.User.FindFirst("sub")?.Value;
         string? email = result.User.FindFirst("email")?.Value;
 
         if (email != null)
         {
-            CurrentUser = await userRepository.GetByAuth0IdAsync(email)!;
+            CurrentUser = await userRepository.GetByEmailAsync(email)!;
         }
 
         if (CurrentUser != null)
