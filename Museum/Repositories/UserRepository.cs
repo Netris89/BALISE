@@ -29,7 +29,7 @@ public class UserRepository
         context.SaveChanges();
     }
 
-    public async Task<User>? GetByAuth0IdAsync(string email)
+    public async Task<User>? GetByEmailAsync(string email)
     {
         var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
 
