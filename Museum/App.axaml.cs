@@ -55,6 +55,26 @@ public partial class App : Application
                 DataContext = new MainWindowViewModel(formService, museumRepository, agendaRepository, authService, userRepository)
             };
         }
+        
+        Museum museum = Hardcoding();
+
+        HttpClient client = new HttpClient();
+        EventFetcherService service = new EventFetcherService(client, museum);
+
+        string html = await service.GetAgendaHtmlAsync();
+        var events = service.ParseEvents(html);
+
+        foreach (var ev in await events)
+        {
+            await agendaRepository.AddAsync(ev);
+        }
+
+        base.OnFrameworkInitializationCompleted();
+    }
+
+    // Temporary. Just hardcodes a few things. I put it out the OnFrameworkInitializationCompleted() because it was becoming hard to read.
+    private Museum Hardcoding()
+    {
 
         // Museum root structure
         var museum = new Museum(
@@ -150,25 +170,14 @@ public partial class App : Application
 
         _ = museumRepository.AddAsync(museum);
 
-        HttpClient client = new HttpClient();
-        EventFetcherService service = new EventFetcherService(client, museum);
-
-        string html = await service.GetAgendaHtmlAsync();
-        var events = service.ParseEvents(html);
-
-        foreach (var ev in await events)
-        {
-            await agendaRepository.AddAsync(ev);
-        }
-
         var user = new User
         {
-            Email = "ludovic.hansen@hotmail.be",
+            Email = "ludovic.hansen@isl-edu.be",
             Password = "test"
         };
 
         userRepository.AddUser(user);
 
-        base.OnFrameworkInitializationCompleted();
+        return museum;
     }
 }
