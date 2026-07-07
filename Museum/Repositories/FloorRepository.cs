@@ -6,21 +6,36 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Balise.Repositories;
 
+/// <summary>
+/// Provides CRUD access to <see cref="Floor"/> entities.
+/// </summary>
 public class FloorRepository
 {
     private readonly AppDbContext context;
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="FloorRepository"/>.
+    /// </summary>
+    /// <param name="context">The database context to operate on.</param>
     public FloorRepository(AppDbContext context)
     {
         this.context = context;
     }
 
+    /// <summary>
+    /// Adds a new floor to the database.
+    /// </summary>
+    /// <param name="floor">The floor to add.</param>
     public async Task AddAsync(Floor floor)
     {
         await context.Floors.AddAsync(floor);
         await context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Updates an existing floor with new values, if it exists.
+    /// </summary>
+    /// <param name="floor">The floor containing the updated values, matched by Id.</param>
     public async Task UpdateAsync(Floor floor)
     {
         var existingFloor = await context.Floors.FindAsync(floor.Id);
@@ -32,6 +47,10 @@ public class FloorRepository
         }
     }
 
+    /// <summary>
+    /// Deletes the floor with the given id, if it exists.
+    /// </summary>
+    /// <param name="id">The id of the floor to delete.</param>
     public async Task DeleteAsync(int id)
     {
         var floor = await context.Floors.FindAsync(id);
@@ -43,11 +62,19 @@ public class FloorRepository
         }
     }
 
+    /// <summary>
+    /// Retrieves a single floor by its id.
+    /// </summary>
+    /// <param name="id">The id of the floor to retrieve.</param>
+    /// <returns>The matching floor, or <c>null</c> if none is found.</returns>
     public async Task<Floor?> GetAsync(int id)
     {
         return await context.Floors.FindAsync(id);
     }
 
+    /// <summary>
+    /// Retrieves all floors in the database.
+    /// </summary>
     public async Task<List<Floor>> GetAllAsync()
     {
         return await context.Floors.ToListAsync();

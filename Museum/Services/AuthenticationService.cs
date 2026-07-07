@@ -5,19 +5,39 @@ using Duende.IdentityModel.OidcClient;
 
 namespace Balise.Services;
 
+/// <summary>
+/// Manages the OIDC login flow and tracks the currently authenticated user.
+/// </summary>
 public class AuthenticationService
 {
     private readonly OidcClient oidcClient;
     private readonly UserRepository userRepository;
+
+    /// <summary>
+    /// The user currently logged in, or <c>null</c> if no one is authenticated.
+    /// </summary>
     public User? CurrentUser { get; set; }
+
+    /// <summary>
+    /// Indicates whether a user is currently authenticated.
+    /// </summary>
     public bool IsAuthenticated { get; set; }
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="AuthenticationService"/>.
+    /// </summary>
+    /// <param name="client">The OIDC client used to perform the login.</param>
+    /// <param name="repository">The repository used to look up the logged-in user.</param>
     public AuthenticationService(OidcClient client, UserRepository repository)
     {
         oidcClient = client;
         userRepository = repository;
     }
 
+    /// <summary>
+    /// Runs the OIDC login flow and, on success, loads the matching user by email
+    /// and marks them as authenticated.
+    /// </summary>
     public async Task LoginAsync()
     {
         var result = await oidcClient.LoginAsync();
@@ -40,6 +60,9 @@ public class AuthenticationService
         }
     }
 
+    /// <summary>
+    /// Clears the current user and marks the session as unauthenticated.
+    /// </summary>
     public void LogoutAsync()
     {
         CurrentUser = null;

@@ -9,6 +9,10 @@ using ReactiveUI;
 
 namespace Balise.ViewModels;
 
+/// <summary>
+/// Backs the registration form view, holding field values, their validation
+/// error flags, and the commands to clear or submit the form.
+/// </summary>
 public class FormViewModel : ViewModelBase
 {
     private string firstName = string.Empty;
@@ -28,6 +32,9 @@ public class FormViewModel : ViewModelBase
     private RegionInfo? selectedCountry;
     private FormService service;
 
+    /// <summary>
+    /// The first name entered in the form.
+    /// </summary>
     public string FirstName
     {
         get => firstName;
@@ -38,6 +45,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// The last name entered in the form.
+    /// </summary>
     public string LastName
     {
         get => lastName;
@@ -48,6 +58,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// The street address entered in the form.
+    /// </summary>
     public string Address
     {
         get => address;
@@ -58,6 +71,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// The house or building number entered in the form.
+    /// </summary>
     public string Number
     {
         get => number;
@@ -68,6 +84,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// The city entered in the form.
+    /// </summary>
     public string City
     {
         get => city;
@@ -78,6 +97,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// The email address entered in the form.
+    /// </summary>
     public string Email
     {
         get => email;
@@ -88,6 +110,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Indicates whether the last name field failed validation.
+    /// </summary>
     public bool LastNameError
     {
         get => lastNameError;
@@ -97,6 +122,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Indicates whether the first name field failed validation.
+    /// </summary>
     public bool FirstNameError
     {
         get => firstNameError;
@@ -106,6 +134,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Indicates whether the address field failed validation.
+    /// </summary>
     public bool AddressError
     {
         get => addressError;
@@ -115,6 +146,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Indicates whether the number field failed validation.
+    /// </summary>
     public bool NumberError
     {
         get => numberError;
@@ -124,6 +158,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Indicates whether the city field failed validation.
+    /// </summary>
     public bool CityError
     {
         get => cityError;
@@ -133,6 +170,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Indicates whether the email field failed validation.
+    /// </summary>
     public bool EmailError
     {
         get => emailError;
@@ -142,6 +182,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Indicates whether the user opted in to the newsletter.
+    /// </summary>
     public bool IsNewletterChecked
     {
         get => isNewletterChecked;
@@ -152,6 +195,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Indicates whether the user opted in to the satisfaction survey.
+    /// </summary>
     public bool IsSatisfactionChecked
     {
         get => isSatisfactionChecked;
@@ -162,6 +208,9 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Indicates whether all required fields have been filled in.
+    /// </summary>
     public bool IsFormCompleted => !string.IsNullOrWhiteSpace(FirstName)
                                 && !string.IsNullOrWhiteSpace(LastName)
                                 && !string.IsNullOrWhiteSpace(Address)
@@ -170,8 +219,14 @@ public class FormViewModel : ViewModelBase
                                 && !string.IsNullOrWhiteSpace(Email)
                                 && SelectedCountry != null;
 
+    /// <summary>
+    /// The list of countries available for selection, one per ISO region.
+    /// </summary>
     public List<RegionInfo> Countries { get; }
 
+    /// <summary>
+    /// The country currently selected in the form.
+    /// </summary>
     public RegionInfo? SelectedCountry
     {
         get => selectedCountry;
@@ -182,9 +237,20 @@ public class FormViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Command that clears all fields in the form.
+    /// </summary>
     public ICommand CancelCommand { get; }
+
+    /// <summary>
+    /// Command that validates and submits the form.
+    /// </summary>
     public ICommand AcceptCommand { get; }
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="FormViewModel"/>.
+    /// </summary>
+    /// <param name="formService">The service used to validate and submit the form.</param>
     public FormViewModel(FormService formService)
     {
         Countries = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
@@ -198,6 +264,9 @@ public class FormViewModel : ViewModelBase
         service = formService;
     }
 
+    /// <summary>
+    /// Resets all fields and checkboxes to their default, empty state.
+    /// </summary>
     public void ClearForm()
     {
         FirstName = string.Empty;
@@ -211,6 +280,10 @@ public class FormViewModel : ViewModelBase
         IsSatisfactionChecked = false;
     }
 
+    /// <summary>
+    /// Builds a <see cref="FormDto"/> from the current field values, validates it
+    /// through the form service, and updates the error flags accordingly.
+    /// </summary>
     public void ValidateForm()
     {
         FormDto dto = new FormDto(FirstName, LastName, Address, Number, City, Email, SelectedCountry!);
