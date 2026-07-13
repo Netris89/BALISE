@@ -173,7 +173,8 @@ public partial class App : Application
         var user = new User
         {
             Email = "ludovic.hansen@isl-edu.be",
-            Password = "test"
+            Password = "test",
+            Role = Enum.UserRole.Admin
         };
 
         userRepository.AddUser(user);

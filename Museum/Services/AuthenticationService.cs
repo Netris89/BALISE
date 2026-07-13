@@ -2,26 +2,37 @@ using System.Threading.Tasks;
 using Balise.Models;
 using Balise.Repositories;
 using Duende.IdentityModel.OidcClient;
+using ReactiveUI;
 
 namespace Balise.Services;
 
 /// <summary>
 /// Manages the OIDC login flow and tracks the currently authenticated user.
 /// </summary>
-public class AuthenticationService
+public class AuthenticationService : ReactiveObject
 {
     private readonly OidcClient oidcClient;
     private readonly UserRepository userRepository;
+    private User? currentUser;
+    private bool isAuthenticated;
 
     /// <summary>
     /// The user currently logged in, or <c>null</c> if no one is authenticated.
     /// </summary>
-    public User? CurrentUser { get; set; }
+    public User? CurrentUser
+    {
+        get => currentUser;
+        set => this.RaiseAndSetIfChanged(ref currentUser, value);
+    }
 
     /// <summary>
     /// Indicates whether a user is currently authenticated.
     /// </summary>
-    public bool IsAuthenticated { get; set; }
+    public bool IsAuthenticated
+    {
+        get => isAuthenticated;
+        set => this.RaiseAndSetIfChanged(ref isAuthenticated, value);
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="AuthenticationService"/>.

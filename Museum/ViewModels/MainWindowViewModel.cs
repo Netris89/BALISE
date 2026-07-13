@@ -14,6 +14,8 @@ public class MainWindowViewModel : ViewModelBase
     private ViewModelBase currentView;
     private FormService formServ;
     private AuthenticationService authServ;
+    private readonly ObservableAsPropertyHelper<bool> isAdmin;
+    private readonly ObservableAsPropertyHelper<bool> isContentManager;
 
     /// <summary>
     /// The view model currently displayed in the main window.
@@ -36,6 +38,10 @@ public class MainWindowViewModel : ViewModelBase
         get => currentView is LangChoiceViewModel;
     }
 
+    public bool IsAdmin => isAdmin.Value;
+
+    public bool IsContentManager => isContentManager.Value;
+
     /// <summary>
     /// Command that navigates to the map view.
     /// </summary>
@@ -57,6 +63,16 @@ public class MainWindowViewModel : ViewModelBase
     public ReactiveCommand<Unit, ViewModelBase> GoToForm { get; }
 
     /// <summary>
+    /// Command that navigates to the content management view.
+    /// </summary>
+    public ReactiveCommand<Unit, ViewModelBase> GoToContent { get; }
+
+    /// <summary>
+    /// Command that navigates to the administration view.
+    /// </summary>
+    public ReactiveCommand<Unit, ViewModelBase> GoToAdmin { get; }
+
+    /// <summary>
     /// Initializes a new instance of <see cref="MainWindowViewModel"/>, starting
     /// on the language selection screen and wiring up the navigation commands.
     /// </summary>
@@ -70,6 +86,18 @@ public class MainWindowViewModel : ViewModelBase
         formServ = formService;
         authServ = auth;
 
+        isAdmin = authServ.WhenAnyValue(
+                x => x.IsAuthenticated,
+                x => x.CurrentUser,
+                (auth, user) => auth && user?.Role == Enum.UserRole.Admin)
+            .ToProperty(this, x => x.IsAdmin);
+
+        isContentManager = authServ.WhenAnyValue(
+                x => x.IsAuthenticated,
+                x => x.CurrentUser,
+                (auth, user) => auth && user?.Role == Enum.UserRole.ContentManager || user?.Role == Enum.UserRole.Admin)
+            .ToProperty(this, x => x.IsContentManager);
+
         // At application startup, the language selection screen is displayed by default
         currentView = new LangChoiceViewModel(SetCurrentView, museumRepository);
 
@@ -77,7 +105,9 @@ public class MainWindowViewModel : ViewModelBase
         GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(museumRepository));
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel(agendaRepository));
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(authServ));
-        GoToForm = ReactiveCommand.Create(()=> CurrentView = new FormViewModel(formServ));
+        GoToForm = ReactiveCommand.Create(() => CurrentView = new FormViewModel(formServ));
+        GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel());
+        GoToAdmin = ReactiveCommand.Create(() => CurrentView = new AdminViewModel());
     }
 
     /// <summary>
