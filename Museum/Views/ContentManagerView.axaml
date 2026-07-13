@@ -4,5 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.ContentManagerView">
-    Welcome to Avalonia!
+    <StackPanel>
+        <TextBlock Text="ContentManager"/>
+        <Button Content="Importer un fichier" Click="OpenFileButton_Clicked"/>
+    </StackPanel>
 </UserControl>
