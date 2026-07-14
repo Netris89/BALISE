@@ -6,6 +6,10 @@ using ReactiveUI;
 
 namespace Balise.ViewModels;
 
+/// <summary>
+/// Backs the content manager view, holding the museum hierarchy (museum,
+/// floor, space, point of interest) and the current selection at each level.
+/// </summary>
 public class ContentManagerViewModel : ViewModelBase
 {
     private readonly MuseumRepository museumRepository;
@@ -14,8 +18,14 @@ public class ContentManagerViewModel : ViewModelBase
     private Space? selectedSpace;
     private PointOfInterest? selectedPointOfInterest;
 
+    /// <summary>
+    /// The list of museums available for selection.
+    /// </summary>
     public List<Museum> Museums { get; set; } = new List<Museum>();
 
+    /// <summary>
+    /// The museum currently selected.
+    /// </summary>
     public Museum? SelectedMuseum
     {
         get => selectedMuseum;
@@ -25,6 +35,9 @@ public class ContentManagerViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// The floor currently selected within the selected museum.
+    /// </summary>
     public Floor? SelectedFloor
     {
         get => selectedFloor;
@@ -34,6 +47,9 @@ public class ContentManagerViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// The space currently selected within the selected floor.
+    /// </summary>
     public Space? SelectedSpace
     {
         get => selectedSpace;
@@ -43,6 +59,9 @@ public class ContentManagerViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// The point of interest currently selected within the selected space.
+    /// </summary>
     public PointOfInterest? SelectedPointOfInterest
     {
         get => selectedPointOfInterest;
@@ -52,12 +71,19 @@ public class ContentManagerViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="ContentManagerViewModel"/>.
+    /// </summary>
+    /// <param name="mRepository">The repository used to load museums.</param>
     public ContentManagerViewModel(MuseumRepository mRepository)
     {
         museumRepository = mRepository;
         _ = InitializeAsync();
     }
 
+    /// <summary>
+    /// Loads the list of museums from the repository.
+    /// </summary>
     public async Task InitializeAsync()
     {
         Museums = await museumRepository.GetAllAsync();
