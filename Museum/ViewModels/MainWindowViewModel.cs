@@ -106,7 +106,7 @@ public class MainWindowViewModel : ViewModelBase
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel(agendaRepository));
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(authServ));
         GoToForm = ReactiveCommand.Create(() => CurrentView = new FormViewModel(formServ));
-        GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel());
+        GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel(museumRepository));
         GoToAdmin = ReactiveCommand.Create(() => CurrentView = new AdminViewModel());
     }
 
