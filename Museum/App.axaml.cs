@@ -25,7 +25,7 @@ public partial class App : Application
     private static AgendaRepository agendaRepository = new AgendaRepository(context);
     private MuseumRepository museumRepository = new MuseumRepository(context);
     private FormService formService = new FormService(userRepository);
-    private AuthenticationService authService;
+    private AuthenticationService? authService;
     private static readonly GeometryFactory Factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
 
     public override void Initialize()
