@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Balise.Data;
+using Balise.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Balise.Repositories;

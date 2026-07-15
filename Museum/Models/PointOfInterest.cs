@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
-using Balise.Models;
 using NetTopologySuite.Geometries;
+
+namespace Balise.Models;
 
 /// <summary>
 /// Represents a geographical point of interest.
