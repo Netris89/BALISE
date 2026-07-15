@@ -16,9 +16,9 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TreeView ItemsSource="{Binding SelectedMuseum.Floors}" Grid.Column="0">
+            <TreeView ItemsSource="{Binding SelectedMuseum.Floors}" SelectedItem="{Binding SelectedItem}" Grid.Column="0">
                 <TreeView.DataTemplates>
-                    <TreeDataTemplate DataType="model:Floor" ItemsSource="{Binding Spaces}">
+                    <TreeDataTemplate DataType="model:Floor" ItemsSource="{Binding Spaces}" >
                         <TextBlock Text="{Binding Number}"/>
                     </TreeDataTemplate>
 
