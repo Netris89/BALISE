@@ -72,6 +72,9 @@ public class ContentManagerViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// The view model currently displayed in the editor window.
+    /// </summary>
     public ViewModelBase? SelectedEditor
     {
         get => selectedEditor;
