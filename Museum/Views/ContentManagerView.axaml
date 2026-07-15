@@ -2,39 +2,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="using:Balise.Models"
              xmlns:vm="clr-namespace:Balise.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.ContentManagerView"
              x:DataType="vm:ContentManagerViewModel">
-    <StackPanel>
-        <ComboBox ItemsSource="{Binding Museums}" SelectedItem="{Binding SelectedMuseum}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox ItemsSource="{Binding SelectedMuseum.Floors}" SelectedItem="{Binding SelectedFloor}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Number}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox ItemsSource="{Binding SelectedFloor.Spaces}" SelectedItem="{Binding SelectedSpace}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox ItemsSource="{Binding SelectedSpace.PointOfInterests}" SelectedItem="{Binding SelectedPointOfInterest}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <Button Content="Importer un fichier" Click="OpenFileButton_Clicked"/>
-    </StackPanel>
+    <Grid ColumnDefinitions="*, *">
+        <StackPanel Grid.Column="0">
+            <ComboBox ItemsSource="{Binding Museums}" SelectedItem="{Binding SelectedMuseum}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TreeView ItemsSource="{Binding SelectedMuseum.Floors}" Grid.Column="0">
+                <TreeView.DataTemplates>
+                    <TreeDataTemplate DataType="model:Floor" ItemsSource="{Binding Spaces}">
+                        <TextBlock Text="{Binding Number}"/>
+                    </TreeDataTemplate>
+
+                    <TreeDataTemplate DataType="model:Space" ItemsSource="{Binding PointOfInterests}">
+                        <TextBlock Text="{Binding Name}"/>
+                    </TreeDataTemplate>
+
+                    <TreeDataTemplate DataType="model:PointOfInterest">
+                        <TextBlock Text="{Binding Name}"/>
+                    </TreeDataTemplate>
+                </TreeView.DataTemplates>
+            </TreeView>
+        </StackPanel>
+        <ContentControl Grid.Column="1" Content="{Binding SelectedEditor}"/>
+    </Grid>
 </UserControl>

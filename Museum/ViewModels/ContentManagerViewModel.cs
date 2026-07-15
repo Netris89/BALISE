@@ -17,6 +17,7 @@ public class ContentManagerViewModel : ViewModelBase
     private Floor? selectedFloor;
     private Space? selectedSpace;
     private PointOfInterest? selectedPointOfInterest;
+    private ViewModelBase? selectedEditor;
 
     /// <summary>
     /// The list of museums available for selection.
@@ -68,6 +69,15 @@ public class ContentManagerViewModel : ViewModelBase
         set
         {
             this.RaiseAndSetIfChanged(ref selectedPointOfInterest, value);
+        }
+    }
+
+    public ViewModelBase? SelectedEditor
+    {
+        get => selectedEditor;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref selectedEditor, value);
         }
     }
 
