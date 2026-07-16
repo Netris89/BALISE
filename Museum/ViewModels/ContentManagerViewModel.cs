@@ -13,6 +13,7 @@ namespace Balise.ViewModels;
 public class ContentManagerViewModel : ViewModelBase
 {
     private readonly MuseumRepository museumRepository;
+    private readonly PointOfInterestRepository pointOfInterestRepository;
     private Museum? selectedMuseum;
     private Floor? selectedFloor;
     private Space? selectedSpace;
@@ -66,7 +67,7 @@ public class ContentManagerViewModel : ViewModelBase
 
                 case PointOfInterest poi:
                     SelectedPointOfInterest = poi;
-                    SelectedEditor = new PointOfInterestEditorViewModel();
+                    SelectedEditor = new PointOfInterestEditorViewModel(SelectedPointOfInterest, pointOfInterestRepository);
                     break;
             }
         }
@@ -124,9 +125,10 @@ public class ContentManagerViewModel : ViewModelBase
     /// Initializes a new instance of <see cref="ContentManagerViewModel"/>.
     /// </summary>
     /// <param name="mRepository">The repository used to load museums.</param>
-    public ContentManagerViewModel(MuseumRepository mRepository)
+    public ContentManagerViewModel(MuseumRepository mRepository, PointOfInterestRepository poiRepository)
     {
         museumRepository = mRepository;
+        pointOfInterestRepository = poiRepository;
         _ = InitializeAsync();
     }
 

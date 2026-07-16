@@ -2,7 +2,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Balise.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Balise.Views.PointOfInterestEditorView">
-  Welcome to PointOfInterestEditorView!
+             x:Class="Balise.Views.PointOfInterestEditorView"
+             x:DataType="vm:PointOfInterestEditorViewModel">
+    <StackPanel>
+        <TextBlock Text="Nom"/>
+        <TextBox Text="{Binding Name}"/>
+        <TextBlock Text="Descripton"/>
+        <TextBox Text="{Binding Description}"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding SaveCommand}" Content="Sauver"/>
+        </StackPanel>
+    </StackPanel>
 </UserControl>
