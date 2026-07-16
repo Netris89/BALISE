@@ -14,6 +14,7 @@ public class ContentManagerViewModel : ViewModelBase
 {
     private readonly MuseumRepository museumRepository;
     private readonly PointOfInterestRepository pointOfInterestRepository;
+    private readonly SpaceRepository spaceRepository;
     private Museum? selectedMuseum;
     private Floor? selectedFloor;
     private Space? selectedSpace;
@@ -62,7 +63,7 @@ public class ContentManagerViewModel : ViewModelBase
                 case Space space:
                     SelectedSpace = space;
                     SelectedPointOfInterest = null;
-                    SelectedEditor = new SpaceEditorViewModel();
+                    SelectedEditor = new SpaceEditorViewModel(SelectedSpace, spaceRepository);
                     break;
 
                 case PointOfInterest poi:
@@ -125,10 +126,11 @@ public class ContentManagerViewModel : ViewModelBase
     /// Initializes a new instance of <see cref="ContentManagerViewModel"/>.
     /// </summary>
     /// <param name="mRepository">The repository used to load museums.</param>
-    public ContentManagerViewModel(MuseumRepository mRepository, PointOfInterestRepository poiRepository)
+    public ContentManagerViewModel(MuseumRepository mRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository)
     {
         museumRepository = mRepository;
         pointOfInterestRepository = poiRepository;
+        spaceRepository = sRepository;
         _ = InitializeAsync();
     }
 
