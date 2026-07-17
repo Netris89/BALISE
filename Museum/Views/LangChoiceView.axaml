@@ -10,25 +10,25 @@
         <TextBlock HorizontalAlignment="Center" Text="{Binding SelectionText}" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50">
             <StackPanel>
-                <Button Name="FrenchButton" CommandParameter="fr">
+                <Button Name="FrenchButton" Command="{Binding SelectLang}" CommandParameter="fr">
                     <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_France.png" Width="63" Height="41"/>
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="Français"></TextBlock>
             </StackPanel>
             <StackPanel>
-                <Button Name="DutchButton" CommandParameter="nl">
+                <Button Name="DutchButton" Command="{Binding SelectLang}" CommandParameter="nl">
                     <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_the_Netherlands.png" Width="63" Height="41" />
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="Nederlands"></TextBlock>
             </StackPanel>
             <StackPanel>
-                <Button Name="GermanButton" CommandParameter="de">
+                <Button Name="GermanButton" Command="{Binding SelectLang}" CommandParameter="de">
                     <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_Germany.png" Width="63" Height="41" />
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="Deutsch"></TextBlock>
             </StackPanel>
             <StackPanel>
-                <Button Name="EnglishButton" CommandParameter="en">
+                <Button Name="EnglishButton" Command="{Binding SelectLang}" CommandParameter="en">
                     <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_the_United_Kingdom.png" Width="63" Height="41" />
                 </Button>
                 <TextBlock HorizontalAlignment="Center" Text="English"></TextBlock>
