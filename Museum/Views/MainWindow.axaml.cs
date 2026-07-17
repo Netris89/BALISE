@@ -1,4 +1,4 @@
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 using Balise.ViewModels;
 
 namespace Balise.Views;

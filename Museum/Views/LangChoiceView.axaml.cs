@@ -1,7 +1,7 @@
-using System.Reactive.Disposables;
-using Avalonia.ReactiveUI;
+using System.Reactive.Disposables.Fluent;
 using Balise.ViewModels;
 using ReactiveUI;
+using ReactiveUI.Avalonia;
 
 namespace Balise.Views;
 
