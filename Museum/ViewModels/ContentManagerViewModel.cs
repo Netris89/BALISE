@@ -39,7 +39,7 @@ public class ContentManagerViewModel : ViewModelBase
 
             if (value != null)
             {
-                SelectedEditor = new MuseumEditorViewModel();
+                SelectedEditor = new MuseumEditorViewModel(value, museumRepository);
             }
         }
     }

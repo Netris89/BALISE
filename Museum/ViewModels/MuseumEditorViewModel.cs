@@ -1,14 +1,19 @@
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Balise.Models;
+using Balise.Repositories;
 using ReactiveUI;
 
 namespace Balise.ViewModels;
 
 public class MuseumEditorViewModel : ViewModelBase
 {
-    private string? name;
-    private string? description;
+    private string name = string.Empty;
+    private readonly Museum selectedMuseum;
+    private readonly MuseumRepository repository;
+    public ICommand SaveCommand { get; }
 
-    public string? Name
+    public string Name
     {
         get => name;
         set
@@ -17,18 +22,21 @@ public class MuseumEditorViewModel : ViewModelBase
         }
     }
 
-    public string? Description
+    public MuseumEditorViewModel(Museum museum, MuseumRepository museumRepository)
     {
-        get => description;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref description, value);
-        }
+        selectedMuseum = museum;
+
+        Name = selectedMuseum.Name;
+
+        repository = museumRepository;
+
+        SaveCommand = ReactiveCommand.CreateFromTask(SaveAsync);
     }
 
     public async Task SaveAsync()
     {
-        // Copy values into the model and save it.
+        selectedMuseum.Name = Name;
 
+        await repository.UpdateAsync(selectedMuseum);
     }
 }
