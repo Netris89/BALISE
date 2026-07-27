@@ -1,6 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Balise.Data;
 using Balise.DTO;
+using Balise.Enum;
 using Balise.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,6 +49,15 @@ public class UserRepository
     }
 
     /// <summary>
+    /// Retrieves all users who do not have the <see cref="UserRole.Visitor"/> role.
+    /// </summary>
+    /// <returns>The list of staff users.</returns>
+    public async Task<List<User>> GetStaff()
+    {
+        return await context.Users.Where(r => r.Role != UserRole.Visitor).ToListAsync();
+    }
+
+    /// <summary>
     /// Retrieves a user by their email address.
     /// </summary>
     /// <param name="email">The email address to search for.</param>
@@ -59,5 +72,30 @@ public class UserRepository
         }
 
         return null!;
+    }
+
+    /// <summary>
+    /// Deletes the user with the specified id, if it exists.
+    /// </summary>
+    /// <param name="id">The id of the user to delete.</param>
+    public async Task DeleteAsync(int id)
+    {
+        var user = await context.Users.FindAsync(id);
+
+        if (user != null)
+        {
+            context.Users.Remove(user);
+            await context.SaveChangesAsync();
+        }
+    }
+
+    /// <summary>
+    /// Saves changes made to an existing user to the database.
+    /// </summary>
+    /// <param name="user">The user to update.</param>
+    public async Task UpdateAsync(User user)
+    {
+        context.Users.Update(user);
+        await context.SaveChangesAsync();
     }
 }
