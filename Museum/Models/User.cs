@@ -39,6 +39,11 @@ public class User
     public string LastName { get; set; } = string.Empty;
 
     /// <summary>
+    /// The user's full name, combining <see cref="FirstName"/> and <see cref="LastName"/>.
+    /// </summary>
+    public string FullName => $"{FirstName} {LastName}";
+
+    /// <summary>
     /// The house or building number of the user's address.
     /// </summary>
     public string Number { get; set; } = string.Empty;
