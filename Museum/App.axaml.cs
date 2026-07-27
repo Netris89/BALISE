@@ -176,6 +176,8 @@ public partial class App : Application
         {
             Email = "ludovic.hansen@isl-edu.be",
             Password = "test",
+            FirstName = "Ludovic",
+            LastName = "Hansen",
             Role = Enum.UserRole.Admin
         };
 
