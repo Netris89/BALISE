@@ -18,6 +18,7 @@ public class MainWindowViewModel : ViewModelBase
     private readonly ObservableAsPropertyHelper<bool> isContentManager;
     private readonly PointOfInterestRepository pointOfInterestRepository;
     private readonly SpaceRepository spaceRepository;
+    private readonly UserRepository userRepository;
 
     /// <summary>
     /// The view model currently displayed in the main window.
@@ -83,12 +84,13 @@ public class MainWindowViewModel : ViewModelBase
     /// <param name="agendaRepository">The repository used by the agenda view model.</param>
     /// <param name="auth">The authentication service used by the connection view model.</param>
     /// <param name="userRepository">The repository used to look up users during login.</param>
-    public MainWindowViewModel(FormService formService, MuseumRepository museumRepository, AgendaRepository agendaRepository, AuthenticationService auth, UserRepository userRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository)
+    public MainWindowViewModel(FormService formService, MuseumRepository museumRepository, AgendaRepository agendaRepository, AuthenticationService auth, UserRepository uRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository)
     {
         formServ = formService;
         authServ = auth;
         pointOfInterestRepository = poiRepository;
         spaceRepository = sRepository;
+        userRepository = uRepository;
 
         isAdmin = authServ.WhenAnyValue(
                 x => x.IsAuthenticated,
@@ -111,7 +113,7 @@ public class MainWindowViewModel : ViewModelBase
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(authServ));
         GoToForm = ReactiveCommand.Create(() => CurrentView = new FormViewModel(formServ));
         GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel(museumRepository, pointOfInterestRepository, spaceRepository));
-        GoToAdmin = ReactiveCommand.Create(() => CurrentView = new AdminViewModel());
+        GoToAdmin = ReactiveCommand.Create(() => CurrentView = new AdminViewModel(userRepository));
     }
 
     /// <summary>
