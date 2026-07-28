@@ -1,64 +1,64 @@
-using System.Diagnostics;
-using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using Duende.IdentityModel.OidcClient.Browser;
+using ReactiveUI;
 
 namespace Balise.Services;
 
 /// <summary>
-/// Implements the OIDC browser step by opening the system browser and listening
-/// on a local HTTP endpoint for the redirect callback.
+/// Implements the OIDC browser step by exposing the authorization URL to a
+/// hosted NativeWebView and completing once the redirect URI is reached.
 /// </summary>
-public class Browser : IBrowser
+public class Browser : ReactiveObject, IBrowser
 {
+    private string? currentUrl;
+    private string? endUrl;
+    private TaskCompletionSource<BrowserResult>? completionSource;
+
     /// <summary>
-    /// Opens the given start URL in the system browser, waits for the redirect
-    /// callback on the local listener, and returns the resulting response URL.
+    /// The URL the hosting NativeWebView should currently display.
     /// </summary>
-    /// <param name="options">The browser options, including the URL to open.</param>
-    /// <param name="cancellationToken">A token used to cancel the response write.</param>
-    /// <returns>A successful <see cref="BrowserResult"/> containing the callback URL.</returns>
-    public async Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken = default)
+    public string? CurrentUrl
     {
-        HttpListener listener = new HttpListener();
+        get => currentUrl;
+        private set => this.RaiseAndSetIfChanged(ref currentUrl, value);
+    }
 
-        listener.Prefixes.Add("http://127.0.0.1:7890/");
-        listener.Start();
+    public Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken = default)
+    {
+        endUrl = options.EndUrl;
+        completionSource = new TaskCompletionSource<BrowserResult>();
 
-        Process.Start(new ProcessStartInfo
+        cancellationToken.Register(() => completionSource.TrySetResult(new BrowserResult
         {
-            FileName = options.StartUrl,
-            UseShellExecute = true
-        });
+            ResultType = BrowserResultType.Timeout
+        }));
 
-        HttpListenerContext context = await listener.GetContextAsync();
+        CurrentUrl = options.StartUrl;
 
-        const string html = """
-        <html>
-            <body>
-                <h2>Connexion r&eacute;ussie.</h2>
-                <p>Vous pouvez fermer cette fen&ecirc;tre.</p>
-            </body>
-        </html>
-        """;
+        return completionSource.Task;
+    }
 
-        byte[] buffer = Encoding.UTF8.GetBytes(html);
+    /// <summary>
+    /// Called by the hosting view on every NativeWebView navigation.
+    /// Completes the pending login once the redirect URI is reached, and
+    /// cancels that navigation so the WebView never tries to load it.
+    /// </summary>
+    /// <param name="args">The navigation event arguments from NativeWebView.</param>
+    public void OnNavigating(WebViewNavigationStartingEventArgs args)
+    {
+        string url = args.Request.ToString();
 
-        context.Response.ContentType = "text/html";
-        context.Response.ContentLength64 = buffer.Length;
-
-        await context.Response.OutputStream.WriteAsync(buffer, cancellationToken);
-
-        BrowserResult result = new BrowserResult
+        if (endUrl is not null && url.StartsWith(endUrl))
         {
-            ResultType = BrowserResultType.Success,
-            Response = context.Request.Url!.ToString()
-        };
+            args.Cancel = true;
 
-        context.Response.Close();
-
-        return result;
+            completionSource?.TrySetResult(new BrowserResult
+            {
+                ResultType = BrowserResultType.Success,
+                Response = url
+            });
+        }
     }
 }

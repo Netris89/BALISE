@@ -29,6 +29,7 @@ public partial class App : Application
     private FormService formService = new FormService(userRepository);
     private AuthenticationService? authService;
     private static readonly GeometryFactory Factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
+    private Browser browser = new Browser();
 
     public override void Initialize()
     {
@@ -43,7 +44,7 @@ public partial class App : Application
         {
             Authority = config["Auth0:Domain"],
             ClientId = config["Auth0:ClientId"],
-            Browser = new Browser(),
+            Browser = browser,
             RedirectUri = "http://127.0.0.1:7890/callback",
             Scope = "openid profile email",
         });
@@ -54,7 +55,7 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(formService, museumRepository, agendaRepository, authService, userRepository, poiRepository, spaceRepository)
+                DataContext = new MainWindowViewModel(formService, museumRepository, agendaRepository, authService, userRepository, poiRepository, spaceRepository, browser)
             };
         }
         
