@@ -25,6 +25,14 @@ public class Browser : ReactiveObject, IBrowser
         private set => this.RaiseAndSetIfChanged(ref currentUrl, value);
     }
 
+    /// <summary>
+    /// Sets the authorization URL for the hosting NativeWebView and returns a task
+    /// that completes once <see cref="OnNavigating"/> detects the redirect URI,
+    /// or the cancellation token is triggered.
+    /// </summary>
+    /// <param name="options">The browser options, including the start and end URLs.</param>
+    /// <param name="cancellationToken">A token used to cancel the pending login.</param>
+    /// <returns>A task that resolves to the resulting <see cref="BrowserResult"/>.</returns>
     public Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken = default)
     {
         endUrl = options.EndUrl;
@@ -52,7 +60,7 @@ public class Browser : ReactiveObject, IBrowser
         {
             return;
         }
-        
+
         string url = args.Request.ToString();
 
         if (endUrl is not null && url.StartsWith(endUrl))
