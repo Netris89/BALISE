@@ -48,6 +48,11 @@ public class Browser : ReactiveObject, IBrowser
     /// <param name="args">The navigation event arguments from NativeWebView.</param>
     public void OnNavigating(WebViewNavigationStartingEventArgs args)
     {
+        if (args.Request is null)
+        {
+            return;
+        }
+        
         string url = args.Request.ToString();
 
         if (endUrl is not null && url.StartsWith(endUrl))
