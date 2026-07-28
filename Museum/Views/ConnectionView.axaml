@@ -6,5 +6,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.ConnectionView"
              x:DataType="vm:ConnectionViewModel">
-    <NativeWebView Source="{Binding Browser.CurrentUrl}" NavigationStarted="OnNavigating"/>
+    <NativeWebView Source="{Binding Browser.CurrentUrl}" NavigationStarted="OnNavigating" Width="500"
+                   Height="620"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
 </UserControl>
