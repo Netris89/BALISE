@@ -3,12 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Balise.ViewModels"
-             xmlns:localization="clr-namespace:Balise.Localization"
-             xmlns:materialIcons="using:Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.ConnectionView"
              x:DataType="vm:ConnectionViewModel">
-    <Grid VerticalAlignment="Center" ColumnDefinitions="2*,*, *, 2*" RowDefinitions="*,*,*" RowSpacing="20">
+    <!-- <Grid VerticalAlignment="Center" ColumnDefinitions="2*,*, *, 2*" RowDefinitions="*,*,*" RowSpacing="20">
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Email :"></TextBlock>
         <TextBox PlaceholderText="Entrez votre adresse email" Grid.Row="0" Grid.Column="2" Name="EmailTextBox"></TextBox>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Mot de passe :"></TextBlock>
@@ -19,5 +17,6 @@
         <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center">
             <TextBlock>Annuler</TextBlock>
         </Button>
-    </Grid>
+    </Grid> -->
+    <NativeWebView Source="https://dev-pdosv2xmimkkduqp.us.auth0.com/authorize?response_type=code&amp;client_id=W7iQOfaD7u626hMe4Qx8RHB9uLNZpA7f&amp;redirect_uri=http://127.0.0.1:7890/callback&amp;scope=openid%20profile%20email&amp;state=xyz"/>
 </UserControl>
