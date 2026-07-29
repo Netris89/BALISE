@@ -112,7 +112,7 @@ public class MainWindowViewModel : ViewModelBase
         // Command to change the current view
         GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(museumRepository));
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel(agendaRepository));
-        GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(authServ, brwser));
+        GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(authServ, brwser, SetCurrentView));
         GoToForm = ReactiveCommand.Create(() => CurrentView = new FormViewModel(formServ));
         GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel(museumRepository, pointOfInterestRepository, spaceRepository));
         GoToAdmin = ReactiveCommand.Create(() => CurrentView = new AdminViewModel(userRepository));

@@ -13,6 +13,7 @@ namespace Balise.ViewModels;
 public class ConnectionViewModel : ViewModelBase
 {
     private readonly AuthenticationService authenticationService;
+    private readonly Action<ViewModelBase> navigate;
 
     /// <summary>
     /// The browser instance that the hosted WebView binds to and reports navigations to.
@@ -30,10 +31,11 @@ public class ConnectionViewModel : ViewModelBase
     /// <param name="auth">The authentication service used to perform login.</param>
     /// <param name="browser">The shared browser instance used by the OIDC client.</param>
     /// <param name="setCurrentView">Callback invoked with the next view once login succeeds.</param>
-    public ConnectionViewModel(AuthenticationService auth, Browser browser)
+    public ConnectionViewModel(AuthenticationService auth, Browser browser, Action<ViewModelBase> navigate)
     {
         authenticationService = auth;
         Browser = browser;
+        this.navigate = navigate;
         LoginCommand = ReactiveCommand.CreateFromTask(LoginAsync);
     }
 
@@ -44,5 +46,14 @@ public class ConnectionViewModel : ViewModelBase
     public async Task LoginAsync()
     {
         await authenticationService.LoginAsync();
+
+        if (authenticationService.IsAuthenticated)
+        {
+            navigate(new ConnectionSuccessViewModel());
+        }
+        else
+        {
+            navigate(new ConnectionFailureViewModel());
+        }
     }
 }
