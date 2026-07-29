@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Balise.Models;
 using Balise.Repositories;
+using Duende.IdentityModel.Client;
 using Duende.IdentityModel.OidcClient;
 using ReactiveUI;
 
@@ -51,7 +52,15 @@ public class AuthenticationService : ReactiveObject
     /// </summary>
     public async Task LoginAsync()
     {
-        var result = await oidcClient.LoginAsync();
+        var loginRequest = new LoginRequest
+        {
+            FrontChannelExtraParameters = new Parameters
+            {
+                { "prompt", "login" }
+            }
+        };
+
+        var result = await oidcClient.LoginAsync(loginRequest);
 
         if (result.IsError == true)
         {
