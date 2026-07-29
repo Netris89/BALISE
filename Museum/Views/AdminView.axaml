@@ -20,7 +20,7 @@
         <StackPanel Orientation="Horizontal">
             <Button Content="Sauver" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedUser}"/>
             <Button Content="Supprimer" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedUser.Id}"/>
-            <Button Content="Annuler"/>
+            <Button Content="Annuler" Command="{Binding CancelCommand}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>
