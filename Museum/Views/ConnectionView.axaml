@@ -7,7 +7,7 @@
              x:Class="Balise.Views.ConnectionView"
              x:DataType="vm:ConnectionViewModel">
     <NativeWebView Source="{Binding Browser.CurrentUrl}" NavigationStarted="OnNavigating" Width="500"
-                   Height="620"
+                   Height="800"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>
 </UserControl>
