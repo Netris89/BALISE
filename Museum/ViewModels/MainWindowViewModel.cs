@@ -1,6 +1,7 @@
 ﻿using System.Reactive;
 using Balise.Repositories;
 using Balise.Services;
+using NetTopologySuite.Geometries;
 using ReactiveUI;
 
 namespace Balise.ViewModels;
@@ -85,7 +86,7 @@ public class MainWindowViewModel : ViewModelBase
     /// <param name="agendaRepository">The repository used by the agenda view model.</param>
     /// <param name="auth">The authentication service used by the connection view model.</param>
     /// <param name="userRepository">The repository used to look up users during login.</param>
-    public MainWindowViewModel(FormService formService, MuseumRepository museumRepository, AgendaRepository agendaRepository, AuthenticationService auth, UserRepository uRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository, Browser brwser)
+    public MainWindowViewModel(FormService formService, MuseumRepository museumRepository, AgendaRepository agendaRepository, AuthenticationService auth, UserRepository uRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository, Browser brwser, GeometryFactory fctory, FloorRepository fRepository)
     {
         formServ = formService;
         authServ = auth;
@@ -114,7 +115,7 @@ public class MainWindowViewModel : ViewModelBase
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel(agendaRepository));
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(authServ, brwser, SetCurrentView));
         GoToForm = ReactiveCommand.Create(() => CurrentView = new FormViewModel(formServ));
-        GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel(museumRepository, pointOfInterestRepository, spaceRepository));
+        GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel(museumRepository, fRepository, pointOfInterestRepository, spaceRepository, fctory));
         GoToAdmin = ReactiveCommand.Create(() => CurrentView = new AdminViewModel(userRepository));
     }
 

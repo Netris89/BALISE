@@ -26,6 +26,7 @@ public partial class App : Application
     private MuseumRepository museumRepository = new MuseumRepository(context);
     private PointOfInterestRepository poiRepository = new PointOfInterestRepository(context);
     private SpaceRepository spaceRepository = new SpaceRepository(context);
+    private FloorRepository floorRepository = new FloorRepository(context);
     private FormService formService = new FormService(userRepository);
     private AuthenticationService? authService;
     private static readonly GeometryFactory Factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
@@ -55,7 +56,7 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(formService, museumRepository, agendaRepository, authService, userRepository, poiRepository, spaceRepository, browser)
+                DataContext = new MainWindowViewModel(formService, museumRepository, agendaRepository, authService, userRepository, poiRepository, spaceRepository, browser, Factory, floorRepository)
             };
         }
         

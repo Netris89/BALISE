@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Balise.Models;
 using Balise.Repositories;
+using Balise.Services;
+using NetTopologySuite.Geometries;
 using ReactiveUI;
 
 namespace Balise.ViewModels;
@@ -21,6 +23,7 @@ public class ContentManagerViewModel : ViewModelBase
     private PointOfInterest? selectedPointOfInterest;
     private ViewModelBase? selectedEditor;
     private object? selectedItem;
+    private ContentImportService contentImportService;
 
     /// <summary>
     /// The list of museums available for selection.
@@ -126,8 +129,9 @@ public class ContentManagerViewModel : ViewModelBase
     /// Initializes a new instance of <see cref="ContentManagerViewModel"/>.
     /// </summary>
     /// <param name="mRepository">The repository used to load museums.</param>
-    public ContentManagerViewModel(MuseumRepository mRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository)
+    public ContentManagerViewModel(MuseumRepository mRepository, FloorRepository fRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository, GeometryFactory fctory)
     {
+        contentImportService = new ContentImportService(sRepository, fRepository, fctory);
         museumRepository = mRepository;
         pointOfInterestRepository = poiRepository;
         spaceRepository = sRepository;
@@ -140,5 +144,10 @@ public class ContentManagerViewModel : ViewModelBase
     public async Task InitializeAsync()
     {
         Museums = await museumRepository.GetAllAsync();
+    }
+
+    public async Task ImportContentAsync(string fileContent)
+    {
+        await contentImportService.ImportAsync(fileContent);
     }
 }

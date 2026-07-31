@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Balise.Data;
@@ -67,7 +68,7 @@ public class FloorRepository
     /// </summary>
     /// <param name="id">The id of the floor to retrieve.</param>
     /// <returns>The matching floor, or <c>null</c> if none is found.</returns>
-    public async Task<Floor?> GetAsync(int id)
+    public async Task<Floor?> GetByIdAsync(int id)
     {
         return await context.Floors.FindAsync(id);
     }

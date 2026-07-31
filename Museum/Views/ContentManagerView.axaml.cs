@@ -2,6 +2,7 @@ using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using Balise.ViewModels;
 
 namespace Balise.Views;
 
@@ -31,6 +32,11 @@ public partial class ContentManagerView : UserControl
             using var streamReader = new StreamReader(stream);
             // Reads all the content of file as a text.
             var fileContent = await streamReader.ReadToEndAsync();
+
+            if (DataContext is ContentManagerViewModel vm)
+            {
+                await vm.ImportContentAsync(fileContent);
+            }
         }
     }
 }

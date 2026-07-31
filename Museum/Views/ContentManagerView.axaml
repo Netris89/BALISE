@@ -32,6 +32,7 @@
                 </TreeView.DataTemplates>
             </TreeView>
         </StackPanel>
+        <Button Click="OpenFileButton_Clicked" Content="Importer un fichier"/>
         <ContentControl Grid.Column="1" Content="{Binding SelectedEditor}"/>
     </Grid>
 </UserControl>
