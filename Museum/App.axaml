@@ -39,11 +39,43 @@
             <Setter Property="Foreground" Value="Red" />
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
-
+        
+        <!-- Icon-only button with no background or border (e.g. close button) -->
         <Style Selector="Button.plainButton">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Padding" Value="0" />
+        </Style>
+
+        <!-- Title of an editor view (Name displayed large at the top) -->
+        <Style Selector="TextBlock.editorTitle">
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+
+        <!-- Divider under the title of an editor view -->
+        <Style Selector="Separator.editorDivider">
+            <Setter Property="Background" Value="#EEEEEE" />
+            <Setter Property="Height" Value="1" />
+        </Style>
+
+        <!-- Label + field group in an editor form -->
+        <Style Selector="StackPanel.fieldGroup">
+            <Setter Property="Spacing" Value="6" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+
+        <!-- Standard padding for text fields in editor views -->
+        <Style Selector="TextBox.editorInput">
+            <Setter Property="Padding" Value="12,10" />
+        </Style>
+
+        <!-- Primary action button (pink) -->
+        <Style Selector="Button.primaryButton">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="#Ca005d" />
+            <Setter Property="Padding" Value="30 10 30 10" />
         </Style>
 
     </Application.Styles>

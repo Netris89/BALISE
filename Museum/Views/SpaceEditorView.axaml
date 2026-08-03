@@ -7,29 +7,27 @@
              x:Class="Balise.Views.SpaceEditorView"
              x:DataType="vm:SpaceEditorViewModel">
     <StackPanel Spacing="20">
-        <TextBlock Margin="10" Text="{Binding Name}" FontSize="22" FontWeight="Bold"/>
+        <TextBlock Classes="editorTitle" Text="{Binding Name}"/>
 
-        <Separator Background="#EEEEEE" Height="1"/>
+        <Separator Classes="editorDivider"/>
 
-        <StackPanel Margin="10" Spacing="6">
+        <StackPanel Classes="fieldGroup">
             <TextBlock Classes="sectionLabel" Text="Nom"/>
-            <TextBox Text="{Binding Name}" Padding="12,10"/>
+            <TextBox Classes="editorInput" Text="{Binding Name}"/>
         </StackPanel>
 
-        <StackPanel Margin="10" Spacing="6">
+        <StackPanel Classes="fieldGroup">
             <TextBlock Classes="sectionLabel" Text="Descripton"/>
-            <TextBox Text="{Binding Description}"
+            <TextBox Classes="editorInput"
+                     Text="{Binding Description}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="140"
-                     Padding="12,10"/>
+                     Height="140"/>
         </StackPanel>
 
-        <Button Margin="10" HorizontalAlignment="Right"
-                Foreground="White"
-                Background="#Ca005d"
-                Padding="30 10 30 10"
-                CornerRadius="8"
+        <Button Classes="primaryButton"
+                Margin="10"
+                HorizontalAlignment="Right"
                 Command="{Binding SaveCommand}"
                 Content="Sauver"/>
     </StackPanel>
