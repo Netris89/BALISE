@@ -4,5 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.FloorEditorView">
-  Welcome to FloorEditorView!
+    <StackPanel Spacing="20">
+        <TextBlock Margin="10"  FontSize="22" FontWeight="Bold"/>
+
+        <Separator Background="#EEEEEE" Height="1"/>
+
+        <StackPanel Spacing="6" Margin="10">
+            <TextBlock Classes="sectionLabel" Text="Nom"/>
+            <TextBox  Padding="12,10"/>
+        </StackPanel>
+
+        <Button HorizontalAlignment="Right"
+                Foreground="White"
+                Background="#Ca005d"
+                Padding="30 10 30 10"
+                CornerRadius="8"
+                Margin="10"
+                
+                Content="Sauver"/>
+    </StackPanel>
 </UserControl>
