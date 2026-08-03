@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -6,7 +5,6 @@ using System.Threading.Tasks;
 using Balise.DTO;
 using Balise.Models;
 using Balise.Repositories;
-using Microsoft.EntityFrameworkCore.Metadata;
 using NetTopologySuite.Geometries;
 
 namespace Balise.Services;
