@@ -4,35 +4,86 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:model="using:Balise.Models"
              xmlns:vm="clr-namespace:Balise.ViewModels"
+             xmlns:materialIcons="using:Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.ContentManagerView"
              x:DataType="vm:ContentManagerViewModel">
-    <Grid ColumnDefinitions="*, *">
-        <StackPanel Grid.Column="0">
-            <ComboBox ItemsSource="{Binding Museums}" SelectedItem="{Binding SelectedMuseum}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <TreeView ItemsSource="{Binding SelectedMuseum.Floors}" SelectedItem="{Binding SelectedItem}" Grid.Column="0">
-                <TreeView.DataTemplates>
-                    <TreeDataTemplate DataType="model:Floor" ItemsSource="{Binding Spaces}" >
-                        <TextBlock Text="{Binding Number}"/>
-                    </TreeDataTemplate>
+    <Grid ColumnDefinitions="340,*" Margin="24" ColumnSpacing="24">
 
-                    <TreeDataTemplate DataType="model:Space" ItemsSource="{Binding PointOfInterests}">
-                        <TextBlock Text="{Binding Name}"/>
-                    </TreeDataTemplate>
+        <Border Grid.Column="0"
+                Classes="infoSection">
+            <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="12">
 
-                    <TreeDataTemplate DataType="model:PointOfInterest">
-                        <TextBlock Text="{Binding Name}"/>
-                    </TreeDataTemplate>
-                </TreeView.DataTemplates>
-            </TreeView>
-        </StackPanel>
-        <Button Click="OpenFileButton_Clicked" Content="Importer un fichier"/>
-        <ContentControl Grid.Column="1" Content="{Binding SelectedEditor}"/>
+                <ComboBox Grid.Row="0"
+                          HorizontalAlignment="Stretch"
+                          ItemsSource="{Binding Museums}"
+                          SelectedItem="{Binding SelectedMuseum}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <TreeView Grid.Row="2"
+                          ItemsSource="{Binding SelectedMuseum.Floors}"
+                          SelectedItem="{Binding SelectedItem}">
+                    <TreeView.DataTemplates>
+                        <TreeDataTemplate DataType="model:Floor" ItemsSource="{Binding Spaces}">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <materialIcons:MaterialIcon Kind="FolderOutline" Foreground="#Ca005d"/>
+                                <TextBlock Text="{Binding Number}"/>
+                            </StackPanel>
+                        </TreeDataTemplate>
+
+                        <TreeDataTemplate DataType="model:Space" ItemsSource="{Binding PointOfInterests}">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <materialIcons:MaterialIcon Kind="FolderOutline" Foreground="#Ca005d"/>
+                                <TextBlock Text="{Binding Name}"/>
+                            </StackPanel>
+                        </TreeDataTemplate>
+
+                        <TreeDataTemplate DataType="model:PointOfInterest">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <materialIcons:MaterialIcon Kind="CubeOutline" Foreground="#Ca005d"/>
+                                <TextBlock Text="{Binding Name}"/>
+                            </StackPanel>
+                        </TreeDataTemplate>
+                    </TreeView.DataTemplates>
+                </TreeView>
+
+                <!-- <Border Grid.Row="3"
+                        BorderBrush="#Ca005d"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Background="#0DCa005d"
+                        Padding="16">
+                    <StackPanel HorizontalAlignment="Center" Spacing="4">
+                        <materialIcons:MaterialIcon Kind="TrayArrowUp"
+                                                    Foreground="#Ca005d"
+                                                    HorizontalAlignment="Center"/>
+                        <TextBlock Text="Importer un fichier"
+                                   Foreground="#Ca005d"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Glissez-déposez un fichier ici"
+                                   Foreground="Gray"
+                                   FontSize="12"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="ou cliquez pour parcourir"
+                                   Foreground="Gray"
+                                   FontSize="12"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                </Border> -->
+                 <Button Grid.Row="3" HorizontalAlignment="Center" Foreground="White" Background="#Ca005d" Padding="30 10 30 10" Click="OpenFileButton_Clicked" Content="Importer un fichier"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1"
+                Classes="infoSection">
+            <ContentControl Content="{Binding SelectedEditor}"/>
+        </Border>
     </Grid>
 </UserControl>
