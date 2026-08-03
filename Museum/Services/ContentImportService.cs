@@ -53,10 +53,23 @@ public class ContentImportService
                 var boundary = factory.CreatePolygon(coordinates);
 
                 var space = new Space(dto.Name, dto.Description, new List<PointOfInterest>(), boundary, floor);
+                var existingSpace = await spaceRepository.GetByIdAsync(dto.Id);
 
-                space.PointOfInterests.AddRange(dto.PointsOfInterest.Select(poi => new PointOfInterest(poi.Name, poi.Description, factory.CreatePoint(new Coordinate(poi.Location.X, poi.Location.Y)), space)));
+                if (existingSpace != null)
+                {
+                    existingSpace.Name = dto.Name;
+                    existingSpace.Description = dto.Description;
+                    existingSpace.Boundary = boundary;
+                    existingSpace.Floor = floor;
 
-                await spaceRepository.AddAsync(space);
+                    await spaceRepository.UpdateAsync(existingSpace);
+                }
+                else
+                {
+                    var newSpace = new Space(dto.Name, dto.Description, new List<PointOfInterest>(), boundary, floor);
+                    newSpace.PointOfInterests.AddRange(dto.PointsOfInterest.Select(poi => new PointOfInterest(poi.Name, poi.Description, factory.CreatePoint(new Coordinate(poi.Location.X, poi.Location.Y)), newSpace)));
+                    await spaceRepository.AddAsync(newSpace);
+                }
             }
         }
     }

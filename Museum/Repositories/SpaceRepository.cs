@@ -67,7 +67,7 @@ public class SpaceRepository
     /// </summary>
     /// <param name="id">The id of the space to retrieve.</param>
     /// <returns>The matching space, or <c>null</c> if none is found.</returns>
-    public async Task<Space?> GetAsync(int id)
+    public async Task<Space?> GetByIdAsync(int id)
     {
         return await context.Spaces.FindAsync(id);
     }
