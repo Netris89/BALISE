@@ -6,13 +6,31 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.PointOfInterestEditorView"
              x:DataType="vm:PointOfInterestEditorViewModel">
-    <StackPanel>
-        <TextBlock Text="Nom"/>
-        <TextBox Text="{Binding Name}"/>
-        <TextBlock Text="Descripton"/>
-        <TextBox Text="{Binding Description}"/>
-        <StackPanel Orientation="Horizontal">
-            <Button Command="{Binding SaveCommand}" Content="Sauver"/>
+    <StackPanel Spacing="20">
+        <TextBlock Text="{Binding Name}" FontSize="22" FontWeight="Bold"/>
+
+        <Separator Background="#EEEEEE" Height="1"/>
+
+        <StackPanel Spacing="6">
+            <TextBlock Classes="sectionLabel" Text="Nom"/>
+            <TextBox Text="{Binding Name}" Padding="12,10"/>
         </StackPanel>
+
+        <StackPanel Spacing="6">
+            <TextBlock Classes="sectionLabel" Text="Descripton"/>
+            <TextBox Text="{Binding Description}"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Height="140"
+                     Padding="12,10"/>
+        </StackPanel>
+
+        <Button HorizontalAlignment="Right"
+                Foreground="White"
+                Background="#Ca005d"
+                Padding="30 10 30 10"
+                CornerRadius="8"
+                Command="{Binding SaveCommand}"
+                Content="Sauver"/>
     </StackPanel>
 </UserControl>
