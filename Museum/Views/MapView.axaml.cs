@@ -1,7 +1,4 @@
 using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
-using Balise.Models;
-using Balise.ViewModels;
 
 namespace Balise.Views;
 
