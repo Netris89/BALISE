@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
@@ -8,7 +9,12 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Balise.Models;
 using Balise.Repositories;
+using Mapsui;
+using Mapsui.Layers;
+using Mapsui.Nts;
+using Mapsui.Styles;
 using ReactiveUI;
+using SkiaSharp;
 
 namespace Balise.ViewModels;
 
@@ -23,6 +29,9 @@ public class MapViewModel : ViewModelBase
     private List<Space> spaces;
     private Space? selectedSpace;
     private PointOfInterest? selectedPointOfInterest;
+    private MemoryLayer spacesLayer = new MemoryLayer();
+    private MemoryLayer pointOfInterestLayer = new MemoryLayer();
+
     private MuseumRepository repository;
 
     /// <summary>
@@ -79,6 +88,8 @@ public class MapViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref spaces, value);
     }
 
+    public Map Map { get; } = new Map();
+
     /// <summary>
     /// Command used to change the displayed floor.
     /// </summary>
@@ -119,6 +130,103 @@ public class MapViewModel : ViewModelBase
         ChangeFloorCommand = ReactiveCommand.Create<Floor>(ChangeFloor);
         SelectingPoiCommand = ReactiveCommand.Create<PointOfInterest>(SelectPointOfInterest);
         ClosePanelCommand = ReactiveCommand.Create(ClosePanel);
+
+        BuildLayers();
+        Map.Tapped += OnMapTapped;
+    }
+
+    private void OnMapTapped(object? sender, MapEventArgs e)
+    {
+        var mapInfo = e.GetMapInfo(new[] { pointOfInterestLayer, spacesLayer });
+
+        if (mapInfo.Feature is null)
+        {
+            return;
+        }
+
+        if (mapInfo.Feature["PointOfInterest"] is PointOfInterest poi)
+        {
+            SelectedPointOfInterest = poi;
+        }
+        else if (mapInfo.Feature["Space"] is Space space)
+        {
+            SelectedSpace = space;
+        }
+    }
+
+    private void BuildLayers()
+    {
+        var floorPlanLyer = BuildFloorPlanLayer();
+        spacesLayer = BuildSpacesLayer();
+        pointOfInterestLayer = BuildPointOfInterestLayer();
+
+        Map.Layers.Add(floorPlanLyer, -1);
+        Map.Layers.Add(spacesLayer, 0);
+        Map.Layers.Add(pointOfInterestLayer, 0);
+    }
+
+    private MemoryLayer BuildPointOfInterestLayer()
+    {
+        var features = CurrentFloor.Spaces.SelectMany(space => space.PointOfInterests).Select(poi =>
+        {
+            var feature = new GeometryFeature(poi.Position);
+            feature["PointOfInterest"] = poi;
+            return (IFeature)feature;
+        }).ToList();
+
+        return new MemoryLayer
+        {
+            Name = "PointOfInterest",
+            Features = features,
+            Style = new SymbolStyle
+            {
+                Fill = new Brush(Color.Blue),
+                SymbolScale = 0.5
+            }
+        };
+    }
+
+    private MemoryLayer BuildSpacesLayer()
+    {
+        var features = CurrentFloor.Spaces.Select(space =>
+        {
+            var feature = new GeometryFeature(space.Boundary);
+            feature["Space"] = space;
+            return (IFeature)feature;
+        }).ToList();
+
+        return new MemoryLayer
+        {
+            Name = "Spaces",
+            Features = features,
+            Style = new VectorStyle
+            {
+                Fill = new Brush(Color.Red),
+                Outline = new Pen(Color.DarkRed, 2)
+            }
+        };
+    }
+
+    private MemoryLayer BuildFloorPlanLayer()
+    {
+        using var stream = AssetLoader.Open(new Uri(CurrentFloor.MapImageUrl));
+        using var memoryStream = new MemoryStream();
+        stream.CopyTo(memoryStream);
+
+        var imageBytes = memoryStream.ToArray();
+        var image = SKBitmap.Decode(imageBytes);
+
+        var extent = new MRect(0, 0, image.Width, image.Height);
+
+        var raster = new MRaster(imageBytes, extent);
+        var feature = new RasterFeature(raster);
+        feature.Styles.Add(new RasterStyle());
+
+        return new MemoryLayer
+        {
+            Name = "FloorPlan",
+            Features = new List<IFeature> { feature }
+        };
     }
 
     public async Task InitializeAsync()
@@ -143,10 +251,8 @@ public class MapViewModel : ViewModelBase
     public void ChangeFloor(Floor floor)
     {
         CurrentFloor = floor;
-        var uri = new Uri(CurrentFloor.MapImageUrl);
-        using var stream = AssetLoader.Open(uri);
-        Image = new Bitmap(stream);
-        Spaces = floor.Spaces;
+        Map.Layers.ClearAllGroups();
+        BuildLayers();
 
         SelectedSpace = null;
         SelectedPointOfInterest = null;

@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:mapsui="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
              xmlns:localization="clr-namespace:Balise.Localization"
              xmlns:vm="clr-namespace:Balise.ViewModels"
              x:DataType="vm:MapViewModel"
@@ -30,22 +31,7 @@
 
         <!-- Map -->
         <Grid Grid.Row="1">
-            <Image Source="{Binding Image}" Stretch="Uniform"/>
-
-            <ItemsControl ItemsSource="{Binding Spaces}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <!-- Interactive map zones; selection handled in code-behind -->
-                        <Polygon Points="{Binding AvaloniaPoints}" Fill="Red" PointerPressed="PolygonPressed"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <mapsui:MapControl x:Name="MapControl" Map="{Binding Map}"/>
 
             <!-- Floating panel -->
             <!-- Two independent selections:
