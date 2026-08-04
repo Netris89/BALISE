@@ -182,11 +182,11 @@ public class MapViewModel : ViewModelBase
     /// </summary>
     private void BuildLayers()
     {
-        var floorPlanLyer = BuildFloorPlanLayer();
+        var floorPlanLayer = BuildFloorPlanLayer();
         spacesLayer = BuildSpacesLayer();
         pointOfInterestLayer = BuildPointOfInterestLayer();
 
-        Map.Layers.Add(floorPlanLyer, -1);
+        Map.Layers.Add(floorPlanLayer, -1);
         Map.Layers.Add(spacesLayer, 0);
         Map.Layers.Add(pointOfInterestLayer, 0);
     }
