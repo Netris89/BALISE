@@ -88,6 +88,9 @@ public class MapViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref spaces, value);
     }
 
+    /// <summary>
+    /// Map instance displayed by the view.
+    /// </summary>
     public Map Map { get; } = new Map();
 
     /// <summary>
@@ -135,6 +138,11 @@ public class MapViewModel : ViewModelBase
         Map.Tapped += OnMapTapped;
     }
 
+    /// <summary>
+    /// Handles map click events to select either a space or a point of interest.
+    /// </summary>
+    /// <param name="sender">Event sender.</param>
+    /// <param name="e">Map event arguments.</param>
     private void OnMapTapped(object? sender, MapEventArgs e)
     {
         var mapInfo = e.GetMapInfo(new[] { pointOfInterestLayer, spacesLayer });
@@ -154,6 +162,9 @@ public class MapViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Builds and adds all map layers for the current floor.
+    /// </summary>
     private void BuildLayers()
     {
         var floorPlanLyer = BuildFloorPlanLayer();
@@ -165,6 +176,10 @@ public class MapViewModel : ViewModelBase
         Map.Layers.Add(pointOfInterestLayer, 0);
     }
 
+    /// <summary>
+    /// Creates the layer containing all points of interest for the current floor.
+    /// </summary>
+    /// <returns>A memory layer containing point of interest features.</returns>
     private MemoryLayer BuildPointOfInterestLayer()
     {
         var features = CurrentFloor.Spaces.SelectMany(space => space.PointOfInterests).Select(poi =>
@@ -186,6 +201,10 @@ public class MapViewModel : ViewModelBase
         };
     }
 
+    /// <summary>
+    /// Creates the layer containing all spaces for the current floor.
+    /// </summary>
+    /// <returns>A memory layer containing space features.</returns>
     private MemoryLayer BuildSpacesLayer()
     {
         var features = CurrentFloor.Spaces.Select(space =>
@@ -207,6 +226,10 @@ public class MapViewModel : ViewModelBase
         };
     }
 
+    /// <summary>
+    /// Creates the raster layer displaying the current floor plan.
+    /// </summary>
+    /// <returns>A memory layer containing the floor plan image.</returns>
     private MemoryLayer BuildFloorPlanLayer()
     {
         using var stream = AssetLoader.Open(new Uri(CurrentFloor.MapImageUrl));
@@ -229,6 +252,10 @@ public class MapViewModel : ViewModelBase
         };
     }
 
+    /// <summary>
+    /// Loads the museum data and initializes the first displayed floor.
+    /// </summary>
+    /// <returns>A task representing the asynchronous initialization operation.</returns>
     public async Task InitializeAsync()
     {
         museum = await repository.GetAsync(1);
