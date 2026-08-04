@@ -121,6 +121,9 @@
                     </Border>
                 </StackPanel>
             </Border>
+            <Button Background="#Ca005d" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding ReinitializeCommand}" Margin="30">
+                <materialIcons:MaterialIcon Grid.Column="0" Kind="CrosshairsGps" Foreground="White" FontSize="30" Padding="10"/>
+            </Button>
         </Grid>
 
     </Grid>

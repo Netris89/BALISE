@@ -31,7 +31,6 @@ public class MapViewModel : ViewModelBase
     private PointOfInterest? selectedPointOfInterest;
     private MemoryLayer spacesLayer = new MemoryLayer();
     private MemoryLayer pointOfInterestLayer = new MemoryLayer();
-
     private MuseumRepository repository;
 
     /// <summary>
@@ -109,14 +108,21 @@ public class MapViewModel : ViewModelBase
     public ICommand ClosePanelCommand { get; }
 
     /// <summary>
+    /// Command used to restore the default map view.
+    /// </summary>
+    public ICommand ReinitializeCommand { get; }
+
+    /// <summary>
     /// Activator for ReactiveUI lifecycle management.
     /// </summary>
     public ViewModelActivator Activator => new ViewModelActivator();
 
     /// <summary>
-    /// Initializes the ViewModel with a sample museum structure.
-    /// (Currently hardcoded for testing purposes.)
+    /// Initializes the ViewModel and starts loading the museum data.
     /// </summary>
+    /// <param name="museumRepository">
+    /// Repository used to retrieve museum data.
+    /// </param>
     public MapViewModel(MuseumRepository museumRepository)
     {
         repository = museumRepository;
@@ -133,6 +139,7 @@ public class MapViewModel : ViewModelBase
         ChangeFloorCommand = ReactiveCommand.Create<Floor>(ChangeFloor);
         SelectingPoiCommand = ReactiveCommand.Create<PointOfInterest>(SelectPointOfInterest);
         ClosePanelCommand = ReactiveCommand.Create(ClosePanel);
+        ReinitializeCommand = ReactiveCommand.Create(ReinitializeMap);
 
         BuildLayers();
         Map.Tapped += OnMapTapped;
@@ -160,6 +167,14 @@ public class MapViewModel : ViewModelBase
         {
             SelectedSpace = space;
         }
+    }
+
+    /// <summary>
+    /// Restores the map to its default extent.
+    /// </summary>
+    public void ReinitializeMap()
+    {
+        Map.Navigator.ZoomToBox(new MRect(0, 0, image.Size.Width, image.Size.Height));
     }
 
     /// <summary>
@@ -272,7 +287,7 @@ public class MapViewModel : ViewModelBase
     }
 
     /// <summary>
-    /// Changes the current floor and resets UI state (image, spaces, selections).
+    /// Changes the current floor and rebuilds the displayed map layers.
     /// </summary>
     /// <param name="floor">Floor to display.</param>
     public void ChangeFloor(Floor floor)
