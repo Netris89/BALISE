@@ -113,17 +113,17 @@ public class MapViewModel : ViewModelBase
     public ReactiveCommand<PointOfInterest, Unit> SelectingPoiCommand { get; }
 
     /// <summary>
-    /// Command used to close de side panel.
+    /// Command used to close the side panel.
     /// </summary>
     public ICommand ClosePanelCommand { get; }
 
     /// <summary>
-    /// Comand used to zoom in the map.
+    /// Command used to zoom in the map.
     /// <\summary>
     public ICommand ZoomInCommand { get; }
 
     /// <summary>
-    /// Comand used to zoom out the map.
+    /// Command used to zoom out the map.
     /// <\summary>
     public ICommand ZoomOutCommand { get; }
 
