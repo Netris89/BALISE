@@ -121,9 +121,17 @@
                     </Border>
                 </StackPanel>
             </Border>
-            <Button Background="#Ca005d" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding ReinitializeCommand}" Margin="30">
-                <materialIcons:MaterialIcon Grid.Column="0" Kind="CrosshairsGps" Foreground="White" FontSize="30" Padding="10"/>
-            </Button>
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="30" Spacing="10">
+                <Button Background="#Ca005d" Command="{Binding ZoomInCommand}">
+                    <materialIcons:MaterialIcon Grid.Column="0" Kind="Plus" Foreground="White" FontSize="30" Padding="10"/>
+                </Button>
+                <Button Background="#Ca005d" Command="{Binding ZoomOutCommand}">
+                    <materialIcons:MaterialIcon Grid.Column="0" Kind="Minus" Foreground="White" FontSize="30" Padding="10"/>
+                </Button>
+                <Button Background="#Ca005d" IsEnabled="{Binding IsReinitializeActive}" Command="{Binding ReinitializeCommand}">
+                    <materialIcons:MaterialIcon Grid.Column="0" Kind="CrosshairsGps" Foreground="White" FontSize="30" Padding="10"/>
+                </Button>
+            </StackPanel>
         </Grid>
 
     </Grid>

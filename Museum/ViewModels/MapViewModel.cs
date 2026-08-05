@@ -32,6 +32,16 @@ public class MapViewModel : ViewModelBase
     private MemoryLayer spacesLayer = new MemoryLayer();
     private MemoryLayer pointOfInterestLayer = new MemoryLayer();
     private MuseumRepository repository;
+    private bool isReinitializeActive;
+
+    public bool IsReinitializeActive
+    {
+        get => isReinitializeActive;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref isReinitializeActive, value);
+        }
+    }
 
     /// <summary>
     /// Currently selected space displayed in the side information panel.
@@ -108,6 +118,16 @@ public class MapViewModel : ViewModelBase
     public ICommand ClosePanelCommand { get; }
 
     /// <summary>
+    /// Comand used to zoom in the map.
+    /// <\summary>
+    public ICommand ZoomInCommand { get; }
+
+    /// <summary>
+    /// Comand used to zoom out the map.
+    /// <\summary>
+    public ICommand ZoomOutCommand { get; }
+
+    /// <summary>
     /// Command used to restore the default map view.
     /// </summary>
     public ICommand ReinitializeCommand { get; }
@@ -140,8 +160,9 @@ public class MapViewModel : ViewModelBase
         SelectingPoiCommand = ReactiveCommand.Create<PointOfInterest>(SelectPointOfInterest);
         ClosePanelCommand = ReactiveCommand.Create(ClosePanel);
         ReinitializeCommand = ReactiveCommand.Create(ReinitializeMap);
+        ZoomInCommand = ReactiveCommand.Create(ZoomIn);
+        ZoomOutCommand = ReactiveCommand.Create(ZoomOut);
 
-        BuildLayers();
         Map.Tapped += OnMapTapped;
     }
 
@@ -170,11 +191,28 @@ public class MapViewModel : ViewModelBase
     }
 
     /// <summary>
+    /// Zoom the map in.
+    /// <\summary>
+    private void ZoomIn()
+    {
+        Map.Navigator.ZoomIn();
+    }
+
+    /// <summary>
+    /// Zoom the map out.
+    /// <\summary>
+    private void ZoomOut()
+    {
+        Map.Navigator.ZoomOut();
+    }
+
+    /// <summary>
     /// Restores the map to its default extent.
     /// </summary>
     public void ReinitializeMap()
     {
         Map.Navigator.ZoomToBox(new MRect(0, 0, image.Size.Width, image.Size.Height));
+        IsReinitializeActive = false;
     }
 
     /// <summary>
@@ -185,6 +223,9 @@ public class MapViewModel : ViewModelBase
         var floorPlanLayer = BuildFloorPlanLayer();
         spacesLayer = BuildSpacesLayer();
         pointOfInterestLayer = BuildPointOfInterestLayer();
+
+        Map.Navigator.OverrideZoomBounds = new MMinMax(0.25, 2.5);
+        Map.Navigator.OverridePanBounds = floorPlanLayer.Extent;
 
         Map.Layers.Add(floorPlanLayer, -1);
         Map.Layers.Add(spacesLayer, 0);
@@ -247,6 +288,8 @@ public class MapViewModel : ViewModelBase
     /// <returns>A memory layer containing the floor plan image.</returns>
     private MemoryLayer BuildFloorPlanLayer()
     {
+        // TODO: Replace png by svg
+
         using var stream = AssetLoader.Open(new Uri(CurrentFloor.MapImageUrl));
         using var memoryStream = new MemoryStream();
         stream.CopyTo(memoryStream);
@@ -280,9 +323,11 @@ public class MapViewModel : ViewModelBase
             Floors = museum.Floors;
             CurrentFloor = museum.Floors.ElementAt(0);
             spaces = CurrentFloor.Spaces;
-            var uri = new Uri(CurrentFloor.MapImageUrl);
-            using var stream = AssetLoader.Open(uri);
+            
+            using var stream = AssetLoader.Open(new Uri(CurrentFloor.MapImageUrl));
             image = new Bitmap(stream);
+
+            BuildLayers();
         }
     }
 
@@ -315,5 +360,10 @@ public class MapViewModel : ViewModelBase
     public void ClosePanel()
     {
         SelectedSpace = null;
+    }
+
+    public void OnMapMoved()
+    {
+        IsReinitializeActive = true;
     }
 }
