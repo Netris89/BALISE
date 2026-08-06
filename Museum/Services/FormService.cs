@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Balise.DTO;
 using Balise.Repositories;
 using Balise.Validation;
@@ -25,13 +26,13 @@ public class FormService
     /// </summary>
     /// <param name="dto">The form data to validate.</param>
     /// <returns>The validation result.</returns>
-    public FormValidationResult ValidateUser(FormDto dto)
+    public async Task<FormValidationResult> ValidateUser(FormDto dto)
     {
         var results = FormValidator.ValidateForm(dto);
 
         if (results.IsValid)
         {
-            repository.AddUserAsync(dto);
+            await repository.AddUserAsync(dto);
         }
 
         return results;
