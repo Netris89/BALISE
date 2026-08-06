@@ -64,7 +64,7 @@ public class UserRepository
     /// </summary>
     /// <param name="email">The email address to search for.</param>
     /// <returns>The matching user, or <c>null</c> if none is found.</returns>
-    public async Task<User>? GetByEmailAsync(string email)
+    public async Task<User?> GetByEmailAsync(string email)
     {
         using var context = await contextFactory.CreateDbContextAsync();
         var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
