@@ -83,13 +83,20 @@ public partial class App : Application
 
         Museum museum = await Hardcoding(museumRepository, userRepository);
 
-        HttpClient client = new HttpClient();
-        EventFetcherService service = new EventFetcherService(client, museum);
-
-        string html = await service.GetAgendaHtmlAsync();
-        var events = service.ParseEvents(html);
-
-        await agendaRepository.AddRangeAsync(await events);
+        try
+        {
+            HttpClient client = new HttpClient();
+            EventFetcherService service = new EventFetcherService(client, museum);
+    
+            string html = await service.GetAgendaHtmlAsync();
+            var events = service.ParseEvents(html);
+    
+            await agendaRepository.AddRangeAsync(await events);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Échec du chargement de l'agenda : {ex.Message}");
+        }
 
         base.OnFrameworkInitializationCompleted();
     }
