@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Balise.DTO;
 using Balise.Services;
@@ -284,11 +285,11 @@ public class FormViewModel : ViewModelBase
     /// Builds a <see cref="FormDto"/> from the current field values, validates it
     /// through the form service, and updates the error flags accordingly.
     /// </summary>
-    public void ValidateForm()
+    public async Task ValidateForm()
     {
         FormDto dto = new FormDto(FirstName, LastName, Address, Number, City, Email, SelectedCountry!);
 
-        FormValidationResult results = service.ValidateUser(dto);
+        FormValidationResult results = await service.ValidateUser(dto);
 
         LastNameError = results.IsValidLastName;
         FirstNameError = results.IsValidFirstName;
