@@ -14,23 +14,24 @@ namespace Balise.Repositories;
 /// </summary>
 public class UserRepository
 {
-    private readonly AppDbContext context;
+    private readonly IDbContextFactory<AppDbContext> contextFactory;
 
     /// <summary>
     /// Initializes a new instance of <see cref="UserRepository"/>.
     /// </summary>
     /// <param name="context">The database context to operate on.</param>
-    public UserRepository(AppDbContext context)
+    public UserRepository(IDbContextFactory<AppDbContext> factory)
     {
-        this.context = context;
+        contextFactory = factory;
     }
 
     /// <summary>
     /// Creates a new user from form data and saves it to the database.
     /// </summary>
     /// <param name="dto">The form data to build the user from.</param>
-    public void AddUser(FormDto dto)
+    public async Task AddUserAsync(FormDto dto)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         User user = new User(dto);
 
         context.Users.Add(user);
@@ -41,8 +42,9 @@ public class UserRepository
     /// Saves an existing user instance to the database.
     /// </summary>
     /// <param name="user">The user to add.</param>
-    public void AddUser(User user)
+    public async Task AddUserAsync(User user)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         context.Users.Add(user);
         context.SaveChanges();
     }
@@ -53,6 +55,7 @@ public class UserRepository
     /// <returns>The list of staff users.</returns>
     public async Task<List<User>> GetStaff()
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         return await context.Users.Where(r => r.Role != UserRole.Visitor).ToListAsync();
     }
 
@@ -63,6 +66,7 @@ public class UserRepository
     /// <returns>The matching user, or <c>null</c> if none is found.</returns>
     public async Task<User>? GetByEmailAsync(string email)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
 
         if (user != null)
@@ -79,6 +83,7 @@ public class UserRepository
     /// <param name="id">The id of the user to delete.</param>
     public async Task DeleteAsync(int id)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         var user = await context.Users.FindAsync(id);
 
         if (user != null)
@@ -94,6 +99,7 @@ public class UserRepository
     /// <param name="user">The user to update.</param>
     public async Task UpdateAsync(User user)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         context.Users.Update(user);
         await context.SaveChangesAsync();
     }

@@ -1,5 +1,8 @@
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Avalonia.Media.Imaging;
 using Balise.Models;
 using Balise.Repositories;
 
@@ -35,9 +38,17 @@ public class AgendaViewModel : ViewModelBase
     private async Task InitializeAsync()
     {
         var scrapedList = await repository.GetAllAsync();
+        var client = new HttpClient();
 
         foreach (var evt in scrapedList)
         {
+            if (!string.IsNullOrEmpty(evt.ImageUrl))
+            {
+                var bytes = await client.GetByteArrayAsync(evt.ImageUrl);
+                using var stream = new MemoryStream(bytes);
+                evt.Image = new Bitmap(stream);
+            }
+
             Events.Add(evt);
         }
     }

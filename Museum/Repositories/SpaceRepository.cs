@@ -11,15 +11,15 @@ namespace Balise.Repositories;
 /// </summary>
 public class SpaceRepository
 {
-    private readonly AppDbContext context;
+    private readonly IDbContextFactory<AppDbContext> contextFactory;
 
     /// <summary>
     /// Initializes a new instance of <see cref="SpaceRepository"/>.
     /// </summary>
-    /// <param name="context">The database context to operate on.</param>
-    public SpaceRepository(AppDbContext context)
+    /// <param name="factory">The database context to operate on.</param>
+    public SpaceRepository(IDbContextFactory<AppDbContext> factory)
     {
-        this.context = context;
+        contextFactory = factory;
     }
 
     /// <summary>
@@ -28,6 +28,10 @@ public class SpaceRepository
     /// <param name="space">The space to add.</param>
     public async Task AddAsync(Space space)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
+
+        context.Attach(space.Floor);
+
         await context.Spaces.AddAsync(space);
         await context.SaveChangesAsync();
     }
@@ -38,6 +42,8 @@ public class SpaceRepository
     /// <param name="space">The space containing the updated values, matched by Id.</param>
     public async Task UpdateAsync(Space space)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
+
         var existingSpace = await context.Spaces.FindAsync(space.Id);
 
         if (existingSpace != null)
@@ -53,6 +59,8 @@ public class SpaceRepository
     /// <param name="id">The id of the space to delete.</param>
     public async Task DeleteAsync(int id)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
+        
         var space = await context.Spaces.FindAsync(id);
 
         if (space != null)
@@ -69,6 +77,7 @@ public class SpaceRepository
     /// <returns>The matching space, or <c>null</c> if none is found.</returns>
     public async Task<Space?> GetByIdAsync(int id)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         return await context.Spaces.FindAsync(id);
     }
 
@@ -77,6 +86,7 @@ public class SpaceRepository
     /// </summary>
     public async Task<List<Space>> GetAllAsync()
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         return await context.Spaces.ToListAsync();
     }
 }

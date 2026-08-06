@@ -11,15 +11,15 @@ namespace Balise.Repositories;
 /// </summary>
 public class FloorRepository
 {
-    private readonly AppDbContext context;
+    private readonly IDbContextFactory<AppDbContext> contextFactory;
 
     /// <summary>
     /// Initializes a new instance of <see cref="FloorRepository"/>.
     /// </summary>
     /// <param name="context">The database context to operate on.</param>
-    public FloorRepository(AppDbContext context)
+    public FloorRepository(IDbContextFactory<AppDbContext> factory)
     {
-        this.context = context;
+        contextFactory = factory;
     }
 
     /// <summary>
@@ -28,6 +28,7 @@ public class FloorRepository
     /// <param name="floor">The floor to add.</param>
     public async Task AddAsync(Floor floor)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         await context.Floors.AddAsync(floor);
         await context.SaveChangesAsync();
     }
@@ -38,6 +39,7 @@ public class FloorRepository
     /// <param name="floor">The floor containing the updated values, matched by Id.</param>
     public async Task UpdateAsync(Floor floor)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         var existingFloor = await context.Floors.FindAsync(floor.Id);
 
         if (existingFloor != null)
@@ -53,6 +55,7 @@ public class FloorRepository
     /// <param name="id">The id of the floor to delete.</param>
     public async Task DeleteAsync(int id)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         var floor = await context.Floors.FindAsync(id);
 
         if (floor != null)
@@ -69,6 +72,7 @@ public class FloorRepository
     /// <returns>The matching floor, or <c>null</c> if none is found.</returns>
     public async Task<Floor?> GetByIdAsync(int id)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         return await context.Floors.FindAsync(id);
     }
 
@@ -77,6 +81,7 @@ public class FloorRepository
     /// </summary>
     public async Task<List<Floor>> GetAllAsync()
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         return await context.Floors.ToListAsync();
     }
 }

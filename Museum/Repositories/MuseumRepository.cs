@@ -12,15 +12,15 @@ namespace Balise.Repositories;
 /// </summary>
 public class MuseumRepository
 {
-    private readonly AppDbContext context;
+    private readonly IDbContextFactory<AppDbContext> contextFactory;
 
     /// <summary>
     /// Initializes a new instance of <see cref="MuseumRepository"/>.
     /// </summary>
     /// <param name="context">The database context to operate on.</param>
-    public MuseumRepository(AppDbContext context)
+    public MuseumRepository(IDbContextFactory<AppDbContext> factory)
     {
-        this.context = context;
+        contextFactory = factory;
     }
 
     /// <summary>
@@ -29,6 +29,7 @@ public class MuseumRepository
     /// <param name="museum">The museum to add.</param>
     public async Task AddAsync(Museum museum)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         await context.Museums.AddAsync(museum);
         await context.SaveChangesAsync();
     }
@@ -39,6 +40,7 @@ public class MuseumRepository
     /// <param name="museum">The museum containing the updated values, matched by Id.</param>
     public async Task UpdateAsync(Museum museum)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         var existingMuseum = await context.Museums.FindAsync(museum.Id);
 
         if (existingMuseum != null)
@@ -54,6 +56,7 @@ public class MuseumRepository
     /// <param name="id">The id of the museum to delete.</param>
     public async Task DeleteAsync(int id)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         var museum = await context.Museums.FindAsync(id);
 
         if (museum != null)
@@ -70,7 +73,11 @@ public class MuseumRepository
     /// <returns>The matching museum, or <c>null</c> if none is found.</returns>
     public async Task<Museum?> GetAsync(int id)
     {
-        return await context.Museums.FindAsync(id);
+        using var context = await contextFactory.CreateDbContextAsync();
+        return await context.Museums.Include(m => m.Floors)
+                                    .ThenInclude(f => f.Spaces)
+                                    .ThenInclude(s => s.PointOfInterests)
+                                    .FirstOrDefaultAsync(m => m.Id == id);
     }
 
     /// <summary>
@@ -78,6 +85,10 @@ public class MuseumRepository
     /// </summary>
     public async Task<List<Museum>> GetAllAsync()
     {
-        return await context.Museums.ToListAsync();
+        using var context = await contextFactory.CreateDbContextAsync();
+        return await context.Museums.Include(m => m.Floors)
+                                    .ThenInclude(f => f.Spaces)
+                                    .ThenInclude(s => s.PointOfInterests)
+                                    .ToListAsync();
     }
 }

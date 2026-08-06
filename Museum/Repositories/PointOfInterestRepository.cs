@@ -11,15 +11,15 @@ namespace Balise.Repositories;
 /// </summary>
 public class PointOfInterestRepository
 {
-    private readonly AppDbContext context;
+    private readonly IDbContextFactory<AppDbContext> contextFactory;
 
     /// <summary>
     /// Initializes a new instance of <see cref="PointOfInterestRepository"/>.
     /// </summary>
     /// <param name="context">The database context to operate on.</param>
-    public PointOfInterestRepository(AppDbContext context)
+    public PointOfInterestRepository(IDbContextFactory<AppDbContext> factory)
     {
-        this.context = context;
+        contextFactory = factory;
     }
 
     /// <summary>
@@ -28,6 +28,7 @@ public class PointOfInterestRepository
     /// <param name="pointOfInterest">The point of interest to add.</param>
     public async Task AddAsync(PointOfInterest pointOfInterest)
     {
+        using var context = await contextFactory.CreateDbContextAsync(); 
         await context.PointOfInterests.AddAsync(pointOfInterest);
         await context.SaveChangesAsync();
     }
@@ -38,6 +39,7 @@ public class PointOfInterestRepository
     /// <param name="pointOfInterest">The point of interest containing the updated values, matched by Id.</param>
     public async Task UpdateAsync(PointOfInterest pointOfInterest)
     {
+        using var context = await contextFactory.CreateDbContextAsync();
         var existingPoi = await context.PointOfInterests.FindAsync(pointOfInterest.Id);
 
         if (existingPoi != null)
@@ -53,6 +55,7 @@ public class PointOfInterestRepository
     /// <param name="id">The id of the point of interest to delete.</param>
     public async Task DeleteAsync(int id)
     {
+        using var context = await contextFactory.CreateDbContextAsync(); 
         var poi = await context.PointOfInterests.FindAsync(id);
 
         if (poi != null)
@@ -69,6 +72,7 @@ public class PointOfInterestRepository
     /// <returns>The matching point of interest, or <c>null</c> if none is found.</returns>
     public async Task<PointOfInterest?> GetAsync(int id)
     {
+        using var context = await contextFactory.CreateDbContextAsync(); 
         return await context.PointOfInterests.FindAsync(id);
     }
 
@@ -77,6 +81,7 @@ public class PointOfInterestRepository
     /// </summary>
     public async Task<List<PointOfInterest>> GetAllAsync()
     {
+        using var context = await contextFactory.CreateDbContextAsync(); 
         return await context.PointOfInterests.ToListAsync();
     }
 }

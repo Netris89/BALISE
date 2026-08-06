@@ -31,7 +31,7 @@ public class FormService
 
         if (results.IsValid)
         {
-            repository.AddUser(dto);
+            repository.AddUserAsync(dto);
         }
 
         return results;
