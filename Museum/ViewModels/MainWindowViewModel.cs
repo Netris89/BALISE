@@ -25,6 +25,8 @@ public class MainWindowViewModel : ViewModelBase
     private readonly PointOfInterestRepository pointOfInterestRepository;
     private readonly SpaceRepository spaceRepository;
     private readonly UserRepository userRepository;
+    private readonly MuseumRepository museumRepository;
+    private readonly LanguageService languageService;
     private readonly DispatcherTimer activityTimeOut = new DispatcherTimer() { Interval = TimeSpan.FromMinutes(5) };
 
     /// <summary>
@@ -113,17 +115,19 @@ public class MainWindowViewModel : ViewModelBase
     /// on the language selection screen and wiring up the navigation commands.
     /// </summary>
     /// <param name="formService">The service used by the form view model.</param>
-    /// <param name="museumRepository">The repository used by the map and language selection view models.</param>
+    /// <param name="mRepository">The repository used by the map and language selection view models.</param>
     /// <param name="agendaRepository">The repository used by the agenda view model.</param>
     /// <param name="auth">The authentication service used by the connection view model.</param>
     /// <param name="userRepository">The repository used to look up users during login.</param>
-    public MainWindowViewModel(FormService formService, MuseumRepository museumRepository, AgendaRepository agendaRepository, AuthenticationService auth, UserRepository uRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository, Browser brwser, GeometryFactory fctory, FloorRepository fRepository)
+    public MainWindowViewModel(FormService formService, MuseumRepository mRepository, AgendaRepository agendaRepository, AuthenticationService auth, UserRepository uRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository, Browser brwser, GeometryFactory fctory, FloorRepository fRepository, LanguageService langService)
     {
         formServ = formService;
         authServ = auth;
         pointOfInterestRepository = poiRepository;
         spaceRepository = sRepository;
         userRepository = uRepository;
+        museumRepository = mRepository;
+        languageService = langService;
 
         isAdmin = authServ.WhenAnyValue(
                 x => x.IsAuthenticated,
@@ -140,16 +144,16 @@ public class MainWindowViewModel : ViewModelBase
         isConnected = authServ.WhenAnyValue(x => x.IsAuthenticated).ToProperty(this, x => x.IsConnected);
 
         // At application startup, the language selection screen is displayed by default
-        currentView = new LangChoiceViewModel(SetCurrentView, museumRepository);
+        currentView = new LangChoiceViewModel(SetCurrentView, mRepository, langService);
 
-        activityTimeOut.Tick += (_,_) => CurrentView = new LangChoiceViewModel(SetCurrentView, museumRepository);
+        activityTimeOut.Tick += (_, _) => CurrentView = new LangChoiceViewModel(SetCurrentView, mRepository, langService);
 
         // Command to change the current view
-        GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(museumRepository));
+        GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(mRepository));
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel(agendaRepository));
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(authServ, brwser, SetCurrentView));
         GoToForm = ReactiveCommand.Create(() => CurrentView = new FormViewModel(formServ));
-        GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel(museumRepository, fRepository, pointOfInterestRepository, spaceRepository, fctory));
+        GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel(mRepository, fRepository, pointOfInterestRepository, spaceRepository, fctory));
         GoToAdmin = ReactiveCommand.Create(() => CurrentView = new AdminViewModel(userRepository));
         LogOutCommand = ReactiveCommand.Create(LogOutAsync);
     }
@@ -169,6 +173,7 @@ public class MainWindowViewModel : ViewModelBase
     public async Task LogOutAsync()
     {
         await authServ.LogoutAsync();
+        CurrentView = new LangChoiceViewModel(SetCurrentView, museumRepository, languageService);
     }
 
     /// <summary>
