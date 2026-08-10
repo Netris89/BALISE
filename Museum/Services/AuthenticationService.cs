@@ -18,7 +18,13 @@ public class AuthenticationService : ReactiveObject
     private User? currentUser;
     private bool isAuthenticated;
     private string? identityToken;
-    private string? accessToken;
+
+    /// <summary>
+    /// The access token from the last login. Not currently used anywhere in the
+    /// app — kept for if/when calls to a secured API are added, so it doesn't need
+    /// to be threaded through the login flow again at that point.
+    /// </summary>
+    private string? accessToken; 
 
     /// <summary>
     /// The user currently logged in, or <c>null</c> if no one is authenticated.
