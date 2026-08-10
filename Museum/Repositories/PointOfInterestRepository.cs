@@ -29,6 +29,9 @@ public class PointOfInterestRepository
     public async Task AddAsync(PointOfInterest pointOfInterest)
     {
         using var context = await contextFactory.CreateDbContextAsync(); 
+
+        context.Attach(pointOfInterest.Space);
+        
         await context.PointOfInterests.AddAsync(pointOfInterest);
         await context.SaveChangesAsync();
     }
