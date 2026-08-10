@@ -58,10 +58,19 @@ public class MainWindowViewModel : ViewModelBase
         get => currentView is LangChoiceViewModel;
     }
 
+    /// <summary>
+    /// Indicates whether the currently authenticated user has the Admin role.
+    /// </summary>
     public bool IsAdmin => isAdmin.Value;
 
+    /// <summary>
+    /// Indicates whether the currently authenticated user has the ContentManger role.
+    /// </summary>
     public bool IsContentManager => isContentManager.Value;
 
+    /// <summary>
+    /// Indicates whether a user is currently authenticated.
+    /// </summary>
     public bool IsConnected => isConnected.Value;
 
     /// <summary>
@@ -94,6 +103,9 @@ public class MainWindowViewModel : ViewModelBase
     /// </summary>
     public ReactiveCommand<Unit, ViewModelBase> GoToAdmin { get; }
 
+    /// <summary>
+    /// Command that logs the current user out.
+    /// </summary>
     public ICommand LogOutCommand { get; }
 
     /// <summary>
@@ -151,11 +163,19 @@ public class MainWindowViewModel : ViewModelBase
         CurrentView = vm;
     }
 
+    /// <summary>
+    /// Logs the current user out through the authentication service.
+    /// </summary>
     public async Task LogOutAsync()
     {
         await authServ.LogoutAsync();
     }
 
+    /// <summary>
+    /// Resets the return-to-language-selection timer if it is currently running.
+    /// Should be called on any user interaction to keep the session on the
+    /// current screen while the app is actively used.
+    /// </summary>
     public void RegisterActivity()
     {
         if (activityTimeOut.IsEnabled)

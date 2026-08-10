@@ -53,6 +53,7 @@ public class AuthenticationService : ReactiveObject
     /// Runs the OIDC login flow and, on success, loads the matching user by email
     /// and marks them as authenticated.
     /// </summary>
+    /// <returns>The result of the login attempt, including whether it failed.</returns>
     public async Task<LoginResult> LoginAsync()
     {
         var loginRequest = new LoginRequest
@@ -88,7 +89,8 @@ public class AuthenticationService : ReactiveObject
     }
 
     /// <summary>
-    /// Clears the current user and marks the session as unauthenticated.
+    /// Ends the current session with the identity provider, then clears the
+    /// current user and marks the session as unauthenticated.
     /// </summary>
     public async Task LogoutAsync()
     {
