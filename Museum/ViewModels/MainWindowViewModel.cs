@@ -1,6 +1,8 @@
-﻿using System.Reactive;
+﻿using System;
+using System.Reactive;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Avalonia.Threading;
 using Balise.Repositories;
 using Balise.Services;
 using NetTopologySuite.Geometries;
@@ -23,6 +25,7 @@ public class MainWindowViewModel : ViewModelBase
     private readonly PointOfInterestRepository pointOfInterestRepository;
     private readonly SpaceRepository spaceRepository;
     private readonly UserRepository userRepository;
+    private readonly DispatcherTimer activityTimeOut = new DispatcherTimer() { Interval = TimeSpan.FromMinutes(5) };
 
     /// <summary>
     /// The view model currently displayed in the main window.
@@ -34,6 +37,16 @@ public class MainWindowViewModel : ViewModelBase
         {
             this.RaiseAndSetIfChanged(ref currentView, value);
             this.RaisePropertyChanged(nameof(IsLangChoiceActive));
+
+            if (value is LangChoiceViewModel)
+            {
+                activityTimeOut.Stop();
+            }
+            else
+            {
+                activityTimeOut.Stop();
+                activityTimeOut.Start();
+            }
         }
     }
 
@@ -117,6 +130,8 @@ public class MainWindowViewModel : ViewModelBase
         // At application startup, the language selection screen is displayed by default
         currentView = new LangChoiceViewModel(SetCurrentView, museumRepository);
 
+        activityTimeOut.Tick += (_,_) => CurrentView = new LangChoiceViewModel(SetCurrentView, museumRepository);
+
         // Command to change the current view
         GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(museumRepository));
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel(agendaRepository));
@@ -139,5 +154,14 @@ public class MainWindowViewModel : ViewModelBase
     public async Task LogOutAsync()
     {
         await authServ.LogoutAsync();
+    }
+
+    public void RegisterActivity()
+    {
+        if (activityTimeOut.IsEnabled)
+        {
+            activityTimeOut.Stop();
+            activityTimeOut.Start();
+        }
     }
 }
