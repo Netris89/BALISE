@@ -1,4 +1,6 @@
 ﻿using System.Reactive;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Balise.Repositories;
 using Balise.Services;
 using NetTopologySuite.Geometries;
@@ -17,10 +19,10 @@ public class MainWindowViewModel : ViewModelBase
     private AuthenticationService authServ;
     private readonly ObservableAsPropertyHelper<bool> isAdmin;
     private readonly ObservableAsPropertyHelper<bool> isContentManager;
+    private readonly ObservableAsPropertyHelper<bool> isConnected;
     private readonly PointOfInterestRepository pointOfInterestRepository;
     private readonly SpaceRepository spaceRepository;
     private readonly UserRepository userRepository;
-    private Browser browser;
 
     /// <summary>
     /// The view model currently displayed in the main window.
@@ -46,6 +48,8 @@ public class MainWindowViewModel : ViewModelBase
     public bool IsAdmin => isAdmin.Value;
 
     public bool IsContentManager => isContentManager.Value;
+
+    public bool IsConnected => isConnected.Value;
 
     /// <summary>
     /// Command that navigates to the map view.
@@ -77,6 +81,8 @@ public class MainWindowViewModel : ViewModelBase
     /// </summary>
     public ReactiveCommand<Unit, ViewModelBase> GoToAdmin { get; }
 
+    public ICommand LogOutCommand { get; }
+
     /// <summary>
     /// Initializes a new instance of <see cref="MainWindowViewModel"/>, starting
     /// on the language selection screen and wiring up the navigation commands.
@@ -93,7 +99,6 @@ public class MainWindowViewModel : ViewModelBase
         pointOfInterestRepository = poiRepository;
         spaceRepository = sRepository;
         userRepository = uRepository;
-        browser = brwser;
 
         isAdmin = authServ.WhenAnyValue(
                 x => x.IsAuthenticated,
@@ -107,6 +112,8 @@ public class MainWindowViewModel : ViewModelBase
                 (auth, user) => auth && user?.Role == Enum.UserRole.ContentManager || user?.Role == Enum.UserRole.Admin)
             .ToProperty(this, x => x.IsContentManager);
 
+        isConnected = authServ.WhenAnyValue(x => x.IsAuthenticated).ToProperty(this, x => x.IsConnected);
+
         // At application startup, the language selection screen is displayed by default
         currentView = new LangChoiceViewModel(SetCurrentView, museumRepository);
 
@@ -117,6 +124,7 @@ public class MainWindowViewModel : ViewModelBase
         GoToForm = ReactiveCommand.Create(() => CurrentView = new FormViewModel(formServ));
         GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel(museumRepository, fRepository, pointOfInterestRepository, spaceRepository, fctory));
         GoToAdmin = ReactiveCommand.Create(() => CurrentView = new AdminViewModel(userRepository));
+        LogOutCommand = ReactiveCommand.Create(LogOutAsync);
     }
 
     /// <summary>
@@ -126,5 +134,10 @@ public class MainWindowViewModel : ViewModelBase
     public void SetCurrentView(ViewModelBase vm)
     {
         CurrentView = vm;
+    }
+
+    public async Task LogOutAsync()
+    {
+        await authServ.LogoutAsync();
     }
 }

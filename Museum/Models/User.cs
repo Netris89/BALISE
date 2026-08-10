@@ -54,11 +54,6 @@ public class User
     public string Country { get; set; } = string.Empty;
 
     /// <summary>
-    /// The user's password. // TODO: make a hash
-    /// </summary>
-    public string Password { get; set; } = string.Empty;
-
-    /// <summary>
     /// The role assigned to the user.
     /// </summary>
     public UserRole Role { get; set; }
@@ -100,7 +95,6 @@ public class User
         LastName = user.LastName;
         Number = user.Number;
         Country = user.Country;
-        Password = user.Password;
         Role = user.Role;
     }
 }

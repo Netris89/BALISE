@@ -30,9 +30,10 @@
                 <Button Name="GoToAgendaButton" Command="{Binding GoToAgenda}" Grid.Column="1" Content="Événements" Foreground="White" Background= "#Ca005d"/>
                 <Button Name="GoToFormButton" Command="{Binding GoToForm}" Grid.Column="2" Content="Newsletter" Foreground="White" Background= "#Ca005d"/>
                 <!-- No column 4 to space things out -->
-                 <Button IsVisible="{Binding IsContentManager}" Name="GoToContentButton" Command="{Binding GoToContent}" Content="Contenu" Grid.Column="5" Foreground="White" Background= "#Ca005d"/>
-                 <Button IsVisible="{Binding IsAdmin}" Name="GoToAdminButton" Command="{Binding GoToAdmin}" Content="Administration" Grid.Column="6" Foreground="White" Background= "#Ca005d"/>
-                <Button Name="GoToConnectionButton" Command="{Binding GoToConnection}" Grid.Column="7" Content="Se connecter" Foreground="White" Background= "#Ca005d"/>
+                <Button IsVisible="{Binding IsContentManager}" Name="GoToContentButton" Command="{Binding GoToContent}" Content="Contenu" Grid.Column="5" Foreground="White" Background= "#Ca005d"/>
+                <Button IsVisible="{Binding IsAdmin}" Name="GoToAdminButton" Command="{Binding GoToAdmin}" Content="Administration" Grid.Column="6" Foreground="White" Background= "#Ca005d"/>
+                <Button IsVisible="{Binding !IsConnected}" Command="{Binding GoToConnection}" Grid.Column="7" Content="Se connecter" Foreground="White" Background= "#Ca005d"/>
+                <Button IsVisible="{Binding IsConnected}" Command="{Binding LogOutCommand}" Grid.Column="7" Content="Se Déconnecter" Foreground="White" Background= "#Ca005d"/>
             </Grid>
         </Border>
 

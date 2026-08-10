@@ -45,9 +45,9 @@ public class ConnectionViewModel : ViewModelBase
     /// </summary>
     public async Task LoginAsync()
     {
-        await authenticationService.LoginAsync();
+        var result = await authenticationService.LoginAsync();
 
-        if (authenticationService.IsAuthenticated)
+        if (!result.IsError)
         {
             navigate(new ConnectionSuccessViewModel());
         }

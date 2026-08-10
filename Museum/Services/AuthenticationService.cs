@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Balise.Models;
 using Balise.Repositories;
+using Balise.ViewModels;
 using Duende.IdentityModel.Client;
 using Duende.IdentityModel.OidcClient;
 using ReactiveUI;
@@ -16,6 +17,8 @@ public class AuthenticationService : ReactiveObject
     private readonly UserRepository userRepository;
     private User? currentUser;
     private bool isAuthenticated;
+    private string? identityToken;
+    private string? accessToken;
 
     /// <summary>
     /// The user currently logged in, or <c>null</c> if no one is authenticated.
@@ -50,7 +53,7 @@ public class AuthenticationService : ReactiveObject
     /// Runs the OIDC login flow and, on success, loads the matching user by email
     /// and marks them as authenticated.
     /// </summary>
-    public async Task LoginAsync()
+    public async Task<LoginResult> LoginAsync()
     {
         var loginRequest = new LoginRequest
         {
@@ -64,27 +67,32 @@ public class AuthenticationService : ReactiveObject
 
         if (result.IsError == true)
         {
-            return;
+            return result;
         }
 
+        identityToken = result.IdentityToken;
         string? email = result.User.FindFirst("email")?.Value;
 
         if (email != null)
         {
             CurrentUser = await userRepository.GetByEmailAsync(email)!;
+            accessToken = result.TokenResponse.AccessToken!;
         }
 
         if (CurrentUser != null)
         {
             IsAuthenticated = true;
         }
+
+        return result;
     }
 
     /// <summary>
     /// Clears the current user and marks the session as unauthenticated.
     /// </summary>
-    public void LogoutAsync()
+    public async Task LogoutAsync()
     {
+        await oidcClient.LogoutAsync(new LogoutRequest { IdTokenHint = identityToken });
         CurrentUser = null;
         IsAuthenticated = false;
     }
