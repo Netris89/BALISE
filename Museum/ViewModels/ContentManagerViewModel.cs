@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Balise.Models;
 using Balise.Repositories;
@@ -24,11 +25,19 @@ public class ContentManagerViewModel : ViewModelBase
     private ViewModelBase? selectedEditor;
     private object? selectedItem;
     private ContentImportService contentImportService;
+    private List<Museum> museums = new List<Museum>();
 
     /// <summary>
     /// The list of museums available for selection.
     /// </summary>
-    public List<Museum> Museums { get; set; } = new List<Museum>();
+    public List<Museum> Museums 
+    { 
+        get => museums;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref museums, value);
+        }
+    }
 
     /// <summary>
     /// The museum currently selected.
@@ -146,8 +155,17 @@ public class ContentManagerViewModel : ViewModelBase
         Museums = await museumRepository.GetAllAsync();
     }
 
+    /// <summary>
+    /// Imports the given file content, then reloads the museum list and
+    /// re-selects the previously selected museum by id, since the import
+    /// creates new tracked instances of the museum hierarchy.
+    /// </summary>
+    /// <param name="fileContent">The raw content of the file to import.</param>
     public async Task ImportContentAsync(string fileContent)
     {
         await contentImportService.ImportAsync(fileContent);
+        var selectedId = SelectedMuseum?.Id;
+        Museums = await museumRepository.GetAllAsync();
+        SelectedMuseum = Museums.FirstOrDefault(m => m.Id == selectedId);
     }
 }
