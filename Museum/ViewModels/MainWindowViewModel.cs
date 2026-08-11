@@ -149,7 +149,7 @@ public class MainWindowViewModel : ViewModelBase
         activityTimeOut.Tick += (_, _) => CurrentView = new LangChoiceViewModel(SetCurrentView, mRepository, langService);
 
         // Command to change the current view
-        GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(mRepository));
+        GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(mRepository, langService));
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel(agendaRepository));
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(authServ, brwser, SetCurrentView));
         GoToForm = ReactiveCommand.Create(() => CurrentView = new FormViewModel(formServ));

@@ -9,6 +9,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Balise.Models;
 using Balise.Repositories;
+using Balise.Services;
 using Mapsui;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -17,6 +18,12 @@ using ReactiveUI;
 using SkiaSharp;
 
 namespace Balise.ViewModels;
+
+/// <summary>
+/// A point of interest paired with its name already resolved in the session's language,
+/// for display in lists.
+/// </summary>
+public record PoiListItem(string Name, PointOfInterest PointOfInterest);
 
 /// <summary>
 /// ViewModel responsible for museum map display, floor navigation,
@@ -32,6 +39,7 @@ public class MapViewModel : ViewModelBase
     private MemoryLayer spacesLayer = new MemoryLayer();
     private MemoryLayer pointOfInterestLayer = new MemoryLayer();
     private MuseumRepository repository;
+    private readonly LanguageService languageService;
     private bool isReinitializeActive;
 
     public bool IsReinitializeActive
@@ -53,6 +61,9 @@ public class MapViewModel : ViewModelBase
         {
             selectedSpace = value;
             this.RaisePropertyChanged(nameof(SelectedSpace));
+            this.RaisePropertyChanged(nameof(SelectedSpaceName));
+            this.RaisePropertyChanged(nameof(SelectedSpaceDescription));
+            this.RaisePropertyChanged(nameof(SelectedSpacePointOfInterests));
         }
     }
 
@@ -66,8 +77,37 @@ public class MapViewModel : ViewModelBase
         {
             selectedPointOfInterest = value;
             this.RaisePropertyChanged(nameof(SelectedPointOfInterest));
+            this.RaisePropertyChanged(nameof(SelectedPointOfInterestName));
+            this.RaisePropertyChanged(nameof(SelectedPointOfInterestDescription));
         }
     }
+
+    /// <summary>
+    /// Name of the currently selected space, in the session's chosen language.
+    /// </summary>
+    public string? SelectedSpaceName => SelectedSpace?.GetName(languageService.CurrentLanguage);
+
+    /// <summary>
+    /// Description of the currently selected space, in the session's chosen language.
+    /// </summary>
+    public string? SelectedSpaceDescription => SelectedSpace?.GetDescription(languageService.CurrentLanguage);
+
+    /// <summary>
+    /// Points of interest of the currently selected space, with names resolved
+    /// in the session's chosen language.
+    /// </summary>
+    public List<PoiListItem> SelectedSpacePointOfInterests => SelectedSpace?.PointOfInterests.Select(poi => new PoiListItem(poi.GetName(languageService.CurrentLanguage), poi))
+                                                                                             .ToList() ?? new List<PoiListItem>();
+
+    /// <summary>
+    /// Name of the currently selected point of interest, in the session's chosen language.
+    /// </summary>
+    public string? SelectedPointOfInterestName => SelectedPointOfInterest?.GetName(languageService.CurrentLanguage);
+
+    /// <summary>
+    /// Description of the currently selected point of interest, in the session's chosen language.
+    /// </summary>
+    public string? SelectedPointOfInterestDescription => SelectedPointOfInterest?.GetDescription(languageService.CurrentLanguage);
 
     /// <summary>
     /// Current floor map image displayed in the view.
@@ -143,9 +183,10 @@ public class MapViewModel : ViewModelBase
     /// <param name="museumRepository">
     /// Repository used to retrieve museum data.
     /// </param>
-    public MapViewModel(MuseumRepository museumRepository)
+    public MapViewModel(MuseumRepository museumRepository, LanguageService langService)
     {
         repository = museumRepository;
+        languageService = langService;
 
         // Temporarily load empty values until the museum is fetched asynchronously
         Floors = new List<Floor>();

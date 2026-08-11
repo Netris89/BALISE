@@ -13,7 +13,7 @@
 
         <!-- Floor buttons -->
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
-            <!-- Floor navigation bound to ChangeFloorCommand -->    
+            <!-- Floor navigation bound to ChangeFloorCommand -->
             <ItemsControl ItemsSource="{Binding Floors}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -35,8 +35,8 @@
 
             <!-- Floating panel -->
             <!-- Two independent selections:
-                - SelectedSpace: main context displayed in side panel
-                - SelectedPointOfInterest: secondary overlay popup -->
+            - SelectedSpace: main context displayed in side panel
+            - SelectedPointOfInterest: secondary overlay popup -->
             <Border HorizontalAlignment="Left"
                     VerticalAlignment="Stretch"
                     IsVisible="{Binding SelectedSpace, Converter={x:Static ObjectConverters.IsNotNull}}"
@@ -65,7 +65,7 @@
                             <materialIcons:MaterialIcon Grid.Column="0" Kind="Warehouse" Foreground="#Ca005d" FontSize="30" Padding="10"/>
                             <StackPanel Grid.Column="1">
                                 <TextBlock Classes="sectionLabel" Text="{x:Static localization:Resources.Name}" />
-                                <TextBlock FontSize="14" Text="{Binding Name}" />
+                                <TextBlock FontSize="14" Text="{Binding $parent[UserControl].DataContext.SelectedSpaceName}" />
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -75,7 +75,7 @@
                             <materialIcons:MaterialIcon Grid.Column="0" Kind="NoteTextOutline" Foreground="#Ca005d" FontSize="30" Padding="10"/>
                             <StackPanel Grid.Column="1">
                                 <TextBlock Classes="sectionLabel" Text="{x:Static localization:Resources.DescriptionText}" />
-                                <TextBlock FontSize="14" Text="{Binding Description}" TextWrapping="Wrap" />
+                                <TextBlock FontSize="14" Text="{Binding $parent[UserControl].DataContext.SelectedSpaceDescription}" TextWrapping="Wrap" />
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -83,14 +83,14 @@
                     <Border Classes="infoSection">
                         <StackPanel>
                             <TextBlock Classes="sectionLabel" Text="{x:Static localization:Resources.PointOfInterests}"/>
-                            <ItemsControl ItemsSource="{Binding PointOfInterests}">
+                            <ItemsControl ItemsSource="{Binding $parent[UserControl].DataContext.SelectedSpacePointOfInterests}">
                                 <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
+                                    <DataTemplate DataType="vm:PoiListItem">
                                         <Grid ColumnDefinitions="auto, *">
                                             <materialIcons:MaterialIcon Grid.Column="0" Kind="MapMarkerOutline" Foreground="#Ca005d" FontSize="30" Padding="10"/>
                                             <Panel Grid.Column="1">
-                                                <!-- Access parent ViewModel because DataTemplate DataContext is a PointOfInterest -->
-                                                <Button Content="{Binding Name}" Classes="plainButton" Command="{Binding $parent[UserControl].DataContext.SelectingPoiCommand}" CommandParameter="{Binding}"/>
+                                                <!-- Access parent ViewModel because DataTemplate DataContext is a PoiListItem -->
+                                                <Button Content="{Binding Name}" Classes="plainButton" Command="{Binding $parent[UserControl].DataContext.SelectingPoiCommand}" CommandParameter="{Binding PointOfInterest}"/>
 
                                                 <!-- Popup bound to global SelectedPointOfInterest and anchored to info panel -->
                                                 <Popup PlacementTarget="infoPanel" Placement="RightEdgeAlignedTop" IsOpen="{Binding $parent[UserControl].DataContext.SelectedPointOfInterest, Converter={x:Static ObjectConverters.IsNotNull}}" IsLightDismissEnabled="True">
@@ -100,13 +100,13 @@
                                                             <Border Classes="infoSection">
                                                                 <StackPanel>
                                                                     <TextBlock Classes="sectionLabel" Text="{x:Static localization:Resources.Name}" />
-                                                                    <TextBlock FontSize="14" Text="{Binding Name}" />
+                                                                    <TextBlock FontSize="14" Text="{Binding $parent[UserControl].DataContext.SelectedPointOfInterestName}" />
                                                                 </StackPanel>
                                                             </Border>
                                                             <Border Classes="infoSection">
                                                                 <StackPanel>
                                                                     <TextBlock Classes="sectionLabel" Text="{x:Static localization:Resources.DescriptionText}" />
-                                                                    <TextBlock FontSize="14" Text="{Binding Description}" />
+                                                                    <TextBlock FontSize="14" Text="{Binding $parent[UserControl].DataContext.SelectedPointOfInterestDescription}" />
                                                                 </StackPanel>
                                                             </Border>
                                                         </StackPanel>

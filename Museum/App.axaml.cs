@@ -59,6 +59,7 @@ public partial class App : Application
         collection.AddSingleton<FormService>();
         collection.AddSingleton<AuthenticationService>();
         collection.AddSingleton<MainWindowViewModel>();
+        collection.AddSingleton<LanguageService>();
         collection.AddSingleton(auth0Client);
         collection.AddSingleton<AuthenticationService>();
         collection.AddSingleton(browser);
@@ -87,10 +88,10 @@ public partial class App : Application
         {
             HttpClient client = new HttpClient();
             EventFetcherService service = new EventFetcherService(client, museum);
-    
+
             string html = await service.GetAgendaHtmlAsync();
             var events = service.ParseEvents(html);
-    
+
             await agendaRepository.AddRangeAsync(await events);
         }
         catch (Exception ex)
@@ -131,29 +132,71 @@ public partial class App : Application
                 new Coordinate(400, 300)
             }),
             floor0
-        );
+        )
+        {
+            NameDe = "Römische Halle",
+            NameEn = "Roman Hall",
+            NameNl = "Romeinse hal",
+            DescriptionDe = "Ein Raum mit römischen Artefakten",
+            DescriptionEn = "A room containing Roman artifacts",
+            DescriptionNl = "Een kamer met Romeinse artefacten."
+        };
 
         var space2 = new Space(
-            "Salle Médiévale",
-            "Une salle contenant des artéfacts médiévaux",
-            new List<PointOfInterest>(),
-            Factory.CreatePolygon(new[]
-            {
-                new Coordinate(300, 200),
-                new Coordinate(450, 200),
-                new Coordinate(450, 400),
-                new Coordinate(300, 400),
-                new Coordinate(300, 200)
-            }),
-            floor1
-        );
+        "Salle Médiévale",
+        "Une salle contenant des artéfacts médiévaux",
+        new List<PointOfInterest>(),
+        Factory.CreatePolygon(new[]
+        {
+            new Coordinate(300, 200),
+            new Coordinate(450, 200),
+            new Coordinate(450, 400),
+            new Coordinate(300, 400),
+            new Coordinate(300, 200)
+        }),
+        floor1
+        )
+        {
+            NameDe = "Mittelalterlicher Saal",
+            NameEn = "Medieval Hall",
+            NameNl = "Middeleeuwse zaal",
+            DescriptionDe = "Ein Raum mit mittelalterlichen Artefakten",
+            DescriptionEn = "A room containing medieval artifacts",
+            DescriptionNl = "Een kamer met middeleeuwse artefacten."
+        };
 
         floor0.Spaces.Add(space1);
         floor1.Spaces.Add(space2);
 
-        var poi1 = new PointOfInterest("Statue A", "Statue en marbre", Factory.CreatePoint(new Coordinate(120, 120)), space1);
-        var poi2 = new PointOfInterest("Statue B", "Statue en bronze", Factory.CreatePoint(new Coordinate(180, 160)), space1);
-        var poi3 = new PointOfInterest("Vitrine C", "Objets anciens", Factory.CreatePoint(new Coordinate(350, 300)), space2);
+        var poi1 = new PointOfInterest("Statue A", "Statue en marbre", Factory.CreatePoint(new Coordinate(120, 120)), space1)
+        {
+            NameDe = "Statue A",
+            NameEn = "Statue A",
+            NameNl = "Beeld A",
+            DescriptionDe = "Marmorstatue",
+            DescriptionEn = "Marble statue",
+            DescriptionNl = "Marmeren standbeeld"
+        };
+
+        var poi2 = new PointOfInterest("Statue B", "Statue en bronze", Factory.CreatePoint(new Coordinate(180, 160)), space1)
+        {
+            NameDe = "Statue B",
+            NameEn = "Statue B",
+            NameNl = "Beeld B",
+            DescriptionDe = "Bronzestatue",
+            DescriptionEn = "Bronze statue",
+            DescriptionNl = "Bronzen standbeeld"
+        };
+
+        var poi3 = new PointOfInterest("Vitrine C", "Objets anciens", Factory.CreatePoint(new Coordinate(350, 300)), space2)
+        {
+            NameDe = "Vitrine C",
+            NameEn = "Display case C",
+            NameNl = "Vitrine C",
+            DescriptionDe = "Antike Gegenstände",
+            DescriptionEn = "Ancient objects",
+            DescriptionNl = "Antieke voorwerpen"
+        };
 
         space1.PointOfInterests.Add(poi1);
         space2.PointOfInterests.Add(poi2);

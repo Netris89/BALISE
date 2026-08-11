@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Reactive;
 using Avalonia.Threading;
 using Balise.Repositories;
+using Balise.Services;
 using ReactiveUI;
 
 namespace Balise.ViewModels;
@@ -19,6 +20,7 @@ public class LangChoiceViewModel : ViewModelBase
     private int index = 0;
     private readonly Action<ViewModelBase> navigate;
     private MuseumRepository repository;
+    private readonly LanguageService languageService;
 
     /// <summary>
     /// Command that selects a language and navigates to the map view.
@@ -45,12 +47,13 @@ public class LangChoiceViewModel : ViewModelBase
     /// </summary>
     /// <param name="navigate">The callback used to navigate to another view model.</param>
     /// <param name="museumRepository">The repository passed on to the map view model.</param>
-    public LangChoiceViewModel(Action<ViewModelBase> navigate, MuseumRepository museumRepository)
+    public LangChoiceViewModel(Action<ViewModelBase> navigate, MuseumRepository museumRepository, LanguageService langService)
     {
         this.navigate = navigate;
         SelectLang = ReactiveCommand.Create<string>(SelectLanguage);
         ChangeMessage();
         repository = museumRepository;
+        languageService = langService;
     }
 
     /// <summary>
@@ -61,8 +64,9 @@ public class LangChoiceViewModel : ViewModelBase
     public void SelectLanguage(string lang)
     {
         Localization.Resources.Culture = new CultureInfo(lang);
+        languageService.CurrentLanguage = lang;
 
-        navigate(new MapViewModel(repository));
+        navigate(new MapViewModel(repository, languageService));
         StopTimer();
     }
 

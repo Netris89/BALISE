@@ -8,7 +8,7 @@ namespace Balise.Models;
 /// <summary>
 /// Represents a physical space defined by a boundary and containing points of interest.
 /// </summary>
-public class Space
+public class Space : ILocalizedContent
 {
     /// <summary>
     /// Unique identifier of the space.
@@ -19,11 +19,17 @@ public class Space
     /// Name of the space.
     /// </summary>
     public string Name { get; set; } = string.Empty;
+    public string NameNl { get; set; } = string.Empty;
+    public string NameEn { get; set; } = string.Empty;
+    public string NameDe { get; set; } = string.Empty;
 
     /// <summary>
     /// Description of a space
     /// </summary>
     public string Description { get; set; } = string.Empty;
+    public string DescriptionNl { get; set; } = string.Empty;
+    public string DescriptionEn { get; set; } = string.Empty;
+    public string DescriptionDe { get; set; } = string.Empty;
 
     /// <summary>
     /// Collection of points of interest contained within the space.
