@@ -48,9 +48,20 @@ public class MainWindowViewModel : ViewModelBase
             {
                 activityTimeOut.Stop();
                 activityTimeOut.Start();
+
+                this.RaisePropertyChanged(nameof(MapLabel));
+                this.RaisePropertyChanged(nameof(AgendaLabel));
+                this.RaisePropertyChanged(nameof(NewsletterLabel));
             }
         }
     }
+
+    /// <summary>
+    /// Navigation bar labels, resolved in the session's chosen language.
+    /// </summary>
+    public string MapLabel => Localization.Resources.Map;
+    public string AgendaLabel => Localization.Resources.Agenda;
+    public string NewsletterLabel => Localization.Resources.Newsletter;
 
     /// <summary>
     /// Indicates whether the language selection screen is currently active.

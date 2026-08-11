@@ -220,4 +220,10 @@
   <data name="Preferences" xml:space="preserve">
     <value>Préférences</value>
   </data>
+  <data name="Agenda" xml:space="preserve">
+    <value>AgendaLabel</value>
+  </data>
+  <data name="Newsletter" xml:space="preserve">
+    <value>Newsletter</value>
+  </data>
 </root>
