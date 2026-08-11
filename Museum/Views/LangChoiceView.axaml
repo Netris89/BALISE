@@ -1,38 +1,50 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialIcons="using:Material.Icons.Avalonia"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Balise.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.LangChoiceView"
              x:DataType="vm:LangChoiceViewModel">
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
-        <TextBlock HorizontalAlignment="Center" Text="{Binding SelectionText}" />
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50">
-            <StackPanel>
-                <Button Name="FrenchButton" Command="{Binding SelectLang}" CommandParameter="fr">
-                    <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_France.png" Width="63" Height="41"/>
-                </Button>
-                <TextBlock HorizontalAlignment="Center" Text="Français"></TextBlock>
-            </StackPanel>
-            <StackPanel>
-                <Button Name="DutchButton" Command="{Binding SelectLang}" CommandParameter="nl">
-                    <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_the_Netherlands.png" Width="63" Height="41" />
-                </Button>
-                <TextBlock HorizontalAlignment="Center" Text="Nederlands"></TextBlock>
-            </StackPanel>
-            <StackPanel>
-                <Button Name="GermanButton" Command="{Binding SelectLang}" CommandParameter="de">
-                    <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_Germany.png" Width="63" Height="41" />
-                </Button>
-                <TextBlock HorizontalAlignment="Center" Text="Deutsch"></TextBlock>
-            </StackPanel>
-            <StackPanel>
-                <Button Name="EnglishButton" Command="{Binding SelectLang}" CommandParameter="en">
-                    <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_the_United_Kingdom.png" Width="63" Height="41" />
-                </Button>
-                <TextBlock HorizontalAlignment="Center" Text="English"></TextBlock>
+    <Border Background="WhiteSmoke">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20" >
+        <materialIcons:MaterialIcon Kind="Web" FontSize="75" Foreground="#Ca005d"/>    
+        <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Text="{Binding SelectionText}" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50">
+                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1">
+                    <Button Background="White" Name="FrenchButton" Command="{Binding SelectLang}" CommandParameter="fr">
+                        <StackPanel Margin="15">
+                            <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_France.png" Width="63" Height="41"/>
+                            <TextBlock Margin="0,10,0,0" FontWeight="Bold" HorizontalAlignment="Center" Text="Français"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1">
+                    <Button Background="White" Name="DutchButton" Command="{Binding SelectLang}" CommandParameter="nl">
+                        <StackPanel Margin="15">
+                            <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_the_Netherlands.png" Width="63" Height="41" />
+                            <TextBlock Margin="0,10,0,0" FontWeight="Bold" HorizontalAlignment="Center" Text="Nederlands"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1">
+                    <Button Background="White" Name="GermanButton" Command="{Binding SelectLang}" CommandParameter="de">
+                        <StackPanel Margin="15">
+                            <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_Germany.png" Width="63" Height="41" />
+                            <TextBlock Margin="0,10,0,0" FontWeight="Bold" HorizontalAlignment="Center" Text="Deutsch"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1">
+                    <Button Background="White" Name="EnglishButton" Command="{Binding SelectLang}" CommandParameter="en">
+                        <StackPanel Margin="15">
+                            <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_the_United_Kingdom.png" Width="63" Height="41" />
+                            <TextBlock Margin="0,10,0,0" FontWeight="Bold" HorizontalAlignment="Center" Text="English"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
             </StackPanel>
         </StackPanel>
-    </StackPanel>
+    </Border>
 </UserControl>
