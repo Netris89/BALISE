@@ -62,10 +62,16 @@ public class Space : ILocalizedContent
     /// <param name="poi">List of points of interest contained in the space.</param>
     /// <param name="boundary">Geographical boundary of the space.</param>
     [SetsRequiredMembers]
-    public Space(string name, string description, List<PointOfInterest> poi, Polygon boundary, Floor floor)
+    public Space(string name, string nameDe, string nameEn, string nameNl, string description, string descriptionDe, string descriptionEn, string descriptionNl, List<PointOfInterest> poi, Polygon boundary, Floor floor)
     {
         Name = name;
+        NameDe = nameDe;
+        NameEn = nameEn;
+        NameNl = nameNl;
         Description = description;
+        DescriptionDe = descriptionDe;
+        DescriptionEn = descriptionEn;
+        DescriptionNl = descriptionNl;
         PointOfInterests = poi;
         Boundary = boundary;
         Floor = floor;

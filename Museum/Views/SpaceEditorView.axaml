@@ -17,12 +17,54 @@
         </StackPanel>
 
         <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Nom allemand"/>
+            <TextBox Classes="editorInput" Text="{Binding NameDe}"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Nom anglais"/>
+            <TextBox Classes="editorInput" Text="{Binding NameEn}"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Nom néerlandais"/>
+            <TextBox Classes="editorInput" Text="{Binding NameNl}"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
             <TextBlock Classes="sectionLabel" Text="Descripton"/>
             <TextBox Classes="editorInput"
                      Text="{Binding Description}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="140"/>
+                     Height="100"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Descripton allemande"/>
+            <TextBox Classes="editorInput"
+                     Text="{Binding DescriptionDe}"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Height="100"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Descripton anglaise"/>
+            <TextBox Classes="editorInput"
+                     Text="{Binding DescriptionEn}"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Height="100"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Descripton néerlandaise"/>
+            <TextBox Classes="editorInput"
+                     Text="{Binding DescriptionNl}"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Height="100"/>
         </StackPanel>
 
         <Button Classes="primaryButton"

@@ -14,7 +14,13 @@ public class PointOfInterestEditorViewModel : ViewModelBase
     private readonly PointOfInterestRepository repository;
     private readonly PointOfInterest selectedPointOfInterest;
     private string name = string.Empty;
+    private string nameDe = string.Empty;
+    private string nameEn = string.Empty;
+    private string nameNl = string.Empty;
     private string description = string.Empty;
+    private string descriptionDe = string.Empty;
+    private string descriptionEn = string.Empty;
+    private string descriptionNl = string.Empty;
 
     /// <summary>
     /// Command used to save the current point of interest changes.
@@ -32,6 +38,30 @@ public class PointOfInterestEditorViewModel : ViewModelBase
             this.RaiseAndSetIfChanged(ref name, value);
         }
     }
+    public string NameDe
+    {
+        get => nameDe;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref nameDe, value);
+        }
+    }
+    public string NameEn
+    {
+        get => nameEn;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref nameEn, value);
+        }
+    }
+    public string NameNl
+    {
+        get => nameNl;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref nameNl, value);
+        }
+    }
 
     /// <summary>
     /// Description of the point of interest being edited.
@@ -45,6 +75,33 @@ public class PointOfInterestEditorViewModel : ViewModelBase
         }
     }
 
+    public string DescriptionDe
+    {
+        get => descriptionDe;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref descriptionDe, value);
+        }
+    }
+
+    public string DescriptionEn
+    {
+        get => descriptionEn;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref descriptionEn, value);
+        }
+    }
+
+    public string DescriptionNl
+    {
+        get => descriptionNl;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref descriptionNl, value);
+        }
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="PointOfInterestEditorViewModel"/> class.
     /// </summary>
@@ -55,7 +112,13 @@ public class PointOfInterestEditorViewModel : ViewModelBase
         selectedPointOfInterest = pointOfInterest;
 
         Name = selectedPointOfInterest.Name;
+        NameDe = selectedPointOfInterest.NameDe;
+        NameEn = selectedPointOfInterest.NameEn;
+        NameNl = selectedPointOfInterest.NameNl;
         Description = selectedPointOfInterest.Description;
+        DescriptionDe = selectedPointOfInterest.DescriptionDe;
+        DescriptionEn = selectedPointOfInterest.DescriptionEn;
+        DescriptionNl = selectedPointOfInterest.DescriptionNl;
 
         repository = pointOfInterestRepository;
 

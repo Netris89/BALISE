@@ -49,10 +49,16 @@ public class PointOfInterest : ILocalizedContent
     /// <param name="description">Description of the point of interest.</param>
     /// <param name="position">Geographical position of the point of interest.</param>
     [SetsRequiredMembers]
-    public PointOfInterest(string name, string description, Point position, Space space)
+    public PointOfInterest(string name, string nameDe, string nameEn, string nameNl, string description, string descriptionDe, string descriptionEn, string descriptionNl, Point position, Space space)
     {
         Name = name;
+        NameDe = nameDe;
+        NameEn = nameEn;
+        NameNl = nameNl;
         Description = description;
+        DescriptionDe = descriptionDe;
+        DescriptionEn = descriptionEn;
+        DescriptionNl = descriptionNl;
         Position = position;
         Space = space;
     }

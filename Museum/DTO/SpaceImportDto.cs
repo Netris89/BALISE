@@ -22,11 +22,17 @@ public class SpaceImportDto
     /// The name of the space.
     /// </summary>
     public string Name { get; set; }
+    public string NameDe { get; set; }
+    public string NameEn { get; set; }
+    public string NameNl { get; set; }
 
     /// <summary>
     /// The description of the space.
     /// </summary>
     public string Description { get; set; }
+    public string DescriptionDe { get; set; }
+    public string DescriptionEn { get; set; }
+    public string DescriptionNl { get; set; }
 
     /// <summary>
     /// The points forming the boundary polygon of the space.
@@ -46,11 +52,17 @@ public class SpaceImportDto
     /// <param name="description">The description of the space.</param>
     /// <param name="polygon">The points forming the boundary polygon of the space.</param>
     /// <param name="pointsOfInterest">The points of interest located within this space.</param>
-    public SpaceImportDto(int id, string name, string description, List<PointDto> polygon, List<PointOfInterestImportDto> pointsOfInterest)
+    public SpaceImportDto(int id, string name, string nameDe, string nameEn, string nameNl, string description, string descriptionDe, string descriptionEn, string descriptionNl, List<PointDto> polygon, List<PointOfInterestImportDto> pointsOfInterest)
     {
         Id = id;
         Name = name;
+        NameDe = nameDe;
+        NameEn = nameEn;
+        NameNl = nameNl;
         Description = description;
+        DescriptionDe = descriptionDe;
+        DescriptionEn = descriptionEn;
+        DescriptionNl = descriptionNl;
         Polygon = polygon;
         PointsOfInterest = pointsOfInterest;
     }

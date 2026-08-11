@@ -11,17 +11,59 @@
 
         <Separator Background="#EEEEEE" Height="1"/>
 
-        <StackPanel Margin="10" Spacing="6">
+        <StackPanel Classes="fieldGroup">
             <TextBlock Classes="sectionLabel" Text="Nom"/>
             <TextBox Text="{Binding Name}" Padding="12,10"/>
         </StackPanel>
 
-        <StackPanel Margin="10" Spacing="6">
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Nom allemand"/>
+            <TextBox Text="{Binding NameDe}" Padding="12,10"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Nom anglais"/>
+            <TextBox Text="{Binding NameEn}" Padding="12,10"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Nom néerlandais"/>
+            <TextBox Text="{Binding NameNl}" Padding="12,10"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
             <TextBlock Classes="sectionLabel" Text="Descripton"/>
             <TextBox Text="{Binding Description}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="140"
+                     Height="100"
+                     Padding="12,10"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Descripton allemande"/>
+            <TextBox Text="{Binding DescriptionDe}"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Height="100"
+                     Padding="12,10"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Descripton anglaise"/>
+            <TextBox Text="{Binding DescriptionEn}"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Height="100"
+                     Padding="12,10"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Descripton néerlandaise"/>
+            <TextBox Text="{Binding DescriptionNl}"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Height="100"
                      Padding="12,10"/>
         </StackPanel>
 

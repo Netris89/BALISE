@@ -122,6 +122,12 @@ public partial class App : Application
         var space1 = new Space(
             "Salle Romaine",
             "Une salle contenant des artéfacts romains",
+            "Römische Halle",
+            "Roman Hall",
+            "Romeinse hal",
+            "Ein Raum mit römischen Artefakten",
+            "A room containing Roman artifacts",
+            "Een kamer met Romeinse artefacten.",
             new List<PointOfInterest>(),
             Factory.CreatePolygon(new[]
             {
@@ -134,17 +140,17 @@ public partial class App : Application
             floor0
         )
         {
-            NameDe = "Römische Halle",
-            NameEn = "Roman Hall",
-            NameNl = "Romeinse hal",
-            DescriptionDe = "Ein Raum mit römischen Artefakten",
-            DescriptionEn = "A room containing Roman artifacts",
-            DescriptionNl = "Een kamer met Romeinse artefacten."
         };
 
         var space2 = new Space(
         "Salle Médiévale",
+        "Mittelalterlicher Saal",
+        "Medieval Hall",
+        "Middeleeuwse zaal",
         "Une salle contenant des artéfacts médiévaux",
+        "Ein Raum mit mittelalterlichen Artefakten",
+        "A room containing medieval artifacts",
+        "Een kamer met middeleeuwse artefacten.",
         new List<PointOfInterest>(),
         Factory.CreatePolygon(new[]
         {
@@ -155,48 +161,49 @@ public partial class App : Application
             new Coordinate(300, 200)
         }),
         floor1
-        )
-        {
-            NameDe = "Mittelalterlicher Saal",
-            NameEn = "Medieval Hall",
-            NameNl = "Middeleeuwse zaal",
-            DescriptionDe = "Ein Raum mit mittelalterlichen Artefakten",
-            DescriptionEn = "A room containing medieval artifacts",
-            DescriptionNl = "Een kamer met middeleeuwse artefacten."
-        };
+        );
 
         floor0.Spaces.Add(space1);
         floor1.Spaces.Add(space2);
 
-        var poi1 = new PointOfInterest("Statue A", "Statue en marbre", Factory.CreatePoint(new Coordinate(120, 120)), space1)
-        {
-            NameDe = "Statue A",
-            NameEn = "Statue A",
-            NameNl = "Beeld A",
-            DescriptionDe = "Marmorstatue",
-            DescriptionEn = "Marble statue",
-            DescriptionNl = "Marmeren standbeeld"
-        };
+        var poi1 = new PointOfInterest(
+            "Statue A",
+            "Statue A",
+            "Statue A",
+            "Beeld A",
+            "Statue en marbre",
+            "Marmorstatue",
+            "Marble statue",
+            "Marmeren standbeeld",
+            Factory.CreatePoint(new Coordinate(120, 120)),
+            space1
+        );
 
-        var poi2 = new PointOfInterest("Statue B", "Statue en bronze", Factory.CreatePoint(new Coordinate(180, 160)), space1)
-        {
-            NameDe = "Statue B",
-            NameEn = "Statue B",
-            NameNl = "Beeld B",
-            DescriptionDe = "Bronzestatue",
-            DescriptionEn = "Bronze statue",
-            DescriptionNl = "Bronzen standbeeld"
-        };
+        var poi2 = new PointOfInterest(
+            "Statue B",
+            "Statue B",
+            "Statue B",
+            "Beeld B",
+            "Statue en bronze",
+            "Bronzestatue",
+            "Bronze statue",
+            "Bronzen standbeeld",
+            Factory.CreatePoint(new Coordinate(180, 160)),
+            space1
+        );
 
-        var poi3 = new PointOfInterest("Vitrine C", "Objets anciens", Factory.CreatePoint(new Coordinate(350, 300)), space2)
-        {
-            NameDe = "Vitrine C",
-            NameEn = "Display case C",
-            NameNl = "Vitrine C",
-            DescriptionDe = "Antike Gegenstände",
-            DescriptionEn = "Ancient objects",
-            DescriptionNl = "Antieke voorwerpen"
-        };
+        var poi3 = new PointOfInterest(
+            "Vitrine C",
+            "Vitrine C",
+            "Display case C",
+            "Vitrine C",
+            "Objets anciens",
+            "Antike Gegenstände",
+            "Ancient objects",
+            "Antieke voorwerpen",
+            Factory.CreatePoint(new Coordinate(350, 300)),
+            space2
+        );
 
         space1.PointOfInterests.Add(poi1);
         space2.PointOfInterests.Add(poi2);

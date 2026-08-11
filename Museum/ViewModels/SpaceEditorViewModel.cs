@@ -12,7 +12,13 @@ namespace Balise.ViewModels;
 public class SpaceEditorViewModel : ViewModelBase
 {
     private string name = string.Empty;
+    private string nameDe = string.Empty;
+    private string nameEn = string.Empty;
+    private string nameNl = string.Empty;
     private string description = string.Empty;
+    private string descriptionDe = string.Empty;
+    private string descriptionEn = string.Empty;
+    private string descriptionNl = string.Empty;
     private readonly Space selectedSpace;
     private readonly SpaceRepository repository;
 
@@ -33,6 +39,33 @@ public class SpaceEditorViewModel : ViewModelBase
         }
     }
 
+    public string NameDe
+    {
+        get => nameDe;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref nameDe, value);
+        }
+    }
+
+    public string NameEn
+    {
+        get => nameEn;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref nameEn, value);
+        }
+    }
+
+    public string NameNl
+    {
+        get => nameNl;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref nameNl, value);
+        }
+    }
+
     /// <summary>
     /// Description of the space being edited.
     /// </summary>
@@ -42,6 +75,33 @@ public class SpaceEditorViewModel : ViewModelBase
         set
         {
             this.RaiseAndSetIfChanged(ref description, value);
+        }
+    }
+
+    public string DescriptionDe
+    {
+        get => descriptionDe;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref descriptionDe, value);
+        }
+    }
+
+    public string DescriptionEn
+    {
+        get => descriptionEn;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref descriptionEn, value);
+        }
+    }
+
+    public string DescriptionNl
+    {
+        get => descriptionNl;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref descriptionNl, value);
         }
     }
 
@@ -55,7 +115,13 @@ public class SpaceEditorViewModel : ViewModelBase
         selectedSpace = space;
 
         Name = selectedSpace.Name;
+        NameDe = selectedSpace.NameDe;
+        NameEn = selectedSpace.NameEn;
+        NameNl = selectedSpace.NameNl;
         Description = selectedSpace.Description;
+        DescriptionDe = selectedSpace.DescriptionDe;
+        DescriptionEn = selectedSpace.DescriptionEn;
+        DescriptionNl = selectedSpace.DescriptionNl;
 
         repository = spaceRepository;
 

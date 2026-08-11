@@ -70,13 +70,19 @@ public class ContentImportService
                 var coordinates = dto.Polygon.Select(p => new Coordinate(p.X, p.Y)).ToArray();
                 var boundary = factory.CreatePolygon(coordinates);
 
-                var space = new Space(dto.Name, dto.Description, new List<PointOfInterest>(), boundary, floor);
+                var space = new Space(dto.Name, dto.NameDe, dto.NameEn, dto.NameNl, dto.Description, dto.DescriptionDe, dto.DescriptionEn, dto.DescriptionNl, new List<PointOfInterest>(), boundary, floor);
                 var existingSpace = await spaceRepository.GetByIdAsync(dto.Id);
 
                 if (existingSpace != null)
                 {
                     existingSpace.Name = dto.Name;
+                    existingSpace.NameDe = dto.NameDe;
+                    existingSpace.NameEn = dto.NameEn;
+                    existingSpace.NameNl = dto.NameNl;
                     existingSpace.Description = dto.Description;
+                    existingSpace.DescriptionDe = dto.DescriptionDe;
+                    existingSpace.DescriptionEn = dto.DescriptionEn;
+                    existingSpace.DescriptionNl = dto.DescriptionNl;
                     existingSpace.Boundary = boundary;
                     existingSpace.Floor = floor;
 
@@ -84,8 +90,8 @@ public class ContentImportService
                 }
                 else
                 {
-                    var newSpace = new Space(dto.Name, dto.Description, new List<PointOfInterest>(), boundary, floor);
-                    newSpace.PointOfInterests.AddRange(dto.PointsOfInterest.Select(poi => new PointOfInterest(poi.Name, poi.Description, factory.CreatePoint(new Coordinate(poi.Location.X, poi.Location.Y)), newSpace)));
+                    var newSpace = new Space(dto.Name, dto.NameDe, dto.NameEn, dto.NameNl, dto.Description, dto.DescriptionDe, dto.DescriptionEn, dto.DescriptionNl, new List<PointOfInterest>(), boundary, floor);
+                    newSpace.PointOfInterests.AddRange(dto.PointsOfInterest.Select(poi => new PointOfInterest(poi.Name, poi.NameDe, poi.NameEn, poi.NameNl, poi.Description, poi.DescriptionDe, poi.DescriptionEn, poi.DescriptionNl, factory.CreatePoint(new Coordinate(poi.Location.X, poi.Location.Y)), newSpace)));
                     await spaceRepository.AddAsync(newSpace);
                 }
             }
