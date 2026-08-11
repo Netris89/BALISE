@@ -218,7 +218,8 @@ public class FormViewModel : ViewModelBase
                                 && !string.IsNullOrWhiteSpace(Number)
                                 && !string.IsNullOrWhiteSpace(City)
                                 && !string.IsNullOrWhiteSpace(Email)
-                                && SelectedCountry != null;
+                                && SelectedCountry != null
+                                && (IsSatisfactionChecked || IsNewletterChecked);
 
     /// <summary>
     /// The list of countries available for selection, one per ISO region.
