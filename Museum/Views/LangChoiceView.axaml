@@ -7,12 +7,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.LangChoiceView"
              x:DataType="vm:LangChoiceViewModel">
-    <Border Background="WhiteSmoke">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20" >
         <materialIcons:MaterialIcon Kind="Web" FontSize="75" Foreground="#Ca005d"/>    
         <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Text="{Binding SelectionText}" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50">
-                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1">
+                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1" BoxShadow="0 2 12 0 #18000000">
                     <Button Background="White" Name="FrenchButton" Command="{Binding SelectLang}" CommandParameter="fr">
                         <StackPanel Margin="15">
                             <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_France.png" Width="63" Height="41"/>
@@ -20,7 +19,7 @@
                         </StackPanel>
                     </Button>
                 </Border>
-                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1">
+                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1" BoxShadow="0 2 12 0 #18000000">
                     <Button Background="White" Name="DutchButton" Command="{Binding SelectLang}" CommandParameter="nl">
                         <StackPanel Margin="15">
                             <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_the_Netherlands.png" Width="63" Height="41" />
@@ -28,7 +27,7 @@
                         </StackPanel>
                     </Button>
                 </Border>
-                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1">
+                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1" BoxShadow="0 2 12 0 #18000000">
                     <Button Background="White" Name="GermanButton" Command="{Binding SelectLang}" CommandParameter="de">
                         <StackPanel Margin="15">
                             <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_Germany.png" Width="63" Height="41" />
@@ -36,7 +35,7 @@
                         </StackPanel>
                     </Button>
                 </Border>
-                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1">
+                <Border CornerRadius="5" BorderBrush="Snow" BorderThickness="1" BoxShadow="0 2 12 0 #18000000">
                     <Button Background="White" Name="EnglishButton" Command="{Binding SelectLang}" CommandParameter="en">
                         <StackPanel Margin="15">
                             <Image HorizontalAlignment="Center" Source="avares://Balise/Assets/Flag_of_the_United_Kingdom.png" Width="63" Height="41" />
@@ -46,5 +45,4 @@
                 </Border>
             </StackPanel>
         </StackPanel>
-    </Border>
 </UserControl>
