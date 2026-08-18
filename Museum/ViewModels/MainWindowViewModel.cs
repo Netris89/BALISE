@@ -157,7 +157,7 @@ public class MainWindowViewModel : ViewModelBase
         // At application startup, the language selection screen is displayed by default
         currentView = new LangChoiceViewModel(SetCurrentView, mRepository, langService);
 
-        activityTimeOut.Tick += (_, _) => CurrentView = new LangChoiceViewModel(SetCurrentView, mRepository, langService);
+        activityTimeOut.Tick += async (_, _) => await LogOutAsync();
 
         // Command to change the current view
         GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(mRepository, langService));

@@ -61,18 +61,14 @@ public partial class App : Application
         collection.AddSingleton<MainWindowViewModel>();
         collection.AddSingleton<LanguageService>();
         collection.AddSingleton(auth0Client);
-        collection.AddSingleton<AuthenticationService>();
         collection.AddSingleton(browser);
         collection.AddSingleton(Factory);
 
         services = collection.BuildServiceProvider();
 
-        var authService = services.GetRequiredService<AuthenticationService>();
         var userRepository = services.GetRequiredService<UserRepository>();
         var museumRepository = services.GetRequiredService<MuseumRepository>();
         var agendaRepository = services.GetRequiredService<AgendaRepository>();
-
-        authService = new AuthenticationService(auth0Client, userRepository);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {

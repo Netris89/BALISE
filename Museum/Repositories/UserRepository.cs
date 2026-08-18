@@ -35,7 +35,7 @@ public class UserRepository
         User user = new User(dto);
 
         context.Users.Add(user);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public class UserRepository
     {
         using var context = await contextFactory.CreateDbContextAsync();
         context.Users.Add(user);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
     }
 
     /// <summary>

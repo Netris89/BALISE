@@ -70,7 +70,6 @@ public class ContentImportService
                 var coordinates = dto.Polygon.Select(p => new Coordinate(p.X, p.Y)).ToArray();
                 var boundary = factory.CreatePolygon(coordinates);
 
-                var space = new Space(dto.Name, dto.NameDe, dto.NameEn, dto.NameNl, dto.Description, dto.DescriptionDe, dto.DescriptionEn, dto.DescriptionNl, new List<PointOfInterest>(), boundary, floor);
                 var existingSpace = await spaceRepository.GetByIdAsync(dto.Id);
 
                 if (existingSpace != null)
