@@ -41,6 +41,7 @@ public class MapViewModel : ViewModelBase
     private MuseumRepository repository;
     private readonly LanguageService languageService;
     private bool isReinitializeActive;
+    private List<Floor> floors;
 
     public bool IsReinitializeActive
     {
@@ -121,7 +122,11 @@ public class MapViewModel : ViewModelBase
     /// <summary>
     /// List of all floors available in the museum.
     /// </summary>
-    public List<Floor> Floors { get; set; }
+    public List<Floor> Floors
+    {
+        get => floors;
+        set => this.RaiseAndSetIfChanged(ref floors, value);
+    }
 
     /// <summary>
     /// Currently displayed floor.
@@ -357,14 +362,15 @@ public class MapViewModel : ViewModelBase
     /// <returns>A task representing the asynchronous initialization operation.</returns>
     public async Task InitializeAsync()
     {
-        museum = await repository.GetAsync(1);
+        var museums = await repository.GetAllAsync();
+        museum = museums.FirstOrDefault();
 
         if (museum != null)
         {
             Floors = museum.Floors;
             CurrentFloor = museum.Floors.ElementAt(0);
             spaces = CurrentFloor.Spaces;
-            
+
             using var stream = AssetLoader.Open(new Uri(CurrentFloor.MapImageUrl));
             image = new Bitmap(stream);
 
