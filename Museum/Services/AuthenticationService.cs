@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Balise.Models;
 using Balise.Repositories;
-using Balise.ViewModels;
 using Duende.IdentityModel.Client;
 using Duende.IdentityModel.OidcClient;
 using ReactiveUI;
