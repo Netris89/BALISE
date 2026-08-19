@@ -17,15 +17,15 @@ using Duende.IdentityModel.OidcClient;
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Storage;
+using System.Linq;
 
 namespace Balise;
 
 public partial class App : Application
 {
     private IServiceProvider? services;
-    private static readonly GeometryFactory Factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
-    private static readonly InMemoryDatabaseRoot InMemoryRoot = new InMemoryDatabaseRoot();
+    private static readonly GeometryFactory factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
+    // private static readonly InMemoryDatabaseRoot InMemoryRoot = new InMemoryDatabaseRoot();
     private Browser browser = new Browser();
 
     public override void Initialize()
@@ -48,7 +48,9 @@ public partial class App : Application
 
         var collection = new ServiceCollection();
 
-        collection.AddDbContextFactory<AppDbContext>(options => options.UseInMemoryDatabase("BaliseDb", InMemoryRoot));
+        var connectionString = config["Postgres:ConnectionString"];
+        // collection.AddDbContextFactory<AppDbContext>(options => options.UseInMemoryDatabase("BaliseDb", InMemoryRoot));
+        collection.AddDbContextFactory<AppDbContext>(options => options.UseNpgsql(connectionString, npgsql => npgsql.UseNetTopologySuite()));
 
         collection.AddSingleton<UserRepository>();
         collection.AddSingleton<AgendaRepository>();
@@ -62,7 +64,7 @@ public partial class App : Application
         collection.AddSingleton<LanguageService>();
         collection.AddSingleton(auth0Client);
         collection.AddSingleton(browser);
-        collection.AddSingleton(Factory);
+        collection.AddSingleton(factory);
 
         services = collection.BuildServiceProvider();
 
@@ -78,7 +80,19 @@ public partial class App : Application
             };
         }
 
-        Museum museum = await Hardcoding(museumRepository, userRepository);
+        try
+        {
+            using var context = await services.GetRequiredService<IDbContextFactory<AppDbContext>>().CreateDbContextAsync();
+            await context.Database.EnsureCreatedAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Échec de l'initialisation de la base de données : {ex.Message}");
+        }
+
+        var existingMuseums = await museumRepository.GetAllAsync();
+
+        Museum? museum = existingMuseums.FirstOrDefault();
 
         try
         {
@@ -125,7 +139,7 @@ public partial class App : Application
             "A room containing Roman artifacts",
             "Een kamer met Romeinse artefacten.",
             new List<PointOfInterest>(),
-            Factory.CreatePolygon(new[]
+            factory.CreatePolygon(new[]
             {
                 new Coordinate(400, 300),
                 new Coordinate(550, 300),
@@ -148,7 +162,7 @@ public partial class App : Application
         "A room containing medieval artifacts",
         "Een kamer met middeleeuwse artefacten.",
         new List<PointOfInterest>(),
-        Factory.CreatePolygon(new[]
+        factory.CreatePolygon(new[]
         {
             new Coordinate(300, 200),
             new Coordinate(450, 200),
@@ -171,7 +185,7 @@ public partial class App : Application
             "Marmorstatue",
             "Marble statue",
             "Marmeren standbeeld",
-            Factory.CreatePoint(new Coordinate(120, 120)),
+            factory.CreatePoint(new Coordinate(120, 120)),
             space1
         );
 
@@ -184,7 +198,7 @@ public partial class App : Application
             "Bronzestatue",
             "Bronze statue",
             "Bronzen standbeeld",
-            Factory.CreatePoint(new Coordinate(180, 160)),
+            factory.CreatePoint(new Coordinate(180, 160)),
             space1
         );
 
@@ -197,7 +211,7 @@ public partial class App : Application
             "Antike Gegenstände",
             "Ancient objects",
             "Antieke voorwerpen",
-            Factory.CreatePoint(new Coordinate(350, 300)),
+            factory.CreatePoint(new Coordinate(350, 300)),
             space2
         );
 
