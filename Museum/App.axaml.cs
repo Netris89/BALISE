@@ -97,7 +97,7 @@ public partial class App : Application
         try
         {
             HttpClient client = new HttpClient();
-            EventFetcherService service = new EventFetcherService(client, museum);
+            EventFetcherService service = new EventFetcherService(client, museum!);
 
             string html = await service.GetAgendaHtmlAsync();
             var events = service.ParseEvents(html);
