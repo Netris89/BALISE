@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Duende.IdentityModel.OidcClient.Browser;
 using ReactiveUI;
+using BrowserOptions = Duende.IdentityModel.OidcClient.Browser.BrowserOptions;
 
 namespace Balise.Services;
 
