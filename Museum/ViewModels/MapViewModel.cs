@@ -41,7 +41,7 @@ public class MapViewModel : ViewModelBase
     private MuseumRepository repository;
     private readonly LanguageService languageService;
     private bool isReinitializeActive;
-    private List<Floor> floors;
+    private List<Floor> floors = new List<Floor>();
 
     public bool IsReinitializeActive
     {
