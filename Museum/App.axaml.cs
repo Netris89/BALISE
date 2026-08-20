@@ -100,9 +100,11 @@ public partial class App : Application
             EventFetcherService service = new EventFetcherService(client, museum!);
 
             string html = await service.GetAgendaHtmlAsync();
-            var events = service.ParseEvents(html);
+            var scrappedEvents = await service.ParseEvents(html);
 
-            await agendaRepository.AddRangeAsync(await events);
+            var eventsInDb = await agendaRepository.GetAllAsync();
+            var filteredEvents = scrappedEvents.Where(e => !eventsInDb.Any(existing => existing.Title == e.Title && existing.Date == e.Date));
+            await agendaRepository.AddRangeAsync(filteredEvents);
         }
         catch (Exception ex)
         {
