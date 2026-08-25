@@ -36,7 +36,7 @@
             <TextBox Text="{Binding Description}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="100"
+                     Height="90"
                      Padding="12,10"/>
         </StackPanel>
 
@@ -45,7 +45,7 @@
             <TextBox Text="{Binding DescriptionDe}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="100"
+                     Height="90"
                      Padding="12,10"/>
         </StackPanel>
 
@@ -54,7 +54,7 @@
             <TextBox Text="{Binding DescriptionEn}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="100"
+                     Height="90"
                      Padding="12,10"/>
         </StackPanel>
 
@@ -63,7 +63,7 @@
             <TextBox Text="{Binding DescriptionNl}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="100"
+                     Height="90"
                      Padding="12,10"/>
         </StackPanel>
 
