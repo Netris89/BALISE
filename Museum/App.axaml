@@ -13,6 +13,7 @@
     <Application.Styles>
         <FluentTheme />
         <materialIcons:MaterialIconStyles />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
 
         <!-- Reusable card style for information sections -->
         <Style Selector="Border.infoSection">

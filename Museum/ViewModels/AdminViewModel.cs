@@ -44,7 +44,6 @@ public class AdminViewModel : ViewModelBase
     public IEnumerable<UserRole> Roles => System.Enum.GetValues(typeof(UserRole)).Cast<UserRole>().Where(r => r != UserRole.Visitor);
     public ICommand SaveCommand { get; }
     public ICommand DeleteCommand { get; }
-    public ICommand CancelCommand { get; }
 
     /// <summary>
     /// Initializes a new instance of <see cref="AdminViewModel"/> and starts
@@ -58,15 +57,6 @@ public class AdminViewModel : ViewModelBase
 
         SaveCommand = ReactiveCommand.CreateFromTask<User>(SaveAsync);
         DeleteCommand = ReactiveCommand.CreateFromTask<int>(DeleteAsync);
-        CancelCommand = ReactiveCommand.Create(Cancel);
-    }
-
-    /// <summary>
-    /// Clears the current selection.
-    /// </summary>
-    private void Cancel()
-    {
-        SelectedUser = null;
     }
 
     /// <summary>
