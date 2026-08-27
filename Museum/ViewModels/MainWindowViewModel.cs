@@ -22,6 +22,7 @@ public class MainWindowViewModel : ViewModelBase
     private readonly ObservableAsPropertyHelper<bool> isAdmin;
     private readonly ObservableAsPropertyHelper<bool> isContentManager;
     private readonly ObservableAsPropertyHelper<bool> isConnected;
+    private readonly Browser browser;
     private readonly PointOfInterestRepository pointOfInterestRepository;
     private readonly SpaceRepository spaceRepository;
     private readonly UserRepository userRepository;
@@ -139,6 +140,7 @@ public class MainWindowViewModel : ViewModelBase
         userRepository = uRepository;
         museumRepository = mRepository;
         languageService = langService;
+        browser = brwser;
 
         isAdmin = authServ.WhenAnyValue(
                 x => x.IsAuthenticated,
@@ -162,7 +164,7 @@ public class MainWindowViewModel : ViewModelBase
         // Command to change the current view
         GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(mRepository, langService));
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel(agendaRepository));
-        GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(authServ, brwser, SetCurrentView));
+        GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(authServ, browser, SetCurrentView));
         GoToForm = ReactiveCommand.Create(() => CurrentView = new FormViewModel(formServ));
         GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel(mRepository, fRepository, pointOfInterestRepository, spaceRepository, fctory));
         GoToAdmin = ReactiveCommand.Create(() => CurrentView = new AdminViewModel(userRepository));
@@ -183,6 +185,7 @@ public class MainWindowViewModel : ViewModelBase
     /// </summary>
     public async Task LogOutAsync()
     {
+        CurrentView = new DisconnectViewModel(browser);
         await authServ.LogoutAsync();
         CurrentView = new LangChoiceViewModel(SetCurrentView, museumRepository, languageService);
     }
