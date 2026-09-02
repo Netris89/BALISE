@@ -21,15 +21,15 @@
     - ContentManagerViewModel charge les musées sans filtrage selon l'utilisateur connecté.  
     - Un gestionnaire peut donc actuellement modifier les contenus de n'importe quel musée.  
     - Restriction d'âge pour la collecte de données non essentielles
-Une restriction est prévue pour les utilisateurs mineurs.  
+8. Une restriction est prévue pour les utilisateurs mineurs.  
     - Aucune vérification d'âge n'est actuellement présente dans les formulaires concernés, notamment newsletter/satisfaction.  
-8. Éditeur d'étage  
+9. Éditeur d'étage  
     - FloorEditorViewModel semble ne pas avoir été réellement implémenté.  
     - La modification du contenu d'un étage n'est donc pas disponible, contrairement aux éditeurs de Space, PointOfInterest et Museum.  
-9. Gestion de plusieurs musées  
+10. Gestion de plusieurs musées  
     - Le document prévoit la possibilité de gérer plusieurs musées.  
     - MapViewModel et ContentManagerViewModel utilisent actuellement systématiquement le premier musée trouvé avec FirstOrDefault().  
     - Il n'existe pas encore de sélection ou de bascule entre plusieurs musées.  
-10. Faire plan moins chargé et en SVG
-11. Ajouter beaucoup de données
-12. Modifier l'affichage d'un point d'intérêt pour y inclure une image
+11. Faire plan moins chargé et en SVG
+12. Ajouter beaucoup de données
+13. Modifier l'affichage d'un point d'intérêt pour y inclure une image
