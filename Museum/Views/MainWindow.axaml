@@ -17,7 +17,7 @@
     </Design.DataContext>
 
     <DockPanel>
-        <Border IsVisible="{Binding !IsLangChoiceActive}"
+        <Border IsVisible="{Binding !IsVisitorConfigurationActive}"
                 DockPanel.Dock="Top"
                 Height="40"
                 Background="#Ca005d">
@@ -27,7 +27,7 @@
 
                 <Button Name="GoToMapButton" Command="{Binding GoToMap}" Grid.Column="0" Content="{Binding MapLabel}" Foreground="White" Background= "#Ca005d"/>
                 <Button Name="GoToAgendaButton" Command="{Binding GoToAgenda}" Grid.Column="1" Content="{Binding AgendaLabel}" Foreground="White" Background= "#Ca005d"/>
-                <Button Name="GoToFormButton" Command="{Binding GoToForm}" Grid.Column="2" Content="{Binding NewsletterLabel}" Foreground="White" Background= "#Ca005d"/>
+                <Button Name="GoToFormButton" IsVisible="{Binding !IsChild}" Command="{Binding GoToForm}" Grid.Column="2" Content="{Binding NewsletterLabel}" Foreground="White" Background= "#Ca005d"/>
                 <!-- No column 4 to space things out -->
                 <Button IsVisible="{Binding IsContentManager}" Name="GoToContentButton" Command="{Binding GoToContent}" Content="Contenu" Grid.Column="5" Foreground="White" Background= "#Ca005d"/>
                 <Button IsVisible="{Binding IsAdmin}" Name="GoToAdminButton" Command="{Binding GoToAdmin}" Content="Administration" Grid.Column="6" Foreground="White" Background= "#Ca005d"/>

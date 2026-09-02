@@ -62,6 +62,7 @@ public partial class App : Application
         collection.AddSingleton<AuthenticationService>();
         collection.AddSingleton<MainWindowViewModel>();
         collection.AddSingleton<LanguageService>();
+        collection.AddSingleton<AgeService>();
         collection.AddSingleton(auth0Client);
         collection.AddSingleton(browser);
         collection.AddSingleton(factory);

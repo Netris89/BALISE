@@ -22,6 +22,8 @@ public class MainWindowViewModel : ViewModelBase
     private readonly ObservableAsPropertyHelper<bool> isAdmin;
     private readonly ObservableAsPropertyHelper<bool> isContentManager;
     private readonly ObservableAsPropertyHelper<bool> isConnected;
+    private readonly ObservableAsPropertyHelper<bool> isChild;
+    private readonly ObservableAsPropertyHelper<bool> isDisabled;
     private readonly Browser browser;
     private readonly PointOfInterestRepository pointOfInterestRepository;
     private readonly SpaceRepository spaceRepository;
@@ -29,6 +31,7 @@ public class MainWindowViewModel : ViewModelBase
     private readonly MuseumRepository museumRepository;
     private readonly LanguageService languageService;
     private readonly DispatcherTimer activityTimeOut = new DispatcherTimer() { Interval = TimeSpan.FromMinutes(5) };
+    private readonly AgeService ageService;
 
     /// <summary>
     /// The view model currently displayed in the main window.
@@ -39,7 +42,7 @@ public class MainWindowViewModel : ViewModelBase
         set
         {
             this.RaiseAndSetIfChanged(ref currentView, value);
-            this.RaisePropertyChanged(nameof(IsLangChoiceActive));
+            this.RaisePropertyChanged(nameof(IsVisitorConfigurationActive));
 
             if (value is LangChoiceViewModel)
             {
@@ -65,11 +68,11 @@ public class MainWindowViewModel : ViewModelBase
     public string NewsletterLabel => Localization.Resources.Newsletter;
 
     /// <summary>
-    /// Indicates whether the language selection screen is currently active.
+    /// Indicates whether the language selection screen or the age selection screen is currently active.
     /// </summary>
-    public bool IsLangChoiceActive
+    public bool IsVisitorConfigurationActive
     {
-        get => currentView is LangChoiceViewModel;
+        get => currentView is LangChoiceViewModel || currentView is AgeSelectViewModel;
     }
 
     /// <summary>
@@ -86,6 +89,10 @@ public class MainWindowViewModel : ViewModelBase
     /// Indicates whether a user is currently authenticated.
     /// </summary>
     public bool IsConnected => isConnected.Value;
+
+    public bool IsChild => isChild.Value;
+
+    public bool IsDisabled => isDisabled.Value;
 
     /// <summary>
     /// Command that navigates to the map view.
@@ -131,7 +138,7 @@ public class MainWindowViewModel : ViewModelBase
     /// <param name="agendaRepository">The repository used by the agenda view model.</param>
     /// <param name="auth">The authentication service used by the connection view model.</param>
     /// <param name="userRepository">The repository used to look up users during login.</param>
-    public MainWindowViewModel(FormService formService, MuseumRepository mRepository, AgendaRepository agendaRepository, AuthenticationService auth, UserRepository uRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository, Browser brwser, GeometryFactory fctory, FloorRepository fRepository, LanguageService langService)
+    public MainWindowViewModel(FormService formService, MuseumRepository mRepository, AgendaRepository agendaRepository, AuthenticationService auth, UserRepository uRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository, Browser brwser, GeometryFactory fctory, FloorRepository fRepository, LanguageService langService, AgeService ageServ)
     {
         formServ = formService;
         authServ = auth;
@@ -141,6 +148,7 @@ public class MainWindowViewModel : ViewModelBase
         museumRepository = mRepository;
         languageService = langService;
         browser = brwser;
+        ageService = ageServ;
 
         isAdmin = authServ.WhenAnyValue(
                 x => x.IsAuthenticated,
@@ -156,8 +164,11 @@ public class MainWindowViewModel : ViewModelBase
 
         isConnected = authServ.WhenAnyValue(x => x.IsAuthenticated).ToProperty(this, x => x.IsConnected);
 
+        isChild = ageService.WhenAnyValue(x => x.IsChildren).ToProperty(this, x => x.IsChild);
+        isDisabled = ageService.WhenAnyValue(x => x.IsDisabled).ToProperty(this, x => x.IsDisabled);
+
         // At application startup, the language selection screen is displayed by default
-        currentView = new LangChoiceViewModel(SetCurrentView, mRepository, langService);
+        currentView = new LangChoiceViewModel(SetCurrentView, mRepository, langService, ageService);
 
         activityTimeOut.Tick += async (_, _) => await LogOutAsync();
 
@@ -187,7 +198,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         CurrentView = new DisconnectViewModel(browser);
         await authServ.LogoutAsync();
-        CurrentView = new LangChoiceViewModel(SetCurrentView, museumRepository, languageService);
+        CurrentView = new LangChoiceViewModel(SetCurrentView, museumRepository, languageService, ageService);
     }
 
     /// <summary>

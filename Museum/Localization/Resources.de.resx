@@ -226,4 +226,16 @@
   <data name="Agenda" xml:space="preserve">
     <value>Agenda</value>
   </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Erwachsene</value>
+  </data>
+  <data name="Child" xml:space="preserve">
+    <value>Kind</value>
+  </data>
+  <data name="Disability" xml:space="preserve">
+    <value>Person mit Behinderung</value>
+  </data>
+  <data name="Visit" xml:space="preserve">
+    <value>Für wen ist dieser Besuch bestimmt?</value>
+  </data>
 </root>
