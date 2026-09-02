@@ -20,9 +20,9 @@
     - User ne contient actuellement aucune association avec un ou plusieurs musées.  
     - ContentManagerViewModel charge les musées sans filtrage selon l'utilisateur connecté.  
     - Un gestionnaire peut donc actuellement modifier les contenus de n'importe quel musée.  
-    - Restriction d'âge pour la collecte de données non essentielles
-8. Une restriction est prévue pour les utilisateurs mineurs.  
-    - Aucune vérification d'âge n'est actuellement présente dans les formulaires concernés, notamment newsletter/satisfaction.  
+    - Restriction d'âge pour la collecte de données non essentielles  
+~~8. Une restriction est prévue pour les utilisateurs mineurs.~~  
+    ~~- Aucune vérification d'âge n'est actuellement présente dans les formulaires concernés, notamment newsletter/satisfaction.~~  
 9. Éditeur d'étage  
     - FloorEditorViewModel semble ne pas avoir été réellement implémenté.  
     - La modification du contenu d'un étage n'est donc pas disponible, contrairement aux éditeurs de Space, PointOfInterest et Museum.  
