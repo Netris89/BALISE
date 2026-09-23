@@ -80,6 +80,7 @@ public class MapViewModel : ViewModelBase
             this.RaisePropertyChanged(nameof(SelectedPointOfInterest));
             this.RaisePropertyChanged(nameof(SelectedPointOfInterestName));
             this.RaisePropertyChanged(nameof(SelectedPointOfInterestDescription));
+            this.RaisePropertyChanged(nameof(SelectedPointOfInterestImage));
         }
     }
 
@@ -104,6 +105,11 @@ public class MapViewModel : ViewModelBase
     /// Name of the currently selected point of interest, in the session's chosen language.
     /// </summary>
     public string? SelectedPointOfInterestName => SelectedPointOfInterest?.GetName(languageService.CurrentLanguage);
+
+    public string? SelectedPointOfInterestImage
+    {
+        get => SelectedPointOfInterest?.ImageUrl;
+    }
 
     /// <summary>
     /// Description of the currently selected point of interest, in the session's chosen language.

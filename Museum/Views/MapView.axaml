@@ -104,6 +104,9 @@
                                                                 </StackPanel>
                                                             </Border>
                                                             <Border Classes="infoSection">
+                                                                <Image Source="{Binding $parent[UserControl].DataContext.SelectedPointOfInterestImage}"/>
+                                                            </Border>
+                                                            <Border Classes="infoSection">
                                                                 <StackPanel>
                                                                     <TextBlock Classes="sectionLabel" Text="{x:Static localization:Resources.DescriptionText}" />
                                                                     <TextBlock FontSize="14" Text="{Binding $parent[UserControl].DataContext.SelectedPointOfInterestDescription}" />
