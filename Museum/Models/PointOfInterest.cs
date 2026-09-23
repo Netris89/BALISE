@@ -35,6 +35,8 @@ public class PointOfInterest : ILocalizedContent
     public Point Position { get; set; } = null!;
     public required Space Space { get; set; }
 
+    public string? ImageUrl { get; set; }
+
     /// <summary>
     /// Initializes a new empty instance of <see cref="PointOfInterest"/>.
     /// </summary>
