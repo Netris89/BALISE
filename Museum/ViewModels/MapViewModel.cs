@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reactive;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -42,6 +43,7 @@ public class MapViewModel : ViewModelBase
     private readonly LanguageService languageService;
     private bool isReinitializeActive;
     private List<Floor> floors = new List<Floor>();
+    private Bitmap? selectedPointOfInterestImage;
 
     public bool IsReinitializeActive
     {
@@ -81,6 +83,7 @@ public class MapViewModel : ViewModelBase
             this.RaisePropertyChanged(nameof(SelectedPointOfInterestName));
             this.RaisePropertyChanged(nameof(SelectedPointOfInterestDescription));
             this.RaisePropertyChanged(nameof(SelectedPointOfInterestImage));
+            _ = LoadImageAsync(value?.ImageUrl);
         }
     }
 
@@ -106,9 +109,10 @@ public class MapViewModel : ViewModelBase
     /// </summary>
     public string? SelectedPointOfInterestName => SelectedPointOfInterest?.GetName(languageService.CurrentLanguage);
 
-    public string? SelectedPointOfInterestImage
+    public Bitmap? SelectedPointOfInterestImage
     {
-        get => SelectedPointOfInterest?.ImageUrl;
+        get => selectedPointOfInterestImage;
+        set => this.RaiseAndSetIfChanged(ref selectedPointOfInterestImage, value);
     }
 
     /// <summary>
@@ -418,5 +422,26 @@ public class MapViewModel : ViewModelBase
     public void OnMapMoved()
     {
         IsReinitializeActive = true;
+    }
+
+    private async Task LoadImageAsync(string? url)
+    {
+        if (string.IsNullOrEmpty(url))
+        {
+            SelectedPointOfInterestImage = null;
+            return;
+        }
+
+        try
+        {
+            using var httpClient = new HttpClient();
+            var bytes = await httpClient.GetByteArrayAsync(url);
+            using var stream = new MemoryStream(bytes);
+            SelectedPointOfInterestImage = new Bitmap(stream);
+        }
+        catch
+        {
+            SelectedPointOfInterestImage = null;
+        }
     }
 }

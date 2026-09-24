@@ -104,7 +104,7 @@
                                                                 </StackPanel>
                                                             </Border>
                                                             <Border Classes="infoSection">
-                                                                <Image Source="{Binding $parent[UserControl].DataContext.SelectedPointOfInterestImage}"/>
+                                                                <Image Source="{Binding $parent[UserControl].DataContext.SelectedPointOfInterestImage}" MaxWidth="500"/>
                                                             </Border>
                                                             <Border Classes="infoSection">
                                                                 <StackPanel>
