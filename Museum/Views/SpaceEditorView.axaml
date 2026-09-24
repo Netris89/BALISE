@@ -37,7 +37,7 @@
                      Text="{Binding Description}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="90"/>
+                     Height="80"/>
         </StackPanel>
 
         <StackPanel Classes="fieldGroup">
@@ -46,7 +46,7 @@
                      Text="{Binding DescriptionDe}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="90"/>
+                     Height="80"/>
         </StackPanel>
 
         <StackPanel Classes="fieldGroup">
@@ -55,7 +55,7 @@
                      Text="{Binding DescriptionEn}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="90"/>
+                     Height="80"/>
         </StackPanel>
 
         <StackPanel Classes="fieldGroup">
@@ -64,7 +64,7 @@
                      Text="{Binding DescriptionNl}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="90"/>
+                     Height="80"/>
         </StackPanel>
 
         <Button Classes="primaryButton"
