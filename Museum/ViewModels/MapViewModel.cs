@@ -335,6 +335,7 @@ public class MapViewModel : ViewModelBase
             Style = new VectorStyle
             {
                 Fill = new Brush(Color.FromString("#CA005D")),
+                Opacity = 0.90f,
                 Outline = new Pen(Color.White, 2)
             }
         };
@@ -387,6 +388,7 @@ public class MapViewModel : ViewModelBase
             image = new Bitmap(stream);
 
             BuildLayers();
+            ReinitializeMap();
         }
     }
 
