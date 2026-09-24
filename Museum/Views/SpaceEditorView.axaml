@@ -6,71 +6,97 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Balise.Views.SpaceEditorView"
              x:DataType="vm:SpaceEditorViewModel">
-    <StackPanel Spacing="20">
-        <TextBlock Classes="editorTitle" Text="{Binding Name}"/>
-
-        <Separator Classes="editorDivider"/>
-
-        <StackPanel Classes="fieldGroup">
-            <TextBlock Classes="sectionLabel" Text="Nom"/>
-            <TextBox Classes="editorInput" Text="{Binding Name}"/>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="20">
+            <TextBlock Classes="editorTitle" Text="{Binding Name}"/>
+    
+            <Separator Classes="editorDivider"/>
+    
+            <StackPanel Classes="fieldGroup">
+                <TextBlock Classes="sectionLabel" Text="Nom"/>
+                <TextBox Classes="editorInput" Text="{Binding Name}"/>
+            </StackPanel>
+    
+            <StackPanel Classes="fieldGroup">
+                <TextBlock Classes="sectionLabel" Text="Nom allemand"/>
+                <TextBox Classes="editorInput" Text="{Binding NameDe}"/>
+            </StackPanel>
+    
+            <StackPanel Classes="fieldGroup">
+                <TextBlock Classes="sectionLabel" Text="Nom anglais"/>
+                <TextBox Classes="editorInput" Text="{Binding NameEn}"/>
+            </StackPanel>
+    
+            <StackPanel Classes="fieldGroup">
+                <TextBlock Classes="sectionLabel" Text="Nom néerlandais"/>
+                <TextBox Classes="editorInput" Text="{Binding NameNl}"/>
+            </StackPanel>
+    
+            <StackPanel Classes="fieldGroup">
+                <TextBlock Classes="sectionLabel" Text="Descripton"/>
+                <TextBox Classes="editorInput"
+                         Text="{Binding Description}"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         Height="65"/>
+            </StackPanel>
+    
+            <StackPanel Classes="fieldGroup">
+                <TextBlock Classes="sectionLabel" Text="Descripton allemande"/>
+                <TextBox Classes="editorInput"
+                         Text="{Binding DescriptionDe}"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         Height="65"/>
+            </StackPanel>
+    
+            <StackPanel Classes="fieldGroup">
+                <TextBlock Classes="sectionLabel" Text="Descripton anglaise"/>
+                <TextBox Classes="editorInput"
+                         Text="{Binding DescriptionEn}"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         Height="65"/>
+            </StackPanel>
+    
+            <StackPanel Classes="fieldGroup">
+                <TextBlock Classes="sectionLabel" Text="Descripton néerlandaise"/>
+                <TextBox Classes="editorInput"
+                         Text="{Binding DescriptionNl}"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         Height="65"/>
+            </StackPanel>
+    
+            <StackPanel Classes="fieldGroup" Spacing="10">
+                <TextBlock Classes="sectionLabel" Text="Coordonnées (4 points)"/>
+    
+                <Grid ColumnDefinitions="*, 10, *">
+                    <NumericUpDown Grid.Column="0" Value="{Binding Point1X}" />
+                    <NumericUpDown Grid.Column="2" Value="{Binding Point1Y}" />
+                </Grid>
+    
+                <Grid ColumnDefinitions="*, 10, *">
+                    <NumericUpDown Grid.Column="0" Value="{Binding Point2X}" />
+                    <NumericUpDown Grid.Column="2" Value="{Binding Point2Y}" />
+                </Grid>
+    
+                <Grid ColumnDefinitions="*, 10, *">
+                    <NumericUpDown Grid.Column="0" Value="{Binding Point3X}" />
+                    <NumericUpDown Grid.Column="2" Value="{Binding Point3Y}" />
+                </Grid>
+    
+                <Grid ColumnDefinitions="*, 10, *">
+                    <NumericUpDown Grid.Column="0" Value="{Binding Point4X}" />
+                    <NumericUpDown Grid.Column="2" Value="{Binding Point4Y}" />
+                </Grid>
+            </StackPanel>
+    
+            <Button Classes="primaryButton"
+    
+                    HorizontalAlignment="Right"
+                    Command="{Binding SaveCommand}"
+                    Content="Sauver"/>
         </StackPanel>
-
-        <StackPanel Classes="fieldGroup">
-            <TextBlock Classes="sectionLabel" Text="Nom allemand"/>
-            <TextBox Classes="editorInput" Text="{Binding NameDe}"/>
-        </StackPanel>
-
-        <StackPanel Classes="fieldGroup">
-            <TextBlock Classes="sectionLabel" Text="Nom anglais"/>
-            <TextBox Classes="editorInput" Text="{Binding NameEn}"/>
-        </StackPanel>
-
-        <StackPanel Classes="fieldGroup">
-            <TextBlock Classes="sectionLabel" Text="Nom néerlandais"/>
-            <TextBox Classes="editorInput" Text="{Binding NameNl}"/>
-        </StackPanel>
-
-        <StackPanel Classes="fieldGroup">
-            <TextBlock Classes="sectionLabel" Text="Descripton"/>
-            <TextBox Classes="editorInput"
-                     Text="{Binding Description}"
-                     AcceptsReturn="True"
-                     TextWrapping="Wrap"
-                     Height="80"/>
-        </StackPanel>
-
-        <StackPanel Classes="fieldGroup">
-            <TextBlock Classes="sectionLabel" Text="Descripton allemande"/>
-            <TextBox Classes="editorInput"
-                     Text="{Binding DescriptionDe}"
-                     AcceptsReturn="True"
-                     TextWrapping="Wrap"
-                     Height="80"/>
-        </StackPanel>
-
-        <StackPanel Classes="fieldGroup">
-            <TextBlock Classes="sectionLabel" Text="Descripton anglaise"/>
-            <TextBox Classes="editorInput"
-                     Text="{Binding DescriptionEn}"
-                     AcceptsReturn="True"
-                     TextWrapping="Wrap"
-                     Height="80"/>
-        </StackPanel>
-
-        <StackPanel Classes="fieldGroup">
-            <TextBlock Classes="sectionLabel" Text="Descripton néerlandaise"/>
-            <TextBox Classes="editorInput"
-                     Text="{Binding DescriptionNl}"
-                     AcceptsReturn="True"
-                     TextWrapping="Wrap"
-                     Height="80"/>
-        </StackPanel>
-
-        <Button Classes="primaryButton"
-                
-                HorizontalAlignment="Right"
-                Command="{Binding SaveCommand}"
-                Content="Sauver"/>
-    </StackPanel>
+    </ScrollViewer>
 </UserControl>

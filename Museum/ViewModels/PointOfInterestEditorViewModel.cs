@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Balise.Models;
 using Balise.Repositories;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 using ReactiveUI;
 
 namespace Balise.ViewModels;
@@ -21,6 +23,7 @@ public class PointOfInterestEditorViewModel : ViewModelBase
     private string descriptionDe = string.Empty;
     private string descriptionEn = string.Empty;
     private string descriptionNl = string.Empty;
+    private Point position = Point.Empty;
 
     /// <summary>
     /// Command used to save the current point of interest changes.
@@ -102,6 +105,37 @@ public class PointOfInterestEditorViewModel : ViewModelBase
         }
     }
 
+    public Point Position
+    {
+        get => position;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref position, value);
+        }
+    }
+
+    public double PositionX
+    {
+        get => position?.X ?? 0;
+        set
+        {
+            var factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
+            Position = factory.CreatePoint(new Coordinate(value, PositionY));
+            this.RaisePropertyChanged(nameof(PositionX));
+        }
+    }
+
+    public double PositionY
+    {
+        get => position?.Y ?? 0;
+        set
+        {
+            var factory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 999001);
+            Position = factory.CreatePoint(new Coordinate(PositionX, value));
+            this.RaisePropertyChanged(nameof(PositionY));
+        }
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="PointOfInterestEditorViewModel"/> class.
     /// </summary>
@@ -119,6 +153,7 @@ public class PointOfInterestEditorViewModel : ViewModelBase
         DescriptionDe = selectedPointOfInterest.DescriptionDe;
         DescriptionEn = selectedPointOfInterest.DescriptionEn;
         DescriptionNl = selectedPointOfInterest.DescriptionNl;
+        Position = selectedPointOfInterest.Position;
 
         repository = pointOfInterestRepository;
 
@@ -139,6 +174,7 @@ public class PointOfInterestEditorViewModel : ViewModelBase
         selectedPointOfInterest.DescriptionDe = DescriptionDe;
         selectedPointOfInterest.DescriptionEn = DescriptionEn;
         selectedPointOfInterest.DescriptionNl = DescriptionNl;
+        selectedPointOfInterest.Position = Position;
 
         await repository.UpdateAsync(selectedPointOfInterest);
     }

@@ -36,7 +36,7 @@
             <TextBox Text="{Binding Description}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="80"
+                     Height="65"
                      Padding="12,10"/>
         </StackPanel>
 
@@ -45,7 +45,7 @@
             <TextBox Text="{Binding DescriptionDe}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="80"
+                     Height="65"
                      Padding="12,10"/>
         </StackPanel>
 
@@ -54,7 +54,7 @@
             <TextBox Text="{Binding DescriptionEn}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="80"
+                     Height="65"
                      Padding="12,10"/>
         </StackPanel>
 
@@ -63,8 +63,16 @@
             <TextBox Text="{Binding DescriptionNl}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
-                     Height="80"
+                     Height="65"
                      Padding="12,10"/>
+        </StackPanel>
+
+        <StackPanel Classes="fieldGroup">
+            <TextBlock Classes="sectionLabel" Text="Position"/>
+            <Grid ColumnDefinitions="*, 10, *">
+                <NumericUpDown Grid.Column="0" Value="{Binding PositionX}"/>
+                <NumericUpDown Grid.Column="2" Value="{Binding PositionY}"/>
+            </Grid>
         </StackPanel>
 
         <Button Margin="10" HorizontalAlignment="Right"
