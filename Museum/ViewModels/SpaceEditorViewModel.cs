@@ -135,7 +135,13 @@ public class SpaceEditorViewModel : ViewModelBase
     public async Task SaveAsync()
     {
         selectedSpace.Name = Name;
+        selectedSpace.NameDe = NameDe;
+        selectedSpace.NameEn = NameEn;
+        selectedSpace.NameNl = NameNl;
         selectedSpace.Description = Description;
+        selectedSpace.DescriptionDe = DescriptionDe;
+        selectedSpace.DescriptionEn = DescriptionEn;
+        selectedSpace.DescriptionNl = DescriptionNl;
         
         await repository.UpdateAsync(selectedSpace);
     }

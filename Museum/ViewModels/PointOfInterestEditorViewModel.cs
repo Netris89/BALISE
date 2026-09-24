@@ -132,7 +132,13 @@ public class PointOfInterestEditorViewModel : ViewModelBase
     public async Task SaveAsync()
     {
         selectedPointOfInterest.Name = Name;
+        selectedPointOfInterest.NameDe = NameDe;
+        selectedPointOfInterest.NameEn = NameEn;
+        selectedPointOfInterest.NameNl = NameNl;
         selectedPointOfInterest.Description = Description;
+        selectedPointOfInterest.DescriptionDe = DescriptionDe;
+        selectedPointOfInterest.DescriptionEn = DescriptionEn;
+        selectedPointOfInterest.DescriptionNl = DescriptionNl;
 
         await repository.UpdateAsync(selectedPointOfInterest);
     }
