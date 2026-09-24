@@ -377,6 +377,7 @@ public class MapViewModel : ViewModelBase
     {
         var museums = await repository.GetAllAsync();
         museum = museums.FirstOrDefault();
+        Map.Widgets.Clear();
 
         if (museum != null)
         {
@@ -401,6 +402,7 @@ public class MapViewModel : ViewModelBase
         CurrentFloor = floor;
         Map.Layers.ClearAllGroups();
         BuildLayers();
+        ReinitializeMap();
 
         SelectedSpace = null;
         SelectedPointOfInterest = null;
