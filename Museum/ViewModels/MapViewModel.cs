@@ -238,10 +238,12 @@ public class MapViewModel : ViewModelBase
 
         if (mapInfo.Feature["PointOfInterest"] is PointOfInterest poi)
         {
+            SelectedSpace = poi.Space;
             SelectedPointOfInterest = poi;
         }
         else if (mapInfo.Feature["Space"] is Space space)
         {
+            SelectedPointOfInterest = null;
             SelectedSpace = space;
         }
     }
@@ -307,7 +309,7 @@ public class MapViewModel : ViewModelBase
             Features = features,
             Style = new SymbolStyle
             {
-                Fill = new Brush(Color.Blue),
+                Fill = new Brush(Color.White),
                 SymbolScale = 0.5
             }
         };
@@ -332,8 +334,8 @@ public class MapViewModel : ViewModelBase
             Features = features,
             Style = new VectorStyle
             {
-                Fill = new Brush(Color.Red),
-                Outline = new Pen(Color.DarkRed, 2)
+                Fill = new Brush(Color.FromString("#CA005D")),
+                Outline = new Pen(Color.White, 2)
             }
         };
     }
