@@ -84,6 +84,10 @@ public class MapViewModel : ViewModelBase
             this.RaisePropertyChanged(nameof(SelectedPointOfInterestDescription));
             this.RaisePropertyChanged(nameof(SelectedPointOfInterestImage));
             _ = LoadImageAsync(value?.ImageUrl);
+
+            Map.Layers.Remove(pointOfInterestLayer);
+            pointOfInterestLayer = BuildPointOfInterestLayer();
+            Map.Layers.Add(pointOfInterestLayer, 0);
         }
     }
 
@@ -300,18 +304,35 @@ public class MapViewModel : ViewModelBase
         {
             var feature = new GeometryFeature(poi.Position);
             feature["PointOfInterest"] = poi;
+
+            bool isSelected = poi == SelectedPointOfInterest;
+
+            if (isSelected)
+            {
+                feature.Styles.Add(new SymbolStyle
+                {
+                    Fill = new Brush(Color.FromString("#CA005D")),
+                    SymbolScale = 0.8,
+                    Outline = null,
+                });
+            }
+            else
+            {
+                feature.Styles.Add(new SymbolStyle
+                {
+                    Fill = new Brush(Color.White),
+                    SymbolScale = 0.8,
+                    Outline = null,
+                });
+            }
+
             return (IFeature)feature;
         }).ToList();
 
         return new MemoryLayer
         {
             Name = "PointOfInterest",
-            Features = features,
-            Style = new SymbolStyle
-            {
-                Fill = new Brush(Color.White),
-                SymbolScale = 0.5
-            }
+            Features = features
         };
     }
 
