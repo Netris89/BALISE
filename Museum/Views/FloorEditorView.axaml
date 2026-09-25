@@ -14,7 +14,8 @@
             <TextBox  Padding="12,10"/>
         </StackPanel>
 
-        <Button Classes="primaryButton"                
+        <Button Classes="primaryButton"
+                HorizontalAlignment="Right"
                 Content="Sauver"/>
     </StackPanel>
 </UserControl>
