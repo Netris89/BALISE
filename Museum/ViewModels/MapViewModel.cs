@@ -233,19 +233,18 @@ public class MapViewModel : ViewModelBase
     /// <param name="e">Map event arguments.</param>
     private void OnMapTapped(object? sender, MapEventArgs e)
     {
-        var mapInfo = e.GetMapInfo(new[] { pointOfInterestLayer, spacesLayer });
+        var poiInfo = e.GetMapInfo(new[] { pointOfInterestLayer });
 
-        if (mapInfo.Feature is null)
-        {
-            return;
-        }
-
-        if (mapInfo.Feature["PointOfInterest"] is PointOfInterest poi)
+        if (poiInfo.Feature?["PointOfInterest"] is PointOfInterest poi)
         {
             SelectedSpace = poi.Space;
             SelectedPointOfInterest = poi;
+            return;
         }
-        else if (mapInfo.Feature["Space"] is Space space)
+
+        var spaceInfo = e.GetMapInfo(new[] { spacesLayer });
+
+        if (spaceInfo.Feature?["Space"] is Space space)
         {
             SelectedPointOfInterest = null;
             SelectedSpace = space;
