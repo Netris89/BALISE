@@ -311,8 +311,8 @@ public class MapViewModel : ViewModelBase
                 feature.Styles.Add(new SymbolStyle
                 {
                     Fill = new Brush(Color.FromString("#CA005D")),
-                    SymbolScale = 0.8,
-                    Outline = null,
+                    SymbolScale = 0.5,
+                    Outline = new Pen(Color.White, 2)
                 });
             }
             else
@@ -320,7 +320,7 @@ public class MapViewModel : ViewModelBase
                 feature.Styles.Add(new SymbolStyle
                 {
                     Fill = new Brush(Color.White),
-                    SymbolScale = 0.8,
+                    SymbolScale = 0.5,
                     Outline = null,
                 });
             }
@@ -331,7 +331,8 @@ public class MapViewModel : ViewModelBase
         return new MemoryLayer
         {
             Name = "PointOfInterest",
-            Features = features
+            Features = features, 
+            Style = null
         };
     }
 
