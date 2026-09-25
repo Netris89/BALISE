@@ -23,8 +23,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-            <Button Content="Sauver" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedUser}"/>
-            <Button Content="Supprimer" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedUser.Id}"/>
+            <Button Classes="primaryButton" Content="Sauver" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedUser}"/>
+            <Button Classes="primaryButton" Content="Supprimer" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedUser.Id}"/>
         </StackPanel>
     </Grid>
 </UserControl>

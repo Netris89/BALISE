@@ -75,11 +75,7 @@
             </Grid>
         </StackPanel>
 
-        <Button Margin="10" HorizontalAlignment="Right"
-                Foreground="White"
-                Background="#Ca005d"
-                Padding="30 10 30 10"
-                CornerRadius="8"
+        <Button Classes="primaryButton"
                 Command="{Binding SaveCommand}"
                 Content="Sauver"/>
     </StackPanel>
