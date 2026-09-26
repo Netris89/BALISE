@@ -42,7 +42,7 @@ public partial class App : Application
             Authority = config["Auth0:Domain"],
             ClientId = config["Auth0:ClientId"],
             Browser = browser,
-            RedirectUri = "http://127.0.0.1:7890/callback",
+            RedirectUri = config["Auth0:RedirectUri"],
             Scope = "openid profile email",
         });
 
