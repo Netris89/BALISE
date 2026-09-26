@@ -310,7 +310,7 @@ public class MapViewModel : ViewModelBase
             {
                 feature.Styles.Add(new SymbolStyle
                 {
-                    Fill = new Brush(Color.FromString("#CA005D")),
+                    Fill = new Brush(Color.FromString("#0077B6")),
                     SymbolScale = 0.5,
                     Outline = new Pen(Color.White, 2)
                 });
@@ -356,7 +356,7 @@ public class MapViewModel : ViewModelBase
             Style = new VectorStyle
             {
                 Fill = new Brush(Color.FromString("#CA005D")),
-                Opacity = 0.90f,
+                Opacity = 0.60f,
                 Outline = new Pen(Color.White, 2)
             }
         };
