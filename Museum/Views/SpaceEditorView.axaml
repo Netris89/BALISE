@@ -9,29 +9,29 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Spacing="20">
             <TextBlock Classes="editorTitle" Text="{Binding Name}"/>
-    
+
             <Separator Classes="editorDivider"/>
-    
+
             <StackPanel Classes="fieldGroup">
                 <TextBlock Classes="sectionLabel" Text="Nom"/>
                 <TextBox Classes="editorInput" Text="{Binding Name}"/>
             </StackPanel>
-    
+
             <StackPanel Classes="fieldGroup">
                 <TextBlock Classes="sectionLabel" Text="Nom allemand"/>
                 <TextBox Classes="editorInput" Text="{Binding NameDe}"/>
             </StackPanel>
-    
+
             <StackPanel Classes="fieldGroup">
                 <TextBlock Classes="sectionLabel" Text="Nom anglais"/>
                 <TextBox Classes="editorInput" Text="{Binding NameEn}"/>
             </StackPanel>
-    
+
             <StackPanel Classes="fieldGroup">
                 <TextBlock Classes="sectionLabel" Text="Nom néerlandais"/>
                 <TextBox Classes="editorInput" Text="{Binding NameNl}"/>
             </StackPanel>
-    
+
             <StackPanel Classes="fieldGroup">
                 <TextBlock Classes="sectionLabel" Text="Descripton"/>
                 <TextBox Classes="editorInput"
@@ -40,7 +40,7 @@
                          TextWrapping="Wrap"
                          Height="65"/>
             </StackPanel>
-    
+
             <StackPanel Classes="fieldGroup">
                 <TextBlock Classes="sectionLabel" Text="Descripton allemande"/>
                 <TextBox Classes="editorInput"
@@ -49,7 +49,7 @@
                          TextWrapping="Wrap"
                          Height="65"/>
             </StackPanel>
-    
+
             <StackPanel Classes="fieldGroup">
                 <TextBlock Classes="sectionLabel" Text="Descripton anglaise"/>
                 <TextBox Classes="editorInput"
@@ -58,7 +58,7 @@
                          TextWrapping="Wrap"
                          Height="65"/>
             </StackPanel>
-    
+
             <StackPanel Classes="fieldGroup">
                 <TextBlock Classes="sectionLabel" Text="Descripton néerlandaise"/>
                 <TextBox Classes="editorInput"
@@ -67,33 +67,44 @@
                          TextWrapping="Wrap"
                          Height="65"/>
             </StackPanel>
-    
+
             <StackPanel Classes="fieldGroup" Spacing="10">
-                <TextBlock Classes="sectionLabel" Text="Coordonnées (4 points)"/>
-    
-                <Grid ColumnDefinitions="*, 10, *">
-                    <NumericUpDown Grid.Column="0" Value="{Binding Point1X}" />
-                    <NumericUpDown Grid.Column="2" Value="{Binding Point1Y}" />
+                <TextBlock Classes="sectionLabel" Text="Forme de l'espace"/>
+
+                <TextBlock Classes="cornerLabel" Text="Coin 1" VerticalAlignment="Center"/>
+                <Grid ColumnDefinitions="auto, 10, *, 10, auto, 10, *">
+                    <TextBlock Classes="sectionLabel" Text="X : " Grid.Column="0" VerticalAlignment="Center"/>
+                    <NumericUpDown Grid.Column="2" Value="{Binding Point1X}"/>
+                    <TextBlock Classes="sectionLabel" Text="Y : " Grid.Column="4" VerticalAlignment="Center"/>
+                    <NumericUpDown Grid.Column="6" Value="{Binding Point1Y}"/>
                 </Grid>
-    
-                <Grid ColumnDefinitions="*, 10, *">
-                    <NumericUpDown Grid.Column="0" Value="{Binding Point2X}" />
-                    <NumericUpDown Grid.Column="2" Value="{Binding Point2Y}" />
+
+                <TextBlock Classes="cornerLabel" Text="Coin 2" VerticalAlignment="Center"/>
+                <Grid ColumnDefinitions="auto, 10, *, 10, auto, 10, *">
+                    <TextBlock Classes="sectionLabel" Text="X : " Grid.Column="0" VerticalAlignment="Center"/>
+                    <NumericUpDown Grid.Column="2" Value="{Binding Point2X}"/>
+                    <TextBlock Classes="sectionLabel" Text="Y : " Grid.Column="4" VerticalAlignment="Center"/>
+                    <NumericUpDown Grid.Column="6" Value="{Binding Point2Y}"/>
                 </Grid>
-    
-                <Grid ColumnDefinitions="*, 10, *">
-                    <NumericUpDown Grid.Column="0" Value="{Binding Point3X}" />
-                    <NumericUpDown Grid.Column="2" Value="{Binding Point3Y}" />
+
+                <TextBlock Classes="cornerLabel" Text="Coin 3" VerticalAlignment="Center"/>
+                <Grid ColumnDefinitions="auto, 10, *, 10, auto, 10, *">
+                    <TextBlock Classes="sectionLabel" Text="X : " Grid.Column="0" VerticalAlignment="Center"/>
+                    <NumericUpDown Grid.Column="2" Value="{Binding Point3X}"/>
+                    <TextBlock Classes="sectionLabel" Text="Y : " Grid.Column="4" VerticalAlignment="Center"/>
+                    <NumericUpDown Grid.Column="6" Value="{Binding Point3Y}"/>
                 </Grid>
-    
-                <Grid ColumnDefinitions="*, 10, *">
-                    <NumericUpDown Grid.Column="0" Value="{Binding Point4X}" />
-                    <NumericUpDown Grid.Column="2" Value="{Binding Point4Y}" />
+
+                <TextBlock Classes="cornerLabel" Text="Coin 4" VerticalAlignment="Center"/>
+                <Grid ColumnDefinitions="auto, 10, *, 10, auto, 10, *">
+                    <TextBlock Classes="sectionLabel" Text="X : " Grid.Column="0" VerticalAlignment="Center"/>
+                    <NumericUpDown Grid.Column="2" Value="{Binding Point4X}"/>
+                    <TextBlock Classes="sectionLabel" Text="Y : " Grid.Column="4" VerticalAlignment="Center"/>
+                    <NumericUpDown Grid.Column="6" Value="{Binding Point4Y}"/>
                 </Grid>
             </StackPanel>
-    
+
             <Button Classes="primaryButton"
-    
                     HorizontalAlignment="Right"
                     Command="{Binding SaveCommand}"
                     Content="Sauver"/>

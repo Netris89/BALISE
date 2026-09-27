@@ -69,9 +69,11 @@
 
         <StackPanel Classes="fieldGroup">
             <TextBlock Classes="sectionLabel" Text="Position"/>
-            <Grid ColumnDefinitions="*, 10, *">
-                <NumericUpDown Grid.Column="0" Value="{Binding PositionX}"/>
-                <NumericUpDown Grid.Column="2" Value="{Binding PositionY}"/>
+            <Grid ColumnDefinitions="auto, 10, *, 10, auto, 10, *">
+                <TextBlock Classes="sectionLabel" Text="X : " Grid.Column="0" VerticalAlignment="Center" />
+                <NumericUpDown Grid.Column="2" Value="{Binding PositionX}"/>
+                <TextBlock Classes="sectionLabel" Text="Y : " Grid.Column="4" VerticalAlignment="Center" />
+                <NumericUpDown Grid.Column="6" Value="{Binding PositionY}"/>
             </Grid>
         </StackPanel>
 
