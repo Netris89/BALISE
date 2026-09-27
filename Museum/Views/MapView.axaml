@@ -23,7 +23,7 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Content="{Binding Number}" Command="{Binding $parent[ItemsControl].DataContext.ChangeFloorCommand}" CommandParameter="{Binding}"/>
+                        <Button Background="#Ca005d" Foreground="White" Content="{Binding Number}" Command="{Binding $parent[ItemsControl].DataContext.ChangeFloorCommand}" CommandParameter="{Binding}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
