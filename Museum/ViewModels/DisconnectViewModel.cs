@@ -1,4 +1,3 @@
-using System;
 using Balise.Services;
 
 namespace Balise.ViewModels;

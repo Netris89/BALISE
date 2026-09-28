@@ -10,13 +10,11 @@ using Balise.Views;
 using NetTopologySuite.Geometries;
 using NetTopologySuite;
 using Balise.Models;
-using System.Collections.Generic;
 using System.Net.Http;
 using Microsoft.Extensions.Configuration;
 using Duende.IdentityModel.OidcClient;
 using System;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
 using System.Linq;
 
 namespace Balise;

@@ -1,6 +1,5 @@
 using System;
 using System.Reactive;
-using System.Windows.Input;
 using Balise.Repositories;
 using Balise.Services;
 using ReactiveUI;
