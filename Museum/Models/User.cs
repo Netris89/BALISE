@@ -58,6 +58,9 @@ public class User
     /// </summary>
     public UserRole Role { get; set; }
 
+    public bool IsNewsletterSubscribed { get; set; }
+    public bool WantsSatisfactionSurvey { get; set; }
+
     /// <summary>
     /// Initializes a new, empty instance of <see cref="User"/>.
     /// </summary>

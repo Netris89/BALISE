@@ -288,7 +288,7 @@ public class FormViewModel : ViewModelBase
     /// </summary>
     public async Task ValidateForm()
     {
-        FormDto dto = new FormDto(FirstName, LastName, Address, Number, City, Email, SelectedCountry!);
+        FormDto dto = new FormDto(FirstName, LastName, Address, Number, City, Email, SelectedCountry!, IsNewletterChecked, IsSatisfactionChecked);
 
         FormValidationResult results = await service.ValidateUser(dto);
 

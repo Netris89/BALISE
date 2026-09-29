@@ -42,6 +42,11 @@ public class FormDto
     /// </summary>
     public RegionInfo SelectedCountry { get; set; }
 
+    public bool IsNewsletterSubscribed { get; set; }
+
+    public bool WantsSatisfactionSurvey { get; set; }
+
+
     /// <summary>
     /// Initializes a new instance of <see cref="FormDto"/> with the values collected from the form.
     /// </summary>
@@ -52,7 +57,7 @@ public class FormDto
     /// <param name="city">The city of the user's address.</param>
     /// <param name="email">The email address entered by the user.</param>
     /// <param name="selectedCountry">The country selected by the user.</param>
-    public FormDto(string firstName, string lastName, string address, string number, string city, string email, RegionInfo selectedCountry)
+    public FormDto(string firstName, string lastName, string address, string number, string city, string email, RegionInfo selectedCountry, bool isNewLetterSubscribed, bool wantsSatisfactionSurvey)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -61,5 +66,7 @@ public class FormDto
         City = city;
         Email = email;
         SelectedCountry = selectedCountry;
+        IsNewsletterSubscribed = isNewLetterSubscribed;
+        WantsSatisfactionSurvey = wantsSatisfactionSurvey;
     }
 }
