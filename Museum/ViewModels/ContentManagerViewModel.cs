@@ -138,9 +138,9 @@ public class ContentManagerViewModel : ViewModelBase
     /// Initializes a new instance of <see cref="ContentManagerViewModel"/>.
     /// </summary>
     /// <param name="mRepository">The repository used to load museums.</param>
-    public ContentManagerViewModel(MuseumRepository mRepository, FloorRepository fRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository, GeometryFactory fctory)
+    public ContentManagerViewModel(MuseumRepository mRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository, ContentImportService importService)
     {
-        contentImportService = new ContentImportService(sRepository, fRepository, fctory);
+        contentImportService = importService;
         museumRepository = mRepository;
         pointOfInterestRepository = poiRepository;
         spaceRepository = sRepository;

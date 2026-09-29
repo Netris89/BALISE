@@ -31,6 +31,7 @@ public class MainWindowViewModel : ViewModelBase
     private readonly UserRepository userRepository;
     private readonly MuseumRepository museumRepository;
     private readonly LanguageService languageService;
+    private readonly ContentImportService contentImportService;
     private readonly DispatcherTimer activityTimeOut = new DispatcherTimer() { Interval = TimeSpan.FromMinutes(5) };
     private readonly AgeService ageService;
 
@@ -139,7 +140,7 @@ public class MainWindowViewModel : ViewModelBase
     /// <param name="agendaRepository">The repository used by the agenda view model.</param>
     /// <param name="auth">The authentication service used by the connection view model.</param>
     /// <param name="userRepository">The repository used to look up users during login.</param>
-    public MainWindowViewModel(FormService formService, MuseumRepository mRepository, AgendaRepository agendaRepository, AuthenticationService auth, UserRepository uRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository, Browser brwser, GeometryFactory fctory, FloorRepository fRepository, LanguageService langService, AgeService ageServ)
+    public MainWindowViewModel(FormService formService, MuseumRepository mRepository, AgendaRepository agendaRepository, AuthenticationService auth, UserRepository uRepository, PointOfInterestRepository poiRepository, SpaceRepository sRepository, Browser brwser, LanguageService langService, AgeService ageServ, ContentImportService importService)
     {
         formServ = formService;
         authServ = auth;
@@ -150,6 +151,7 @@ public class MainWindowViewModel : ViewModelBase
         languageService = langService;
         browser = brwser;
         ageService = ageServ;
+        contentImportService = importService;
 
         isAdmin = authServ.WhenAnyValue(
                 x => x.IsAuthenticated,
@@ -184,7 +186,7 @@ public class MainWindowViewModel : ViewModelBase
         GoToAgenda = ReactiveCommand.Create(() => CurrentView = new AgendaViewModel(agendaRepository));
         GoToConnection = ReactiveCommand.Create(() => CurrentView = new ConnectionViewModel(authServ, browser, SetCurrentView));
         GoToForm = ReactiveCommand.Create(() => CurrentView = new FormViewModel(formServ));
-        GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel(mRepository, fRepository, pointOfInterestRepository, spaceRepository, fctory));
+        GoToContent = ReactiveCommand.Create(() => CurrentView = new ContentManagerViewModel(mRepository, pointOfInterestRepository, spaceRepository, contentImportService));
         GoToAdmin = ReactiveCommand.Create(() => CurrentView = new AdminViewModel(userRepository));
         LogOutCommand = ReactiveCommand.Create(LogOutAsync);
     }
