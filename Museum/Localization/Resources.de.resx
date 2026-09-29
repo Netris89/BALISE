@@ -125,13 +125,10 @@
     <value>Annehmen</value>
   </data>
   <data name="CancelText" xml:space="preserve">
-    <value>Stornieren</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Passwort</value>
+    <value>Abbrechen</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Mail</value>
+    <value>E-Mail</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -149,13 +146,14 @@
     <value>Stadt</value>
   </data>
   <data name="Country" xml:space="preserve">
-    <value>Auszahlungen</value>
+    <value>Land</value>
   </data>
   <data name="EmailPlaceholder" xml:space="preserve">
-    <value>Geben Sie Ihre E-Mail-Adresse ein.</value>
+    <value>Geben Sie Ihre E-Mail-Adresse ein</value>
   </data>
   <data name="NewsletterPlaceholder" xml:space="preserve">
-    <value>Newsletter abonnieren</value>
+    <value>Newsletter
+abonnieren?</value>
   </data>
   <data name="SatisfactionPlaceholder" xml:space="preserve">
     <value>Möchten Sie an der Zufriedenheitsumfrage teilnehmen?</value>
@@ -173,7 +171,8 @@
     <value>Wählen Sie Ihr Land aus</value>
   </data>
   <data name="CityPlaceholder" xml:space="preserve">
-    <value>Gib deine Stadt ein</value>
+    <value>Geben Sie
+Ihre Stadt ein</value>
   </data>
   <data name="NumberPlaceholder" xml:space="preserve">
     <value>Geben Sie die Nummer ein</value>
@@ -209,7 +208,7 @@
     <value>Veranstaltungen</value>
   </data>
   <data name="EventDiscoverText" xml:space="preserve">
-    <value>Entdecken Sie die kommenden Veranstaltungen des Museums.</value>
+    <value>Entdecken Sie die kommenden Veranstaltungen des Museums</value>
   </data>
   <data name="NewsletterSignup" xml:space="preserve">
     <value>Newsletter-Anmeldung</value>
@@ -224,7 +223,7 @@
     <value>Newsletter</value>
   </data>
   <data name="Agenda" xml:space="preserve">
-    <value>Agenda</value>
+    <value>Veranstaltungen</value>
   </data>
   <data name="Adult" xml:space="preserve">
     <value>Erwachsene</value>

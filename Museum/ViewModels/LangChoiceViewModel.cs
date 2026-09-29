@@ -87,7 +87,7 @@ public class LangChoiceViewModel : ViewModelBase
         {
             "Choisissez votre langue",
             "Kies uw taal",
-            "Wähle deine Sprache",
+            "Wählen Sie Ihre Sprache",
             "Choose your language"
         };
 

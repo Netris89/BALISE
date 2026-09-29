@@ -127,9 +127,6 @@
   <data name="CancelText" xml:space="preserve">
     <value>Annuler</value>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>Mot de passe</value>
-  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -215,7 +212,7 @@
     <value>Inscription à la newsletter</value>
   </data>
   <data name="NewsletterSignupDesc" xml:space="preserve">
-    <value>Recevez les nouveautés, événements et nouveautés du musée.</value>
+    <value>Recevez les nouveautés et les événements du musée.</value>
   </data>
   <data name="Preferences" xml:space="preserve">
     <value>Préférences</value>

@@ -122,13 +122,10 @@
             Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AcceptText" xml:space="preserve">
-    <value>Accepter</value>
+    <value>Accepteren</value>
   </data>
   <data name="CancelText" xml:space="preserve">
-    <value>Nietiger</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+    <value>Annuleren</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>E-mail</value>
@@ -137,7 +134,7 @@
     <value>Naam</value>
   </data>
   <data name="FirstName" xml:space="preserve">
-    <value>Voorname</value>
+    <value>Voornaam</value>
   </data>
   <data name="Address" xml:space="preserve">
     <value>Adres</value>
