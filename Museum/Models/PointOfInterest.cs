@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Balise.DTO;
 using NetTopologySuite.Geometries;
 
 namespace Balise.Models;
@@ -62,6 +63,21 @@ public class PointOfInterest : ILocalizedContent
         DescriptionEn = descriptionEn;
         DescriptionNl = descriptionNl;
         Position = position;
+        Space = space;
+    }
+
+    [SetsRequiredMembers]
+    public PointOfInterest(PointOfInterestImportDto dto, Space space)
+    {
+        Name = dto.Name;
+        NameDe = dto.NameDe;
+        NameEn = dto.NameEn;
+        NameNl = dto.NameNl;
+        Description = dto.Description;
+        DescriptionDe = dto.DescriptionDe;
+        DescriptionEn = dto.DescriptionEn;
+        DescriptionNl = dto.DescriptionNl;
+        Position = new Point(dto.Location.X, dto.Location.Y);
         Space = space;
     }
 }

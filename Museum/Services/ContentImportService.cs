@@ -85,6 +85,29 @@ public class ContentImportService
                     existingSpace.Boundary = boundary;
                     existingSpace.Floor = floor;
 
+                    foreach (var poi in dto.PointsOfInterest)
+                    {
+                        var existingPoi = existingSpace.PointOfInterests.FirstOrDefault(p => p.Id == poi.Id);
+
+                        if (existingPoi != null)
+                        {
+                            existingPoi.Name = poi.Name;
+                            existingPoi.NameDe = poi.NameDe;
+                            existingPoi.NameEn = poi.NameEn;
+                            existingPoi.NameNl = poi.NameNl;
+                            existingPoi.Description = poi.Description;
+                            existingPoi.DescriptionDe = poi.DescriptionDe;
+                            existingPoi.DescriptionEn = poi.DescriptionEn;
+                            existingPoi.DescriptionNl = poi.DescriptionNl;
+                            existingPoi.Position = new Point(poi.Location.X, poi.Location.Y);
+                            existingPoi.Space = existingSpace;
+                        }
+                        else
+                        {
+                            existingSpace.PointOfInterests.Add(new PointOfInterest(poi, existingSpace));
+                        }
+                    }
+
                     await spaceRepository.UpdateAsync(existingSpace);
                 }
                 else
