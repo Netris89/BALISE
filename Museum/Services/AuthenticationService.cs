@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Balise.Models;
 using Balise.Repositories;
+using Duende.IdentityModel;
 using Duende.IdentityModel.Client;
 using Duende.IdentityModel.OidcClient;
 using ReactiveUI;
@@ -23,7 +24,7 @@ public class AuthenticationService : ReactiveObject
     /// app — kept for if/when calls to a secured API are added, so it doesn't need
     /// to be threaded through the login flow again at that point.
     /// </summary>
-    private string? accessToken; 
+    private string? accessToken;
 
     /// <summary>
     /// The user currently logged in, or <c>null</c> if no one is authenticated.
@@ -77,11 +78,15 @@ public class AuthenticationService : ReactiveObject
         }
 
         identityToken = result.IdentityToken;
-        string? email = result.User.FindFirst("email")?.Value;
+        
+        string? email = result.User.FindFirst(JwtClaimTypes.Email)?.Value;
+        string? emailVerifiedClaim = result.User.FindFirst(JwtClaimTypes.EmailVerified)?.Value;
 
-        if (email != null)
+        bool emailVerified = bool.TryParse(emailVerifiedClaim, out bool verified) && verified;
+
+        if (email != null && emailVerified)
         {
-            CurrentUser = await userRepository.GetByEmailAsync(email)!;
+            CurrentUser = await userRepository.GetByEmailAsync(email);
             accessToken = result.TokenResponse.AccessToken!;
         }
 
