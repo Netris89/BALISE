@@ -38,7 +38,7 @@ public class FormValidator
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            return false;
+            return true;
         }
 
         if (name.Length < 2 || name.Length > 50)
@@ -82,7 +82,7 @@ public class FormValidator
     {
         if (string.IsNullOrWhiteSpace(address))
         {
-            return false;
+            return true;
         }
 
         if (address.Length < 5 || address.Length > 200)
@@ -103,7 +103,7 @@ public class FormValidator
     {
         if (string.IsNullOrWhiteSpace(number))
         {
-            return false;
+            return true;
         }
 
         if (number.Length > 20)
@@ -128,7 +128,7 @@ public class FormValidator
     {
         if (string.IsNullOrWhiteSpace(city))
         {
-            return false;
+            return true;
         }
 
         if (city.Length < 2 || city.Length > 100)

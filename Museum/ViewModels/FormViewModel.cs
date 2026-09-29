@@ -212,13 +212,13 @@ public class FormViewModel : ViewModelBase
     /// <summary>
     /// Indicates whether all required fields have been filled in.
     /// </summary>
-    public bool IsFormCompleted => !string.IsNullOrWhiteSpace(FirstName)
+    public bool IsFormCompleted => /* !string.IsNullOrWhiteSpace(FirstName)
                                 && !string.IsNullOrWhiteSpace(LastName)
                                 && !string.IsNullOrWhiteSpace(Address)
                                 && !string.IsNullOrWhiteSpace(Number)
                                 && !string.IsNullOrWhiteSpace(City)
-                                && !string.IsNullOrWhiteSpace(Email)
                                 && SelectedCountry != null
+                                &&  */!string.IsNullOrWhiteSpace(Email)
                                 && (IsSatisfactionChecked || IsNewletterChecked);
 
     /// <summary>
