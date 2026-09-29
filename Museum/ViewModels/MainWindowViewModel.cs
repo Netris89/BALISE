@@ -3,6 +3,7 @@ using System.Reactive;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Threading;
+using Balise.Models;
 using Balise.Repositories;
 using Balise.Services;
 using NetTopologySuite.Geometries;
@@ -170,7 +171,13 @@ public class MainWindowViewModel : ViewModelBase
         // At application startup, the language selection screen is displayed by default
         currentView = new LangChoiceViewModel(SetCurrentView, mRepository, langService, ageService);
 
-        activityTimeOut.Tick += async (_, _) => await LogOutAsync();
+        activityTimeOut.Tick += async (_, _) =>
+        {
+            if (authServ.IsAuthenticated)
+            {
+                await LogOutAsync();
+            }
+        };
 
         // Command to change the current view
         GoToMap = ReactiveCommand.Create(() => CurrentView = new MapViewModel(mRepository, langService));
