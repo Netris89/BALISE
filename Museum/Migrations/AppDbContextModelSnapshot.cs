@@ -238,6 +238,9 @@ namespace Balise.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsNewsletterSubscribed")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -248,6 +251,9 @@ namespace Balise.Migrations
 
                     b.Property<int>("Role")
                         .HasColumnType("integer");
+
+                    b.Property<bool>("WantsSatisfactionSurvey")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
