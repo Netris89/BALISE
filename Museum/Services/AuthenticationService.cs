@@ -78,7 +78,7 @@ public class AuthenticationService : ReactiveObject
         }
 
         identityToken = result.IdentityToken;
-        
+
         string? email = result.User.FindFirst(JwtClaimTypes.Email)?.Value;
         string? emailVerifiedClaim = result.User.FindFirst(JwtClaimTypes.EmailVerified)?.Value;
 
@@ -104,8 +104,15 @@ public class AuthenticationService : ReactiveObject
     /// </summary>
     public async Task LogoutAsync()
     {
-        await oidcClient.LogoutAsync(new LogoutRequest { IdTokenHint = identityToken });
-        CurrentUser = null;
-        IsAuthenticated = false;
+        try
+        {
+            await oidcClient.LogoutAsync(new LogoutRequest { IdTokenHint = identityToken });
+        }
+        finally
+        {
+            CurrentUser = null;
+            identityToken = null;
+            IsAuthenticated = false;
+        }
     }
 }
