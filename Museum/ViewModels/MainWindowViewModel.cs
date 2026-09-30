@@ -179,6 +179,13 @@ public class MainWindowViewModel : ViewModelBase
             {
                 await LogOutAsync();
             }
+            else
+            {
+                CurrentView = new LangChoiceViewModel(SetCurrentView, museumRepository, languageService, ageService);
+            }
+
+            ageService.IsChildren = false;
+            ageService.IsDisabled = false;
         };
 
         // Command to change the current view
