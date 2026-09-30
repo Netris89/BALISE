@@ -26,6 +26,16 @@ public class ContentManagerViewModel : ViewModelBase
     private object? selectedItem;
     private ContentImportService contentImportService;
     private List<Museum> museums = new List<Museum>();
+    private string? importStatus;
+
+    public string? ImportStatus
+    {
+        get => importStatus;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref importStatus, value);
+        }
+    }
 
     /// <summary>
     /// The list of museums available for selection.
@@ -163,7 +173,7 @@ public class ContentManagerViewModel : ViewModelBase
     /// <param name="fileContent">The raw content of the file to import.</param>
     public async Task ImportContentAsync(string fileContent)
     {
-        await contentImportService.ImportAsync(fileContent);
+        ImportStatus = await contentImportService.ImportAsync(fileContent);
         var selectedId = SelectedMuseum?.Id;
         Museums = await museumRepository.GetAllAsync();
         SelectedMuseum = Museums.FirstOrDefault(m => m.Id == selectedId);

@@ -40,11 +40,11 @@ public class ContentImportService
     /// unknown floor are skipped.
     /// </summary>
     /// <param name="jsonContent">The raw JSON content of the import file.</param>
-    public async Task ImportAsync(string jsonContent)
+    public async Task<string> ImportAsync(string jsonContent)
     {
         if (jsonContent == null)
         {
-            return; // TODO: show error message in the UI
+            return "Erreur lors de l'import";
         }
 
         var options = new JsonSerializerOptions
@@ -116,7 +116,10 @@ public class ContentImportService
                     newSpace.PointOfInterests.AddRange(dto.PointsOfInterest.Select(poi => new PointOfInterest(poi.Name, poi.NameDe, poi.NameEn, poi.NameNl, poi.Description, poi.DescriptionDe, poi.DescriptionEn, poi.DescriptionNl, factory.CreatePoint(new Coordinate(poi.Location.X, poi.Location.Y)), newSpace)));
                     await spaceRepository.AddAsync(newSpace);
                 }
+                return "Import réussi";
             }
         }
+
+        return "Fichier d'import vide";
     }
 }
