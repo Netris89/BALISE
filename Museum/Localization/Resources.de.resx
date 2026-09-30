@@ -152,8 +152,7 @@
     <value>Geben Sie Ihre E-Mail-Adresse ein</value>
   </data>
   <data name="NewsletterPlaceholder" xml:space="preserve">
-    <value>Newsletter
-abonnieren?</value>
+    <value>Newsletter abonnieren?</value>
   </data>
   <data name="SatisfactionPlaceholder" xml:space="preserve">
     <value>Möchten Sie an der Zufriedenheitsumfrage teilnehmen?</value>
@@ -171,8 +170,7 @@ abonnieren?</value>
     <value>Wählen Sie Ihr Land aus</value>
   </data>
   <data name="CityPlaceholder" xml:space="preserve">
-    <value>Geben Sie
-Ihre Stadt ein</value>
+    <value>Geben Sie</value>
   </data>
   <data name="NumberPlaceholder" xml:space="preserve">
     <value>Geben Sie die Nummer ein</value>
