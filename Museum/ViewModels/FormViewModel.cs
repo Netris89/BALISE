@@ -299,6 +299,9 @@ public class FormViewModel : ViewModelBase
         CityError = results.IsValidCity;
         EmailError = results.IsValidMail;
 
-        ClearForm();
+        if (results.IsValid)
+        {
+            ClearForm();
+        }
     }
 }
