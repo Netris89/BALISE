@@ -99,12 +99,12 @@ public class ContentImportService
                             existingPoi.DescriptionDe = poi.DescriptionDe;
                             existingPoi.DescriptionEn = poi.DescriptionEn;
                             existingPoi.DescriptionNl = poi.DescriptionNl;
-                            existingPoi.Position = new Point(poi.Location.X, poi.Location.Y);
+                            existingPoi.Position = factory.CreatePoint(new Coordinate(poi.Location.X, poi.Location.Y));
                             existingPoi.Space = existingSpace;
                         }
                         else
                         {
-                            existingSpace.PointOfInterests.Add(new PointOfInterest(poi, existingSpace));
+                            existingSpace.PointOfInterests.Add(new PointOfInterest(poi, existingSpace, factory));
                         }
                     }
 

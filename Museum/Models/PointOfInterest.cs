@@ -67,7 +67,7 @@ public class PointOfInterest : ILocalizedContent
     }
 
     [SetsRequiredMembers]
-    public PointOfInterest(PointOfInterestImportDto dto, Space space)
+    public PointOfInterest(PointOfInterestImportDto dto, Space space, GeometryFactory factory)
     {
         Name = dto.Name;
         NameDe = dto.NameDe;
@@ -77,7 +77,7 @@ public class PointOfInterest : ILocalizedContent
         DescriptionDe = dto.DescriptionDe;
         DescriptionEn = dto.DescriptionEn;
         DescriptionNl = dto.DescriptionNl;
-        Position = new Point(dto.Location.X, dto.Location.Y);
+        Position = factory.CreatePoint(new Coordinate(dto.Location.X, dto.Location.Y));
         Space = space;
     }
 }
