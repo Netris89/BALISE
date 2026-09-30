@@ -178,12 +178,12 @@ public class MapViewModel : ViewModelBase
 
     /// <summary>
     /// Command used to zoom in the map.
-    /// <\summary>
+    /// </summary>
     public ICommand ZoomInCommand { get; }
 
     /// <summary>
     /// Command used to zoom out the map.
-    /// <\summary>
+    /// </summary>
     public ICommand ZoomOutCommand { get; }
 
     /// <summary>
@@ -253,7 +253,7 @@ public class MapViewModel : ViewModelBase
 
     /// <summary>
     /// Zoom the map in.
-    /// <\summary>
+    /// </summary>
     private void ZoomIn()
     {
         Map.Navigator.ZoomIn();
@@ -261,7 +261,7 @@ public class MapViewModel : ViewModelBase
 
     /// <summary>
     /// Zoom the map out.
-    /// <\summary>
+    /// </summary>
     private void ZoomOut()
     {
         Map.Navigator.ZoomOut();
