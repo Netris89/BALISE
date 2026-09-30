@@ -83,6 +83,8 @@ public class User
         Number = dto.Number;
         Country = dto.SelectedCountry.TwoLetterISORegionName;
         Role = UserRole.Visitor;
+        IsNewsletterSubscribed = dto.IsNewsletterSubscribed;
+        WantsSatisfactionSurvey = dto.WantsSatisfactionSurvey;
     }
 
     /// <summary>
