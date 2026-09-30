@@ -69,6 +69,7 @@ public class PointOfInterest : ILocalizedContent
     [SetsRequiredMembers]
     public PointOfInterest(PointOfInterestImportDto dto, Space space, GeometryFactory factory)
     {
+        Id = dto.Id;
         Name = dto.Name;
         NameDe = dto.NameDe;
         NameEn = dto.NameEn;
