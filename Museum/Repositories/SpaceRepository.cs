@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Balise.Data;
 using Balise.Models;
@@ -44,13 +45,31 @@ public class SpaceRepository
     {
         using var context = await contextFactory.CreateDbContextAsync();
 
-        var existingSpace = await context.Spaces.FindAsync(space.Id);
+        var existingSpace = await context.Spaces.Include(s => s.PointOfInterests).FirstOrDefaultAsync(s => s.Id == space.Id);
 
-        if (existingSpace != null)
+        if (existingSpace == null)
         {
-            context.Entry(existingSpace).CurrentValues.SetValues(space);
-            await context.SaveChangesAsync();
+            return;
         }
+
+        context.Entry(existingSpace).CurrentValues.SetValues(space);
+
+        foreach (var poi in space.PointOfInterests)
+        {
+            var existingPoi = existingSpace.PointOfInterests.FirstOrDefault(p => p.Id == poi.Id);
+
+            if (existingPoi != null)
+            {
+                context.Entry(existingPoi).CurrentValues.SetValues(poi);
+            }
+            else
+            {
+                poi.Space = existingSpace;
+                existingSpace.PointOfInterests.Add(poi);
+            }
+        }
+
+        await context.SaveChangesAsync();
     }
 
     /// <summary>
