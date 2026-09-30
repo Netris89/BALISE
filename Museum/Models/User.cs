@@ -81,7 +81,16 @@ public class User
         FirstName = dto.FirstName;
         LastName = dto.LastName;
         Number = dto.Number;
-        Country = dto.SelectedCountry.TwoLetterISORegionName;
+
+        if (dto.SelectedCountry != null)
+        {
+            Country = dto.SelectedCountry.TwoLetterISORegionName;
+        }
+        else
+        {
+            Country = string.Empty;
+        }
+        
         Role = UserRole.Visitor;
         IsNewsletterSubscribed = dto.IsNewsletterSubscribed;
         WantsSatisfactionSurvey = dto.WantsSatisfactionSurvey;
