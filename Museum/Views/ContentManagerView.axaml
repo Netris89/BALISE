@@ -52,15 +52,16 @@
                     </TreeView.DataTemplates>
                 </TreeView>
 
-                <Button Grid.Row="3"
-                        Classes="primaryButton"
-                        HorizontalAlignment="Center"
-                        Click="OpenFileButton_Clicked"
-                        Content="Importer un fichier"/>
+                <StackPanel Grid.Row="3" HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding ImportStatus}" IsVisible="{Binding ImportStatus, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                    <Button Classes="primaryButton"
+                            HorizontalAlignment="Center"
+                            Click="OpenFileButton_Clicked"
+                            Content="Importer un fichier"/>
+                </StackPanel>
             </Grid>
         </Border>
 
-        <TextBlock Text="{Binding ImportStatus}" IsVisible="{Binding ImportStatus, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
         <Border Grid.Column="1"
                 Classes="infoSection">
             <ContentControl Content="{Binding SelectedEditor}"/>
