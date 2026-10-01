@@ -97,7 +97,7 @@ public class SpaceRepository
     public async Task<Space?> GetByIdAsync(int id)
     {
         using var context = await contextFactory.CreateDbContextAsync();
-        return await context.Spaces.FindAsync(id);
+        return await context.Spaces.Include(s => s.PointOfInterests).FirstOrDefaultAsync(s => s.Id == id);
     }
 
     /// <summary>

@@ -104,6 +104,7 @@ public class ContentImportService
                         }
                         else
                         {
+                            poi.Id = 0;
                             existingSpace.PointOfInterests.Add(new PointOfInterest(poi, existingSpace, factory));
                         }
                     }
@@ -116,8 +117,9 @@ public class ContentImportService
                     newSpace.PointOfInterests.AddRange(dto.PointsOfInterest.Select(poi => new PointOfInterest(poi.Name, poi.NameDe, poi.NameEn, poi.NameNl, poi.Description, poi.DescriptionDe, poi.DescriptionEn, poi.DescriptionNl, factory.CreatePoint(new Coordinate(poi.Location.X, poi.Location.Y)), newSpace)));
                     await spaceRepository.AddAsync(newSpace);
                 }
-                return "Import réussi";
             }
+            
+            return "Import réussi";
         }
 
         return "Fichier d'import vide";
