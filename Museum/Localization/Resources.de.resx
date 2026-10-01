@@ -170,7 +170,7 @@
     <value>Wählen Sie Ihr Land aus</value>
   </data>
   <data name="CityPlaceholder" xml:space="preserve">
-    <value>Geben Sie</value>
+    <value>Geben Sie Ihre Stadt ein</value>
   </data>
   <data name="NumberPlaceholder" xml:space="preserve">
     <value>Geben Sie die Nummer ein</value>
