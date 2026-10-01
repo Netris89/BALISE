@@ -47,6 +47,7 @@ public class PointOfInterestRepository
 
         if (existingPoi != null)
         {
+            pointOfInterest.ImageUrl ??= existingPoi.ImageUrl;
             context.Entry(existingPoi).CurrentValues.SetValues(pointOfInterest);
             await context.SaveChangesAsync();
         }
