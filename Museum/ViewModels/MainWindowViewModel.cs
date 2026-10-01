@@ -213,7 +213,14 @@ public class MainWindowViewModel : ViewModelBase
     public async Task LogOutAsync()
     {
         CurrentView = new DisconnectViewModel(browser);
-        await authServ.LogoutAsync();
+        try
+        {
+            await authServ.LogoutAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
         CurrentView = new LangChoiceViewModel(SetCurrentView, museumRepository, languageService, ageService);
     }
 
